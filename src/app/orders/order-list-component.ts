@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IOrder } from './order';
+import { OrderService } from './order.service';
 
 @Component({
   selector: 'app-orderlist',
@@ -6,24 +8,32 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./order-list-component.css']
 })
 export class OrderListComponent implements OnInit {
-  listFilter:string='a';
-  orders:any[]=[{
-    "ID": 20062,
-    "OrderDate": "2018-04-25T00:00:00",
-    "OrderNumber": "135",
-    "OrderType": "O",
-    "CustomerNumber": "bbb"  
-  },
-  {
-    "ID": 20063,
-    "OrderDate": "2018-04-25T00:00:00",
-    "OrderNumber": "235",
-    "OrderType": "O",
-    "CustomerNumber": "aaa"  
-  }];
-  constructor() { }
 
+  orders : IOrder[] = [];
+  filteredOrders : IOrder[] = [];
+
+  _listFilter : string = '';
+  get listFilter() : string {
+    return this._listFilter;
+  }
+  set listFilter(value:string){
+    this._listFilter = value;
+    this.filteredOrders = this.listFilter?this.performFilter(this.listFilter):this.orders;
+  }
+
+  performFilter(filterBy:string) : IOrder[]{
+    filterBy = filterBy.toLocaleLowerCase();    
+    return this.orders.filter((order : IOrder) => order.orderNumber.toLocaleLowerCase().indexOf(filterBy) !== -1);
+ } 
+
+
+  constructor(private orderService:OrderService){
+   
+  }
   ngOnInit() {
+    this.orders = this.orderService.getOrders();
+    this.filteredOrders = this.orders;
+    this.listFilter = "";
   }
 
 }
