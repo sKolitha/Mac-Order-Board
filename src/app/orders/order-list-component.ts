@@ -11,29 +11,51 @@ export class OrderListComponent implements OnInit {
 
   orders : IOrder[] = [];
   filteredOrders : IOrder[] = [];
+  errors : string;
 
-  _listFilter : string = '';
-  get listFilter() : string {
-    return this._listFilter;
+  _filterByOrder : string = '';
+  get filterByOrder() : string {
+    return this._filterByOrder;
   }
-  set listFilter(value:string){
-    this._listFilter = value;
-    this.filteredOrders = this.listFilter?this.performFilter(this.listFilter):this.orders;
+  set filterByOrder(value:string){
+    this._filterByCustomer ='';
+    this._filterByOrder = value;
+    this.filteredOrders = this.filterByOrder?this.performOrderFilter(this.filterByOrder):this.orders;
   }
 
-  performFilter(filterBy:string) : IOrder[]{
-    filterBy = filterBy.toLocaleLowerCase();    
-    return this.orders.filter((order : IOrder) => order.orderNumber.toLocaleLowerCase().indexOf(filterBy) !== -1);
- } 
-
-
+  _filterByCustomer : string = '';
+  get filterByCustomer() : string {
+    return this._filterByCustomer;
+  }
+  set filterByCustomer(value:string){
+    this._filterByOrder = '';
+    this._filterByCustomer = value;
+    this.filteredOrders = this.filterByCustomer?this.performCustomerFilter(this.filterByCustomer):this.orders;
+  }
   constructor(private orderService:OrderService){
    
   }
+
+  performOrderFilter(filterBy:string) : IOrder[]{
+    filterBy = filterBy.toLocaleLowerCase();    
+    return this.orders.filter((order : IOrder) => order.OrderNumber.toLocaleLowerCase().indexOf(filterBy) !== -1);
+ } 
+ performCustomerFilter(filterBy:string) : IOrder[]{
+  filterBy = filterBy.toLocaleLowerCase();    
+  return this.orders.filter((order : IOrder) => order.CustomerNumber.toLocaleLowerCase().indexOf(filterBy) !== -1);
+} 
   ngOnInit() {
-    this.orders = this.orderService.getOrders();
-    this.filteredOrders = this.orders;
-    this.listFilter = "";
+    //this.orders = this.orderService.getOrders();
+    this.orderService.getOrdersAsync().subscribe(
+      orders=>{
+        this.orders=orders;
+        this.filteredOrders = this.orders;
+        this.filterByOrder = "";
+        this.filterByCustomer="";
+      },
+      error=>this.errors=<any>error      
+    );
+   
   }
 
 }

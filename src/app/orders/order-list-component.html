@@ -3,13 +3,19 @@
   <div class="card-body">
     <div class="row">
         <div class="col-md-1">Filter by:</div>
-        <div class="col-md-4">
-          <input type="text" [(ngModel)]='listFilter'>
+        <div class="col-md-1">
+          <h6>Order ID</h6>
+          <input type="text" [(ngModel)]='filterByOrder'>         
         </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-1">
+            <h6>Customer</h6>
+            <input type="text" [(ngModel)]='filterByCustomer'>
+          </div>
     </div>
     <div class="row">
         <div class="col-md-6">
-          <h6>Filtered by: {{listFilter}}</h6> 
+            <h6></h6> 
         </div> 
     </div>
     <div class="table-responsive"> 
@@ -20,14 +26,26 @@
                     <th>Order Number</th>
                     <th>Order Date</th>
                     <th>Customer Number</th>
+                    <th>TotalWeight</th>
+                    <th>TotalSaleAmt</th>
+                    <th>TotalTaxableAmount</th>
+                    <th>TotalDollars</th>
+                    <th>TotalTaxableCost</th>
+                    <th>TotalCost</th>                
                 </tr>
             </thead>
             <tbody>
               <tr *ngFor ='let order of filteredOrders'>
-                <td>{{order.Id}}</td>
-                <td>{{order.orderNumber}}</td>
-                <td>{{order.orderDate}}</td>
-                <td>{{order.customerNumber}}</td>
+                <td>{{order.ID}}</td>
+                <td>{{order.OrderNumber}}</td>
+                <td>{{order.OrderDate}}</td>
+                <td>{{order.CustomerNumber}}</td>
+                <td>{{order.TotalWeight}}</td>
+                <td>{{order.TotalSaleAmt}}</td>
+                <td>{{order.TotalTaxableAmount}}</td>
+                <td>{{order.TotalDollars}}</td>
+                <td>{{order.TotalTaxableCost}}</td>
+                <td>{{order.TotalCost}}</td>
               </tr>
             </tbody>
         </table>

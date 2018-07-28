@@ -1,7 +1,7 @@
 export interface  IOrder{
-    Id : number;
-    orderNumber : string;
-    orderDate : string;
-    orderType : string;
-    customerNumber : string;
+    ID : number;
+    OrderNumber : string;
+    OrderDate : string;
+    OrderType : string;
+    CustomerNumber : string;
 }
