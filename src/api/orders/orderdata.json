@@ -1,7 +1,7 @@
 [{
 	"ID": 20062,
 	"OrderDate": "2018-04-25T00:00:00",
-	"OrderNumber": "135",
+	"OrderNumber": "00137",
 	"OrderType": "O",
 	"CustomerNumber": "905",
 	"TotalCost": 1029,
@@ -10,12 +10,12 @@
 	"TotalSalesDiscount": 0,
 	"TotalTaxableAmount": 1960.34,
 	"TotalTaxableCost": 1029,
-	"TotalWeight": 2418
+	"TotalWeight": 2418.2365
 },
 {
 	"ID": 20063,
 	"OrderDate": "2018-04-25T00:00:00",
-	"OrderNumber": "135",
+	"OrderNumber": "00135",
 	"OrderType": "O",
 	"CustomerNumber": "800",
 	"TotalCost": 1039,
@@ -29,7 +29,7 @@
 {
 	"ID": 20064,
 	"OrderDate": "2018-04-25T00:00:00",
-	"OrderNumber": "135",
+	"OrderNumber": "00125",
 	"OrderType": "O",
 	"CustomerNumber": "102",
 	"TotalCost": 1059,
@@ -43,7 +43,7 @@
 {
 	"ID": 20065,
 	"OrderDate": "2018-04-25T00:00:00",
-	"OrderNumber": "135",
+	"OrderNumber": "00145",
 	"OrderType": "O",
 	"CustomerNumber": "245",
 	"TotalCost": 1019,

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { IOrder } from './order';
 import { OrderService } from './order.service';
+import { CustomerService } from '../shared/customer.service';
 
-@Component({
-  selector: 'app-orderlist',
+@Component({ 
   templateUrl: './order-list-component.html',
   styleUrls: ['./order-list-component.css']
 })
@@ -12,8 +12,8 @@ export class OrderListComponent implements OnInit {
   orders : IOrder[] = [];
   filteredOrders : IOrder[] = [];
   errors : string;
-
   _filterByOrder : string = '';
+  
   get filterByOrder() : string {
     return this._filterByOrder;
   }
@@ -27,28 +27,35 @@ export class OrderListComponent implements OnInit {
   get filterByCustomer() : string {
     return this._filterByCustomer;
   }
-  set filterByCustomer(value:string){
+  set filterByCustomer(value:string){    
     this._filterByOrder = '';
     this._filterByCustomer = value;
     this.filteredOrders = this.filterByCustomer?this.performCustomerFilter(this.filterByCustomer):this.orders;
   }
-  constructor(private orderService:OrderService){
-   
-  }
+  constructor(private orderService:OrderService, private customerService:CustomerService){ }
 
-  performOrderFilter(filterBy:string) : IOrder[]{
+ performOrderFilter(filterBy:string) : IOrder[]{
     filterBy = filterBy.toLocaleLowerCase();    
     return this.orders.filter((order : IOrder) => order.OrderNumber.toLocaleLowerCase().indexOf(filterBy) !== -1);
  } 
  performCustomerFilter(filterBy:string) : IOrder[]{
-  filterBy = filterBy.toLocaleLowerCase();    
-  return this.orders.filter((order : IOrder) => order.CustomerNumber.toLocaleLowerCase().indexOf(filterBy) !== -1);
-} 
-  ngOnInit() {
-    //this.orders = this.orderService.getOrders();
+  filterBy = filterBy.toLocaleLowerCase(); 
+
+  return this.orders.filter((order : IOrder) => order.CustomerName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+ } 
+ 
+ formatData(orderList:IOrder[]):IOrder[]{
+    orderList.forEach(element => {
+    element.CustomerName=this.customerService
+    .getCustomerName(element.CustomerNumber);     
+    });
+    return orderList;
+ }
+ 
+ ngOnInit() {
     this.orderService.getOrdersAsync().subscribe(
       orders=>{
-        this.orders=orders;
+        this.orders=this.formatData(orders);
         this.filteredOrders = this.orders;
         this.filterByOrder = "";
         this.filterByCustomer="";

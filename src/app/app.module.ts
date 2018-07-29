@@ -1,30 +1,26 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Input } from '@angular/core';
-import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
 import { AppComponent } from './app.component';
-import { OrderListComponent } from './orders/order-list-component';
 import { WelcomeComponent } from './home/welcome.component';
-import { OrderDetailComponent } from './orders/order-detail.component';
+import { OrderModule } from './orders/order.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    OrderListComponent,
-    WelcomeComponent,
-    OrderDetailComponent
+    AppComponent,    
+    WelcomeComponent
   ],
   imports: [
-    BrowserModule,
-    FormsModule,
+    BrowserModule,    
     HttpClientModule,
-    RouterModule.forRoot([
-      {path:'orders',component:OrderListComponent },
-      {path:'orders/:Id',component:OrderDetailComponent},
-      {path:'welcome',component:WelcomeComponent}      
-    ])
+    RouterModule.forRoot([     
+      {path:'welcome',component:WelcomeComponent},
+      {path:'',redirectTo:'welcome',pathMatch:'full'},
+      {path:'**',redirectTo:'welcome',pathMatch:'full'}
+    ]),
+    OrderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -10,7 +10,7 @@ providedIn:"root"
 })
 export class OrderService{
 
-    private orderJsonUrl='api/orders/orderdata.json';
+    private orderJsonUrl='api/orders/orderdata.json';    
     constructor(private http:HttpClient){
 
     }
@@ -19,25 +19,7 @@ export class OrderService{
            tap(data=>console.log("All"+JSON.stringify(data))),
            catchError(this.errorHandler)
        );
-    }
-    getOrders():IOrder[]{
-        return [{
-            'ID': 20062,
-            'OrderDate': '2018-04-25T00:00:00',
-            'OrderNumber': '20001',
-            'OrderType': 'O',
-            'CustomerNumber': 'Ford'  
-          },
-          {
-            'ID': 20063,
-            'OrderDate': '2018-04-25T00:00:00',
-            'OrderNumber': '20003',
-            'OrderType': 'O',
-            'CustomerNumber': 'ABC'   
-          }];
-
-    }
-    
+    }    
     private errorHandler(err:HttpErrorResponse){
         let errMessage = '';
 

@@ -4,4 +4,5 @@ export interface  IOrder{
     OrderDate : string;
     OrderType : string;
     CustomerNumber : string;
+    CustomerName : string;
 }

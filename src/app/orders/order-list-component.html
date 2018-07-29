@@ -3,12 +3,12 @@
   <div class="card-body">
     <div class="row">
         <div class="col-md-1">Filter by:</div>
-        <div class="col-md-1">
+        <div class="col-md-3">
           <h6>Order ID</h6>
           <input type="text" [(ngModel)]='filterByOrder'>         
         </div>
         <div class="col-md-1"></div>
-        <div class="col-md-1">
+        <div class="col-md-4">
             <h6>Customer</h6>
             <input type="text" [(ngModel)]='filterByCustomer'>
           </div>
@@ -18,37 +18,42 @@
             <h6></h6> 
         </div> 
     </div>
-    <div class="table-responsive"> 
-        <table class="table table-condensed" *ngIf='orders && orders.length'>
+    <div class="table-responsive  w-auto"> 
+        <table class="table table-sm" *ngIf='orders && orders.length'>
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Order Number</th>
-                    <th>Order Date</th>
-                    <th>Customer Number</th>
-                    <th>TotalWeight</th>
-                    <th>TotalSaleAmt</th>
-                    <th>TotalTaxableAmount</th>
-                    <th>TotalDollars</th>
-                    <th>TotalTaxableCost</th>
-                    <th>TotalCost</th>                
+                    <th>Ord NO</th>
+                    <th>Ord Date</th>
+                    <th>Customer ID</th>
+                    <th>Customer Name</th>
+                    <th>Tot Weight</th>
+                    <th>Tot Sale</th>
+                    <th>To Taxable</th>
+                    <th>Tot Dollars</th>
+                              
                 </tr>
             </thead>
             <tbody>
               <tr *ngFor ='let order of filteredOrders'>
-                <td>{{order.ID}}</td>
-                <td>{{order.OrderNumber}}</td>
-                <td>{{order.OrderDate}}</td>
+                <td>
+                    <a [routerLink]="['/orders',order.ID]">{{order.ID}}</a>
+                </td>
+                <td>{{order.OrderNumber | uppercase}}</td>
+                <td>{{order.OrderDate| date: 'dd/MM/yyyy'}}</td>
                 <td>{{order.CustomerNumber}}</td>
-                <td>{{order.TotalWeight}}</td>
-                <td>{{order.TotalSaleAmt}}</td>
-                <td>{{order.TotalTaxableAmount}}</td>
-                <td>{{order.TotalDollars}}</td>
-                <td>{{order.TotalTaxableCost}}</td>
-                <td>{{order.TotalCost}}</td>
+                <td>{{order.CustomerName}}</td>
+                <td>{{order.TotalWeight | number:'1.2-2'}}</td>
+                <td>{{order.TotalSaleAmt | currency : 'USD' : 'symbol':'1.2-2'}}</td>
+                <td>{{order.TotalTaxableAmount | currency : 'USD' : 'symbol':'1.2-2'}}</td>
+                <td>{{order.TotalDollars | currency : 'USD' : 'symbol':'1.2-2' }}</td>
+               
               </tr>
             </tbody>
         </table>
-    </div>   
-  </div>     
+    </div> 
+    
+  </div> 
+  <div class='card-footer'>  
+  </div>    
 </div>
