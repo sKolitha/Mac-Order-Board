@@ -58,11 +58,15 @@ export class OrderListComponent implements OnInit {
         this.orders=this.formatData(orders);
         this.filteredOrders = this.orders;
         this.filterByOrder = "";
-        this.filterByCustomer="";
+        this.filterByCustomer="";        
       },
       error=>this.errors=<any>error      
     );
    
+  }
+
+  orderidclicked(id:number){
+    this.orderService.changeOrders(this.filteredOrders.find(x=>x.ID==id))
   }
 
 }

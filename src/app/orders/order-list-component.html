@@ -37,7 +37,7 @@
             <tbody>
               <tr *ngFor ='let order of filteredOrders'>
                 <td>
-                    <a [routerLink]="['/orders',order.ID]">{{order.ID}}</a>
+                    <a [routerLink]="['/orders',order.ID]" (click)='orderidclicked(order.ID)'>{{order.ID}}</a>
                 </td>
                 <td>{{order.OrderNumber | uppercase}}</td>
                 <td>{{order.OrderDate| date: 'dd/MM/yyyy'}}</td>
