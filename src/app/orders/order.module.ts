@@ -6,6 +6,7 @@ import { OrderListComponent } from './order-list-component';
 import { OrderDetailComponent } from './order-detail.component';
 import {ConvertCustomerIdToNamePipe} from '../shared/convertcustId-to-name.pipe';
 import { OrderDetailGuard } from './order-detail.guard';
+import { CustomerCommentComponent } from '../shared/customer-comment/customer-comment.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { OrderDetailGuard } from './order-detail.guard';
   declarations: [
     OrderListComponent,
     OrderDetailComponent,
-    ConvertCustomerIdToNamePipe
+    ConvertCustomerIdToNamePipe,
+    CustomerCommentComponent
   ]
 })
 export class OrderModule { }

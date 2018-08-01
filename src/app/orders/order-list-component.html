@@ -52,7 +52,9 @@
             </tbody>
         </table>
     </div> 
-    
+    <div class="alert alert-danger" role="alert" *ngIf='errors'>  
+        <strong>Error!</strong> {{errors}}
+    </div>
   </div> 
   <div class='card-footer'>  
   </div>    

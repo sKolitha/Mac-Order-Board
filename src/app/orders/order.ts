@@ -48,6 +48,7 @@ FreightCostUnit : string;
 FreightGLAccountNumber : string;
 FreightPayCodeLiteral : IFreightpaycodeliteral[];
 FreightPaymentCode : string;
+FreightPaymentName : string;
 HoldCode : string;
 InvoiceNumber : string;
 IsBillToFreeForm : boolean;
@@ -107,7 +108,8 @@ TotalSalesDiscount : number;
 TotalTaxableAmount : number;
 TotalTaxableCost : number;
 TotalWeight : number;
-
+Messages :string[];
+MessagesStr: string;
 
 }
 export interface ICustomerordercomment{

@@ -7,8 +7,9 @@ import { WelcomeComponent } from './home/welcome.component';
 import { OrderModule } from './orders/order.module';
 
 
+
 @NgModule({
-  declarations: [
+  declarations: [   
     AppComponent,    
     WelcomeComponent
   ],

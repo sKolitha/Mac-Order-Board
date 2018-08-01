@@ -10,7 +10,8 @@ import { CustomerService } from '../shared/customer.service';
 export class OrderListComponent implements OnInit {
 
   orders : IOrder[] = [];
-  filteredOrders : IOrder[] = [];
+  filteredOrders : IOrder[] = [];  
+
   errors : string;
   _filterByOrder : string = '';
   
@@ -42,12 +43,13 @@ export class OrderListComponent implements OnInit {
   filterBy = filterBy.toLocaleLowerCase(); 
 
   return this.orders.filter((order : IOrder) => order.CustomerName.toLocaleLowerCase().indexOf(filterBy) !== -1);
- } 
+ }  
  
  formatData(orderList:IOrder[]):IOrder[]{
-    orderList.forEach(element => {
-    element.CustomerName=this.customerService
-    .getCustomerName(element.CustomerNumber);     
+    orderList.forEach(element => {      
+      element.CustomerName=this.customerService.getCustomerName(element.CustomerNumber);  
+      element.FreightPaymentName=(element.FreightPayCodeLiteral.find(x=>x.Key.toLocaleLowerCase()==element.FreightPaymentCode.toLocaleLowerCase()).Value);
+      element.MessagesStr=element.Messages.join("/");
     });
     return orderList;
  }

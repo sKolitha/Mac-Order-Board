@@ -1,0 +1,34 @@
+<div class="table-responsive  w-auto "> 
+  <table class="table table-sm" *ngIf='customerordercomments && customerordercomments.length' >
+      <thead>
+          <tr>
+             <th></th>
+              
+              <th>Comment Type</th>
+              <th>Level Number</th>              
+              <th>Comment</th>
+             <!-- 
+               <th>ID</th>
+              <th>Ord NO</th>
+              <th>Sequence Number</th>
+              <th>Line SequenceNumber</th>-->            
+                        
+          </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor ='let comment of customerordercomments'>    
+          <td></td>     
+          <td>{{comment.CommentType}}</td>
+          <td>{{comment.LevelNumber}}</td>          
+          <td>{{comment.Comment }}</td>
+         <!-- 
+           <td>{{comment.ID}}</td>
+          <td>{{comment.OrderNumber}}</td>
+          <td>{{comment.OrderType | uppercase}}</td>
+          <td>{{comment.SequenceNumber }}</td>
+          <td>{{comment.LineSequenceNumber }}</td>-->
+         
+        </tr>
+      </tbody>
+  </table>
+</div> 

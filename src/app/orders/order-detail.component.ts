@@ -11,15 +11,20 @@ export class OrderDetailComponent implements OnInit {
   pageTitle:string='Order ID';
   order:IOrder;
 
-  constructor(private route:ActivatedRoute,private router:Router,
-    private orderService:OrderService) {}
+  constructor(private route:ActivatedRoute,private router:Router,private orderService:OrderService) {
 
+  }
   
   ngOnInit() {
-    let id=+this.route.snapshot.paramMap.get('Id');
-    this.pageTitle+=`: ${id}`;
     this.orderService.currentMessage.subscribe(ord=>this.order=ord);
+
+    if (!this.order){
+      this.onBack();
+    }
+    let id=+this.route.snapshot.paramMap.get('Id');
+    this.pageTitle+=`: ${id==null ? "" : id}`;
   }
+
   onBack(): void {
     this.router.navigate(['/orders']);
   }

@@ -4,7 +4,6 @@ import { HttpClient, HttpErrorResponse } from "../../../node_modules/@angular/co
 import { Observable, throwError,BehaviorSubject } from "../../../node_modules/rxjs";
 import {catchError,tap, map} from "../../../node_modules/rxjs/operators";
 
-
 @Injectable({
 providedIn:"root"
 })
@@ -26,8 +25,8 @@ export class OrderService{
        return this.http.get<IOrder[]>(this.orderJsonUrl).pipe(
            map(data=>data["data"]),
            tap(data=>{
-               this.currentorder=data[0];
-               console.log("All"+JSON.stringify(data))
+               this.currentorder=data[0];                            
+               //console.log("All"+JSON.stringify(data))
             }),
            catchError(this.errorHandler)
        );
@@ -36,13 +35,13 @@ export class OrderService{
         let errMessage = '';
 
         if (err.error instanceof ErrorEvent){
-            errMessage = 'error occured :'+ err.error.message;
+            errMessage = `error occured :${err.error.message}`;
         }
         else{
-            errMessage = 'error status code :' + err.status+', message is : ' + err.message;
+            errMessage = `error status code :${ err.status}, message is :${err.message}`;
         }
 
-        console.log(errMessage);
+        //console.log(errMessage);
         return throwError(errMessage);
     }
 }
