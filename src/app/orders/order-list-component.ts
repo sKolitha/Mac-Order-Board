@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { IOrder } from './order';
 import { OrderService } from './order.service';
 import { CustomerService } from '../shared/customer.service';
+import { Router } from '../../../node_modules/@angular/router';
+import { OrderParameterService } from './order-parameter/order-parameter.service';
 
 @Component({ 
   templateUrl: './order-list-component.html',
@@ -10,9 +12,23 @@ import { CustomerService } from '../shared/customer.service';
 export class OrderListComponent implements OnInit {
 
   orders : IOrder[] = [];
-  filteredOrders : IOrder[] = [];  
-
+  filteredOrders : IOrder[] = []; 
   errors : string;
+
+  constructor(private orderService:OrderService, 
+    private customerService:CustomerService,
+    private orderParamterService:OrderParameterService,
+    private router:Router){ }
+
+    get filterByOrder() : string {
+      return this.orderParamterService.filterByOrder;
+    }
+    set filterByOrder(value:string){
+     // this._filterByCustomer ='';
+      this.orderParamterService.filterByOrder = value;
+      this.filteredOrders = this.filterByOrder?this.performOrderFilter(this.filterByOrder):this.orders;
+    }
+/*
   _filterByOrder : string = '';
   
   get filterByOrder() : string {
@@ -29,11 +45,11 @@ export class OrderListComponent implements OnInit {
     return this._filterByCustomer;
   }
   set filterByCustomer(value:string){    
-    this._filterByOrder = '';
+    //this._filterByOrder = '';
     this._filterByCustomer = value;
     this.filteredOrders = this.filterByCustomer?this.performCustomerFilter(this.filterByCustomer):this.orders;
   }
-  constructor(private orderService:OrderService, private customerService:CustomerService){ }
+  */
 
  performOrderFilter(filterBy:string) : IOrder[]{
     filterBy = filterBy.toLocaleLowerCase();    
@@ -58,9 +74,10 @@ export class OrderListComponent implements OnInit {
     this.orderService.getOrdersAsync().subscribe(
       orders=>{
         this.orders=this.formatData(orders);
-        this.filteredOrders = this.orders;
-        this.filterByOrder = "";
-        this.filterByCustomer="";        
+        this.filteredOrders = this.filterByOrder?this.performOrderFilter(this.filterByOrder):this.orders;
+        //this.filteredOrders = this.orders;
+        //this.filterByOrder = "";
+        //this.filterByCustomer="";        
       },
       error=>this.errors=<any>error      
     );
@@ -68,7 +85,9 @@ export class OrderListComponent implements OnInit {
   }
 
   orderidclicked(id:number){
-    this.orderService.changeOrders(this.filteredOrders.find(x=>x.ID==id))
+    this.orderService.changeSelectedOrder(this.filteredOrders.find(x=>x.ID==id))
+    //[routerLink]="['/orders',order.ID]" 
+    this.router.navigate(['/orders',id]);
   }
 
 }

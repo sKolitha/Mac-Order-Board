@@ -1,212 +1,212 @@
 <div class="card">
-    <div class="card-header">
-        <div class="row">
-            <div class="col-xs-10 col-sm-5 col-md-8">
-                <strong>{{pageTitle}}</strong>
-            </div>
-            <div class="col-xs-10 col-sm-2 col-md">
-                  
+        <div class="card-header">
+            <div class="row">
+                <div class="col-xs-10 col-sm-5 col-md-8">
+                    <strong>{{pageTitle}}</strong>
                 </div>
-            <div class="col-xs-12 col-sm-5 col-md-2">
+                <div class="col-xs-10 col-sm-2 col-md">
+                      
+                    </div>
+                <div class="col-xs-12 col-sm-5 col-md-2">
+                    <button class='btn btn-outline-dark btn-sm'
+                    (click)='onBack()'
+                    style='width:80px'>
+                    <i class='fa fa-chevron-left'></i> Back
+                    </button>
+                </div>
+                
+            </div>
+        </div>
+          
+        <div class="card-body">    
+            <div class="row">   
+                    <div class="col-xs-12 col-sm-5 col-md-4">
+                        <div><strong>Order Number:</strong>{{order.OrderNumber}}</div> 
+                        <div><strong>Order Date:</strong> {{order.OrderDate| date: 'dd/MM/yyyy'}}</div>                    
+                        <div><strong>Order Type:</strong> {{order.OrderType}}</div> 
+                    </div>
+                    <div class="col-xs-12 col-sm-5 col-md-4">  
+                        <div><strong>Total Weight:</strong> {{order.TotalWeight| number:'1.2-2'}}</div>
+                        <div><strong>Currency Code:</strong>{{order.CurrencyCode}}</div>
+    
+                    </div>
+                    <div class="col-xs-12 col-sm-5 col-md-4">  
+                        <div><strong>Status:</strong>{{order.Status}}</div>
+                        <div><strong>Closed?:</strong>{{order.IsClosed}}</div>
+                    </div>
+            </div>
+            <div><hr/></div>        
+            <div class="row">
+                <div class="col-xs-10 col-sm-5 col-md-4">                        
+                    <div > 
+                            <div><strong>Customer:</strong> {{order.CustomerNumber}} / {{order.CustomerName}}</div>                   
+                            <div><strong>Contact Email:</strong> {{order.ContactEmailAddress}}</div>            
+                            <div><strong>Contact Name:</strong> {{order.ContactName}}</div>            
+                            <div><strong>Contact Phone:</strong> {{order.ContactPhoneNumber}}</div>                                              
+                    </div>                        
+                </div>
+                <div class="col-xs-10 col-sm-5 col-md-4">
+                    <div><strong>Bill To Address 1:</strong>{{order.BillToAddressLine1}}</div> 
+                    <div><strong>Bill To Address 2:</strong> {{order.BillToAddressLine4}}</div>                    
+                    <div><strong>Bill To City:</strong> {{order.BillToCity}}</div> 
+                    <div><strong>Bill To Country:</strong> {{order.BillToCountry}}</div> 
+                    <div><strong>Bill To CustomerName:</strong>  {{order.BillToCustomerName}}</div>                    
+                    <div><strong>Bill To CustomerNumber:</strong> {{order.BillToCustomerNumber}}</div> 
+                    <div><strong>Bill To State:</strong> {{order.BillToState}}</div>
+                    <div><strong>Bill To ToZip:</strong> {{order.BillToZip}}</div>
+                </div>
+                <div class="col-xs-10 col-sm-5 col-md-4">
+                    <div><strong>Ship To Address 1:</strong> {{order.ShipToAddressLine1}}</div> 
+                    <div><strong>Ship To Address 2:</strong> {{order.ShipToAddressLine4}}</div>                    
+                    <div><strong>Ship To City:</strong> {{order.ShipToCity}}</div> 
+                    <div><strong>Ship To Country:</strong> {{order.ShipToCountry}}</div> 
+                    <div><strong>Ship To CustomerName:</strong> {{order.ShipToCustomerName}}</div>                    
+                    <div><strong>Ship To CustomerNumber:</strong> {{order.ShipToCustomerNumber}}</div> 
+                    <div><strong>Ship To State:</strong> {{order.ShipToState}}</div>
+                    <div><strong>Ship To ToZip:</strong> {{order.ShipToZip}}</div>
+                </div>
+            </div>
+            <div><hr/></div>
+            <div class="row">
+                <div class="col-xs-10 col-sm-5 col-md-4">
+                    <div><strong>Freight Amount:</strong>{{order.FreightAmount| currency : 'USD' : 'symbol':'1.2-2'}}</div>
+                    <div><strong>Freight CostCenter:</strong>{{order.FreightCostCenter}}</div>
+                    <div><strong>Freight Cost Unit:</strong>{{order.FreightCostUnit}}</div>
+                    <div><strong>Freight GLAccountNumber:</strong>{{order.FreightGLAccountNumber}}</div>
+                    <div><strong>Freight Payment Type:</strong>{{order.FreightPaymentName}}</div>
+                    <!--<div><strong>FreightPayCodeLiteral:</strong>{{order.FreightPayCodeLiteral}}</div>
+                    <div><strong>Freight PaymentCode:</strong>{{order.FreightPaymentCode}}</div> -->                  
+                </div>
+                <div class="col-xs-10 col-sm-5 col-md-4">
+                    <div><strong>SalesTax Amount1:</strong>{{order.SalesTaxAmount1| currency : 'USD' : 'symbol':'1.2-2'}}</div>
+                    <div><strong>SalesTax Amount2:</strong>{{order.SalesTaxAmount2| currency : 'USD' : 'symbol':'1.2-2'}}</div>
+                    <div><strong>SalesTax Amount3:</strong>{{order.SalesTaxAmount3| currency : 'USD' : 'symbol':'1.2-2'}}</div>                                          
+                </div>
+                <div class="col-xs-10 col-sm-5 col-md-4">
+                    <div><strong>TaxCode:</strong>{{order.TaxCode}}</div>
+                    <div><strong>TaxPercent:</strong>{{order.TaxPercent| number:'1.2-2'}}</div>
+                    <div><strong>TaxPercent2:</strong>{{order.TaxPercent2| number:'1.2-2'}}</div>
+                    <div><strong>TaxPercent3:</strong>{{order.TaxPercent3| number:'1.2-2'}}</div>                                    
+                </div>
+            </div>
+            <div><hr/></div>
+            <div class="row">
+                <div class="col-xs-10 col-sm-5 col-md-4">
+                    
+                    <div><strong>Manufacturing Location:</strong>{{order.ManufacturingLocation}}</div>
+                    <div><strong>PackingSlip Number:</strong>{{order.PackingSlipNumber}}</div>
+                    <div><strong>PreSelect Status:</strong>{{order.PreSelectStatus}}</div>
+                    <div><strong>ProgTerm Number:</strong>{{order.ProgTermNumber}}</div>
+                    <div><strong>Return Material Authorization Number:</strong>{{order.ReturnMaterialAuthorizationNumber}}</div>
+                    
+                   
+                                       
+                </div>
+                <div class="col-xs-10 col-sm-5 col-md-4">
+                    <div><strong>Invoice Number:</strong>{{order.InvoiceNumber}}</div>
+                    <div><strong>PurchaseOrder Number:</strong>{{order.PurchaseOrderNumber}}</div>                     
+                    <div><strong>Accounts Receivable Reference:</strong>{{order.AccountsReceivableReference}}</div>
+                    <div><strong>Accounts Receivable TermsCode:</strong>{{order.AccountsReceivableTermsCode}}</div>                        
+                    <div><strong>Payment Amount:</strong>{{order.PaymentAmount| currency : 'USD' : 'symbol':'1.2-2'}}</div>
+                    <div><strong>Payment Discount Amount:</strong>{{order.PaymentDiscountAmount| currency : 'USD' : 'symbol':'1.2-2'}}</div>
+                    <div><strong>OE Cash Number:</strong>{{order.OECashNumber}}</div>
+    
+                </div>
+                <div class="col-xs-10 col-sm-5 col-md-4">
+                    <div><strong>Original Transaction Rate:</strong>{{order.OriginalTransactionRate| number:'1.2-2'}}</div>
+                    <div><strong>Currency Transaction Rate:</strong>{{order.CurrencyTransactionRate| number:'1.2-2'}}</div>
+                    <div><strong>Determine Rate By:</strong>{{order.DetermineRateBy}}</div>
+                    <div><strong>Discount Percent:</strong>{{order.DiscountPercent| number:'1.2-2'}}</div>
+                    <div><strong>Customer Balance Method:</strong>{{order.CustomerBalanceMethod}}</div>
+                    <div><strong>Miscellaneous Cost Center:</strong>{{order.MiscellaneousCostCenter}}</div>
+                    <div><strong>Miscellaneous Cost Unit:</strong>{{order.MiscellaneousCostUnit}}</div>                                              
+                </div>
+    
+            </div>
+            <div><hr/></div>
+            <div class="row">
+                <div class="col-xs-10 col-sm-5 col-md-4">
+                    <div><strong>Salesperson Number:</strong>{{order.SalespersonNumber}}</div>
+                    <div><strong>Salesperson Percent Commission:</strong>{{order.SalespersonPercentCommission| number:'1.2-2'}}</div>
+                    <div><strong>Salesperson Commission Amount:</strong>{{order.SalespersonCommissionAmount| currency : 'USD' : 'symbol':'1.2-2'}}</div>
+                    <div><strong>Salesperson Number2:</strong>{{order.SalespersonNumber2}}</div>
+                    <div><strong>Salesperson Percent Commission2:</strong>{{order.SalespersonPercentCommission2| number:'1.2-2'}}</div>
+                    <div><strong>Salesperson Commission Amount2:</strong>{{order.SalespersonCommissionAmount2| currency : 'USD' : 'symbol':'1.2-2'}}</div>
+                    <div><strong>Salesperson Number3:</strong>{{order.SalespersonNumber3}}</div>  
+                    <div><strong>Salesperson Percent Commission3:</strong>{{order.SalespersonPercentCommission3| number:'1.2-2'}}</div>
+                    <div><strong>Salesperson Commission Amount3:</strong>{{order.SalespersonCommissionAmount3| currency : 'USD' : 'symbol':'1.2-2'}}</div>      
+                    <div><strong>Commission Amount:</strong>{{order.CommissionAmount}}</div>
+                    <div><strong>Commission Percent:</strong>{{order.CommissionPercent}}</div>   
+                </div>
+                <div class="col-xs-10 col-sm-5 col-md-4">
+                    <div><strong>Is Bill To Free Form:</strong>{{order.IsBillToFreeForm}}</div>
+                    <div><strong>Is Copy To Bill Of Material:</strong>{{order.IsCopyToBillOfMaterial}}</div>
+                    <div><strong>Is Exchange Rate:</strong>{{order.IsExchangeRate}}</div>
+                    <div><strong>Is Multiple Location:</strong>{{order.IsMultipleLocation}}</div>
+                    <div><strong>Is Order Taxable:</strong>{{order.IsOrderTaxable}}</div>
+                    <div><strong>Is Partially Posted:</strong>{{order.IsPartiallyPosted}}</div>
+                    <div><strong>Is Prepayment:</strong>{{order.IsPrepayment}}</div>
+                    <div><strong>Is Ship To Free Form:</strong>{{order.IsShipToFreeForm}}</div>                    
+                    
+                </div>
+                <div class="col-xs-10 col-sm-5 col-md-4">
+                    <div><strong>Edi Code:</strong>{{order.EdiCode}}</div>
+                    <div><strong>EDI Document Sequence:</strong>{{order.EDIDocumentSequence}}</div>
+                    <div><strong>Form Number:</strong>{{order.FormNumber}}</div>
+                    <div><strong>Selection Code:</strong>{{order.SelectionCode}}</div>
+                    <div><strong>Hold Code:</strong>{{order.HoldCode}}</div>                    
+                    
+                </div>
+    
+            </div>
+            <div><hr/></div>
+            <div class="row">
+                    <div class="col-xs-10 col-sm-5 col-md-4">
+                        <div><strong>Total Cost:</strong>{{order.TotalCost| currency : 'USD' : 'symbol':'1.2-2'}}</div>
+                        <div><strong>Total Taxable Cost:</strong>{{order.TotalTaxableCost| currency : 'USD' : 'symbol':'1.2-2'}}</div>
+                        <div><strong>Total Dollars:</strong>{{order.TotalDollars| currency : 'USD' : 'symbol':'1.2-2'}}</div>
+                        <div><strong>Total Sale Amt:</strong>{{order.TotalSaleAmt| currency : 'USD' : 'symbol':'1.2-2'}}</div>
+                        <div><strong>Total Sales Discount:</strong>{{order.TotalSalesDiscount| currency : 'USD' : 'symbol':'1.2-2'}}</div>
+                        <div><strong>Total Taxable Amount:</strong>{{order.TotalTaxableAmount| currency : 'USD' : 'symbol':'1.2-2'}}</div>
+                            
+                    </div>
+                    <div class="col-xs-10 col-sm-5 col-md-4">
+                        <div><strong>Accumulated Freight Amount:</strong>{{order.AccumulatedFreightAmount| currency : 'USD' : 'symbol':'1.2-2'}}</div>
+                        <div><strong>Accumulated Misc. Charges Amount:</strong>{{order.AccumulatedMiscellaneousChargesAmount| currency : 'USD' : 'symbol':'1.2-2'}}</div>
+                        <div><strong>Miscellaneous Amount:</strong>{{order.MiscellaneousAmount| currency : 'USD' : 'symbol':'1.2-2'}}</div>
+                        <div><strong>Miscellaneous GL Account Number:</strong>{{order.MiscellaneousGLAccountNumber}}</div>
+                        <div><strong>Accumulated Sales Tax Amount:</strong>{{order.AccumulatedSalesTaxAmount| currency : 'USD' : 'symbol':'1.2-2'}}</div>
+                        <div><strong>Accumulated Total Sales Amount:</strong>{{order.AccumulatedTotalSalesAmount| currency : 'USD' : 'symbol':'1.2-2'}}</div>
+                        <div><strong>Accumulated Total Taxable Amount:</strong>{{order.AccumulatedTotalTaxableAmount| currency : 'USD' : 'symbol':'1.2-2'}}</div>
+                            
+                    </div>
+                    <div class="col-xs-10 col-sm-5 col-md-4">
+                        <div><strong>ExtraField10:</strong>{{order.ExtraField10}}</div>
+                        <div><strong>ExtraField11:</strong>{{order.ExtraField11}}</div>
+                        <div><strong>ExtraField12:</strong>{{order.ExtraField12}}</div>
+                        <div><strong>ExtraField13:</strong>{{order.ExtraField13}}</div>
+                        <div><strong>ExtraField14:</strong>{{order.ExtraField14}}</div>
+                        <div><strong>ExtraField15:</strong>{{order.ExtraField15}}</div>                        
+                    </div>
+            </div>
+            <div><hr/></div>
+            <div class="row" >                      
+                <div class="col-xs-10 col-sm-5 col-md-4" >
+                    <div><strong>Order Comments:</strong><app-customer-comment [comments]='order?.CustomerOrderComments'></app-customer-comment></div>
+                </div>
+                <div class="col-xs-10 col-sm-5 col-md-4" >
+                        <div><strong>Order Messages:</strong></div>
+                        <div>{{order.MessagesStr}}</div>
+                </div>             
+            </div>
+        </div>  
+    
+        <div class='card-footer'>        
                 <button class='btn btn-outline-dark btn-sm'
                 (click)='onBack()'
                 style='width:80px'>
                 <i class='fa fa-chevron-left'></i> Back
                 </button>
-            </div>
-            
         </div>
+        
     </div>
-      
-    <div class="card-body">    
-        <div class="row">   
-                <div class="col-xs-10 col-sm-5 col-md-4">
-                    <div><strong>Order Number:</strong> {{order.OrderNumber}}</div> 
-                    <div><strong>Order Date:</strong> {{order.OrderDate| date: 'dd/MM/yyyy'}}</div>                    
-                    <div><strong>Order Type:</strong> {{order.OrderType}}</div> 
-                </div>
-                <div class="col-xs-12 col-sm-5 col-md-4">  
-                    <div><strong>Total Weight:</strong> {{order.TotalWeight| number:'1.2-2'}}</div>
-                    <div><strong>Currency Code:</strong>{{order.CurrencyCode}}</div>
-
-                </div>
-                <div class="col-xs-12 col-sm-5 col-md-4">  
-                    <div><strong>Status:</strong>{{order.Status}}</div>
-                    <div><strong>Closed?:</strong>{{order.IsClosed}}</div>
-                </div>
-        </div>
-        <div><hr/></div>        
-        <div class="row">
-            <div class="col-xs-10 col-sm-5 col-md-4">                        
-                <div > 
-                        <div><strong>Customer:</strong> {{order.CustomerNumber}} / {{order.CustomerName}}</div>                   
-                        <div><strong>Contact Email:</strong> {{order.ContactEmailAddress}}</div>            
-                        <div><strong>Contact Name:</strong> {{order.ContactName}}</div>            
-                        <div><strong>Contact Phone:</strong> {{order.ContactPhoneNumber}}</div>                                              
-                </div>                        
-            </div>
-            <div class="col-xs-10 col-sm-5 col-md-4">
-                <div><strong>Bill To Address 1:</strong>{{order.BillToAddressLine1}}</div> 
-                <div><strong>Bill To Address 2:</strong> {{order.BillToAddressLine4}}</div>                    
-                <div><strong>Bill To City:</strong> {{order.BillToCity}}</div> 
-                <div><strong>Bill To Country:</strong> {{order.BillToCountry}}</div> 
-                <div><strong>Bill To CustomerName:</strong>  {{order.BillToCustomerName}}</div>                    
-                <div><strong>Bill To CustomerNumber:</strong> {{order.BillToCustomerNumber}}</div> 
-                <div><strong>Bill To State:</strong> {{order.BillToState}}</div>
-                <div><strong>Bill To ToZip:</strong> {{order.BillToZip}}</div>
-            </div>
-            <div class="col-xs-10 col-sm-5 col-md-4">
-                <div><strong>Ship To Address 1:</strong> {{order.ShipToAddressLine1}}</div> 
-                <div><strong>Ship To Address 2:</strong> {{order.ShipToAddressLine4}}</div>                    
-                <div><strong>Ship To City:</strong> {{order.ShipToCity}}</div> 
-                <div><strong>Ship To Country:</strong> {{order.ShipToCountry}}</div> 
-                <div><strong>Ship To CustomerName:</strong> {{order.ShipToCustomerName}}</div>                    
-                <div><strong>Ship To CustomerNumber:</strong> {{order.ShipToCustomerNumber}}</div> 
-                <div><strong>Ship To State:</strong> {{order.ShipToState}}</div>
-                <div><strong>Ship To ToZip:</strong> {{order.ShipToZip}}</div>
-            </div>
-        </div>
-        <div><hr/></div>
-        <div class="row">
-            <div class="col-xs-10 col-sm-5 col-md-4">
-                <div><strong>Freight Amount:</strong>{{order.FreightAmount| currency : 'USD' : 'symbol':'1.2-2'}}</div>
-                <div><strong>Freight CostCenter:</strong>{{order.FreightCostCenter}}</div>
-                <div><strong>Freight Cost Unit:</strong>{{order.FreightCostUnit}}</div>
-                <div><strong>Freight GLAccountNumber:</strong>{{order.FreightGLAccountNumber}}</div>
-                <div><strong>Freight Payment Type:</strong>{{order.FreightPaymentName}}</div>
-                <!--<div><strong>FreightPayCodeLiteral:</strong>{{order.FreightPayCodeLiteral}}</div>
-                <div><strong>Freight PaymentCode:</strong>{{order.FreightPaymentCode}}</div> -->                  
-            </div>
-            <div class="col-xs-10 col-sm-5 col-md-4">
-                <div><strong>SalesTax Amount1:</strong>{{order.SalesTaxAmount1| currency : 'USD' : 'symbol':'1.2-2'}}</div>
-                <div><strong>SalesTax Amount2:</strong>{{order.SalesTaxAmount2| currency : 'USD' : 'symbol':'1.2-2'}}</div>
-                <div><strong>SalesTax Amount3:</strong>{{order.SalesTaxAmount3| currency : 'USD' : 'symbol':'1.2-2'}}</div>                                          
-            </div>
-            <div class="col-xs-10 col-sm-5 col-md-4">
-                <div><strong>TaxCode:</strong>{{order.TaxCode}}</div>
-                <div><strong>TaxPercent:</strong>{{order.TaxPercent| number:'1.2-2'}}</div>
-                <div><strong>TaxPercent2:</strong>{{order.TaxPercent2| number:'1.2-2'}}</div>
-                <div><strong>TaxPercent3:</strong>{{order.TaxPercent3| number:'1.2-2'}}</div>                                    
-            </div>
-        </div>
-        <div><hr/></div>
-        <div class="row">
-            <div class="col-xs-10 col-sm-5 col-md-4">
-                
-                <div><strong>Manufacturing Location:</strong>{{order.ManufacturingLocation}}</div>
-                <div><strong>PackingSlip Number:</strong>{{order.PackingSlipNumber}}</div>
-                <div><strong>PreSelect Status:</strong>{{order.PreSelectStatus}}</div>
-                <div><strong>ProgTerm Number:</strong>{{order.ProgTermNumber}}</div>
-                <div><strong>Return Material Authorization Number:</strong>{{order.ReturnMaterialAuthorizationNumber}}</div>
-                
-               
-                                   
-            </div>
-            <div class="col-xs-10 col-sm-5 col-md-4">
-                <div><strong>Invoice Number:</strong>{{order.InvoiceNumber}}</div>
-                <div><strong>PurchaseOrder Number:</strong>{{order.PurchaseOrderNumber}}</div>                     
-                <div><strong>Accounts Receivable Reference:</strong>{{order.AccountsReceivableReference}}</div>
-                <div><strong>Accounts Receivable TermsCode:</strong>{{order.AccountsReceivableTermsCode}}</div>                        
-                <div><strong>Payment Amount:</strong>{{order.PaymentAmount| currency : 'USD' : 'symbol':'1.2-2'}}</div>
-                <div><strong>Payment Discount Amount:</strong>{{order.PaymentDiscountAmount| currency : 'USD' : 'symbol':'1.2-2'}}</div>
-                <div><strong>OE Cash Number:</strong>{{order.OECashNumber}}</div>
-
-            </div>
-            <div class="col-xs-10 col-sm-5 col-md-4">
-                <div><strong>Original Transaction Rate:</strong>{{order.OriginalTransactionRate| number:'1.2-2'}}</div>
-                <div><strong>Currency Transaction Rate:</strong>{{order.CurrencyTransactionRate| number:'1.2-2'}}</div>
-                <div><strong>Determine Rate By:</strong>{{order.DetermineRateBy}}</div>
-                <div><strong>Discount Percent:</strong>{{order.DiscountPercent| number:'1.2-2'}}</div>
-                <div><strong>Customer Balance Method:</strong>{{order.CustomerBalanceMethod}}</div>
-                <div><strong>Miscellaneous Cost Center:</strong>{{order.MiscellaneousCostCenter}}</div>
-                <div><strong>Miscellaneous Cost Unit:</strong>{{order.MiscellaneousCostUnit}}</div>                                              
-            </div>
-
-        </div>
-        <div><hr/></div>
-        <div class="row">
-            <div class="col-xs-10 col-sm-5 col-md-4">
-                <div><strong>Salesperson Number:</strong>{{order.SalespersonNumber}}</div>
-                <div><strong>Salesperson Percent Commission:</strong>{{order.SalespersonPercentCommission| number:'1.2-2'}}</div>
-                <div><strong>Salesperson Commission Amount:</strong>{{order.SalespersonCommissionAmount| currency : 'USD' : 'symbol':'1.2-2'}}</div>
-                <div><strong>Salesperson Number2:</strong>{{order.SalespersonNumber2}}</div>
-                <div><strong>Salesperson Percent Commission2:</strong>{{order.SalespersonPercentCommission2| number:'1.2-2'}}</div>
-                <div><strong>Salesperson Commission Amount2:</strong>{{order.SalespersonCommissionAmount2| currency : 'USD' : 'symbol':'1.2-2'}}</div>
-                <div><strong>Salesperson Number3:</strong>{{order.SalespersonNumber3}}</div>  
-                <div><strong>Salesperson Percent Commission3:</strong>{{order.SalespersonPercentCommission3| number:'1.2-2'}}</div>
-                <div><strong>Salesperson Commission Amount3:</strong>{{order.SalespersonCommissionAmount3| currency : 'USD' : 'symbol':'1.2-2'}}</div>      
-                <div><strong>Commission Amount:</strong>{{order.CommissionAmount}}</div>
-                <div><strong>Commission Percent:</strong>{{order.CommissionPercent}}</div>   
-            </div>
-            <div class="col-xs-10 col-sm-5 col-md-4">
-                <div><strong>Is Bill To Free Form:</strong>{{order.IsBillToFreeForm}}</div>
-                <div><strong>Is Copy To Bill Of Material:</strong>{{order.IsCopyToBillOfMaterial}}</div>
-                <div><strong>Is Exchange Rate:</strong>{{order.IsExchangeRate}}</div>
-                <div><strong>Is Multiple Location:</strong>{{order.IsMultipleLocation}}</div>
-                <div><strong>Is Order Taxable:</strong>{{order.IsOrderTaxable}}</div>
-                <div><strong>Is Partially Posted:</strong>{{order.IsPartiallyPosted}}</div>
-                <div><strong>Is Prepayment:</strong>{{order.IsPrepayment}}</div>
-                <div><strong>Is Ship To Free Form:</strong>{{order.IsShipToFreeForm}}</div>                    
-                
-            </div>
-            <div class="col-xs-10 col-sm-5 col-md-4">
-                <div><strong>Edi Code:</strong>{{order.EdiCode}}</div>
-                <div><strong>EDI Document Sequence:</strong>{{order.EDIDocumentSequence}}</div>
-                <div><strong>Form Number:</strong>{{order.FormNumber}}</div>
-                <div><strong>Selection Code:</strong>{{order.SelectionCode}}</div>
-                <div><strong>Hold Code:</strong>{{order.HoldCode}}</div>                    
-                
-            </div>
-
-        </div>
-        <div><hr/></div>
-        <div class="row">
-                <div class="col-xs-10 col-sm-5 col-md-4">
-                    <div><strong>Total Cost:</strong>{{order.TotalCost| currency : 'USD' : 'symbol':'1.2-2'}}</div>
-                    <div><strong>Total Taxable Cost:</strong>{{order.TotalTaxableCost| currency : 'USD' : 'symbol':'1.2-2'}}</div>
-                    <div><strong>Total Dollars:</strong>{{order.TotalDollars| currency : 'USD' : 'symbol':'1.2-2'}}</div>
-                    <div><strong>Total Sale Amt:</strong>{{order.TotalSaleAmt| currency : 'USD' : 'symbol':'1.2-2'}}</div>
-                    <div><strong>Total Sales Discount:</strong>{{order.TotalSalesDiscount| currency : 'USD' : 'symbol':'1.2-2'}}</div>
-                    <div><strong>Total Taxable Amount:</strong>{{order.TotalTaxableAmount| currency : 'USD' : 'symbol':'1.2-2'}}</div>
-                        
-                </div>
-                <div class="col-xs-10 col-sm-5 col-md-4">
-                    <div><strong>Accumulated Freight Amount:</strong>{{order.AccumulatedFreightAmount| currency : 'USD' : 'symbol':'1.2-2'}}</div>
-                    <div><strong>Accumulated Misc. Charges Amount:</strong>{{order.AccumulatedMiscellaneousChargesAmount| currency : 'USD' : 'symbol':'1.2-2'}}</div>
-                    <div><strong>Miscellaneous Amount:</strong>{{order.MiscellaneousAmount| currency : 'USD' : 'symbol':'1.2-2'}}</div>
-                    <div><strong>Miscellaneous GL Account Number:</strong>{{order.MiscellaneousGLAccountNumber}}</div>
-                    <div><strong>Accumulated Sales Tax Amount:</strong>{{order.AccumulatedSalesTaxAmount| currency : 'USD' : 'symbol':'1.2-2'}}</div>
-                    <div><strong>Accumulated Total Sales Amount:</strong>{{order.AccumulatedTotalSalesAmount| currency : 'USD' : 'symbol':'1.2-2'}}</div>
-                    <div><strong>Accumulated Total Taxable Amount:</strong>{{order.AccumulatedTotalTaxableAmount| currency : 'USD' : 'symbol':'1.2-2'}}</div>
-                        
-                </div>
-                <div class="col-xs-10 col-sm-5 col-md-4">
-                    <div><strong>ExtraField10:</strong>{{order.ExtraField10}}</div>
-                    <div><strong>ExtraField11:</strong>{{order.ExtraField11}}</div>
-                    <div><strong>ExtraField12:</strong>{{order.ExtraField12}}</div>
-                    <div><strong>ExtraField13:</strong>{{order.ExtraField13}}</div>
-                    <div><strong>ExtraField14:</strong>{{order.ExtraField14}}</div>
-                    <div><strong>ExtraField15:</strong>{{order.ExtraField15}}</div>                        
-                </div>
-        </div>
-        <div><hr/></div>
-        <div class="row" >                      
-            <div class="col-xs-10 col-sm-5 col-md-4" >
-                <div><strong>Order Comments:</strong><app-customer-comment [comments]='order?.CustomerOrderComments'></app-customer-comment></div>
-            </div>
-            <div class="col-xs-10 col-sm-5 col-md-4" >
-                    <div><strong>Order Messages:</strong></div>
-                    <div>{{order.MessagesStr}}</div>
-            </div>             
-        </div>
-    </div>  
-
-    <div class='card-footer'>        
-            <button class='btn btn-outline-dark btn-sm'
-            (click)='onBack()'
-            style='width:80px'>
-            <i class='fa fa-chevron-left'></i> Back
-            </button>
-    </div>
-    
-</div>

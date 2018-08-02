@@ -1,23 +1,25 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { ActivatedRoute,Router   } from '../../../node_modules/@angular/router';
 import {IOrder} from './order';
 import { OrderService } from './order.service';
+import { Subscription } from '../../../node_modules/rxjs';
 
 @Component({ 
   templateUrl: './order-detail.component.html',
   styleUrls: ['./order-detail.component.css']
 })
-export class OrderDetailComponent implements OnInit {
+
+export class OrderDetailComponent implements OnInit,OnDestroy {
   pageTitle:string='Order ID';
   order:IOrder;
+  sub:Subscription;
 
-  constructor(private route:ActivatedRoute,private router:Router,private orderService:OrderService) {
-
-  }
+  constructor(private route:ActivatedRoute,private router:Router,
+    private orderService:OrderService) { }
   
   ngOnInit() {
-    this.orderService.currentMessage.subscribe(ord=>this.order=ord);
 
+    this.sub=this.orderService.selectedorderchanges$.subscribe(ord=>this.order=ord);
     if (!this.order){
       this.onBack();
     }
@@ -27,5 +29,9 @@ export class OrderDetailComponent implements OnInit {
 
   onBack(): void {
     this.router.navigate(['/orders']);
+  }
+
+  ngOnDestroy():void{
+    this.sub.unsubscribe();
   }
 }
