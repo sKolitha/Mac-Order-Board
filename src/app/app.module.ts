@@ -5,13 +5,14 @@ import {RouterModule} from '@angular/router';
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { OrderModule } from './orders/order.module';
+import { ErrorComponent } from './error/error.component';
 
 
 
 @NgModule({
   declarations: [   
     AppComponent,    
-    WelcomeComponent
+    WelcomeComponent, ErrorComponent
   ],
   imports: [
     BrowserModule,    

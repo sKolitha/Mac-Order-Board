@@ -1,6 +1,6 @@
-import { Pipe, PipeTransform } from "../../../node_modules/@angular/core";
+
 import { CustomerService } from "./customer.service";
-import { RouteReuseStrategy } from "../../../node_modules/@angular/router";
+import { PipeTransform, Pipe } from "@angular/core";
 
 @Pipe({
 name:'ConvertCustomerIdToName'

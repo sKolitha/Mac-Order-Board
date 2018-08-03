@@ -1,8 +1,8 @@
 import { Component, OnInit,OnDestroy } from '@angular/core';
-import { ActivatedRoute,Router   } from '../../../node_modules/@angular/router';
-import {IOrder} from './order';
-import { OrderService } from './order.service';
-import { Subscription } from '../../../node_modules/rxjs';
+import { ActivatedRoute,Router   } from '@angular/router';
+import {IOrder} from '../order';
+import { OrderService } from '../order.service';
+import { Subscription } from 'rxjs';
 
 @Component({ 
   templateUrl: './order-detail.component.html',

@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class OrderParameterService {
 
   filterByOrder:string;
+  filterByCustomer:string;
 
   constructor() { }
 }
