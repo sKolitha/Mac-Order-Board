@@ -126,24 +126,24 @@
       <div><hr/></div>
       <div class="row">
           <div class="col-xs-12 col-sm-5 col-md-4">
-              <div><strong>Is Binned:</strong>{{orderLine.IsBinned}}</div>
-              <div><strong>Is Backorderable:</strong>{{orderLine.IsBackorderable}}</div>
-              <div><strong>Is CreditMemoPost:</strong>{{orderLine.IsCreditMemoPost}}</div>
-              <div><strong>Is Controlled:</strong>{{orderLine.IsControlled}}</div>
-              <div><strong>Is Copyto BillofMaterial:</strong>{{orderLine.IsCopytoBillofMaterial}}</div>                       
+              <div><strong>Is Binned:</strong>{{orderLine.IsBinned | convertBooleanToString :orderLine.IsBinned}}</div>
+              <div><strong>Is Backorderable:</strong>{{orderLine.IsBackorderable | convertBooleanToString :orderLine.IsBackorderable}}</div>
+              <div><strong>Is CreditMemoPost:</strong>{{orderLine.IsCreditMemoPost | convertBooleanToString :orderLine.IsCreditMemoPost}}</div>
+              <div><strong>Is Controlled:</strong>{{orderLine.IsControlled | convertBooleanToString :orderLine.IsControlled}}</div>
+              <div><strong>Is Copyto BillofMaterial:</strong>{{orderLine.IsCopytoBillofMaterial | convertBooleanToString :orderLine.IsCopytoBillofMaterial}}</div>                       
           </div>
           <div class="col-xs-12 col-sm-5 col-md-4">
-              <div><strong>Is Explode Kit:</strong>{{orderLine.IsExplodeKit}}</div>
-              <div><strong>Is Feature Return:</strong>{{orderLine.IsFeatureReturn}}</div>
-              <div><strong>Is Multiple Feature:</strong>{{orderLine.IsMultipleFeature}}</div>
-              <div><strong>Is Multi Release:</strong>{{orderLine.IsMultiRelease}}</div>
-              <div><strong>Is Offset Used:</strong>{{orderLine.IsOffsetUsed}}</div>                             
+              <div><strong>Is Explode Kit:</strong>{{orderLine.IsExplodeKit | convertBooleanToString :orderLine.IsExplodeKit}}</div>
+              <div><strong>Is Feature Return:</strong>{{orderLine.IsFeatureReturn | convertBooleanToString :orderLine.IsFeatureReturn}}</div>
+              <div><strong>Is Multiple Feature:</strong>{{orderLine.IsMultipleFeature | convertBooleanToString :orderLine.IsMultipleFeature}}</div>
+              <div><strong>Is Multi Release:</strong>{{orderLine.IsMultiRelease | convertBooleanToString :orderLine.IsMultiRelease}}</div>
+              <div><strong>Is Offset Used:</strong>{{orderLine.IsOffsetUsed | convertBooleanToString :orderLine.IsOffsetUsed}}</div>                             
           </div>
           <div class="col-xs-12 col-sm-5 col-md-4">
-              <div><strong>Is Quantity Backordered:</strong>{{orderLine.IsQuantityBackordered}}</div>
-              <div><strong>Is Receiving Inspected:</strong>{{orderLine.IsReceivingInspected}}</div>
-              <div><strong>Is To Be Recalculated:</strong>{{orderLine.IsToBeRecalculated}}</div>
-              <div><strong>Is Updated:</strong>{{orderLine.IsUpdated}}</div>                              
+              <div><strong>Is Quantity Backordered:</strong>{{orderLine.IsQuantityBackordered| convertBooleanToString :orderLine.IsQuantityBackordered}}</div>
+              <div><strong>Is Receiving Inspected:</strong>{{orderLine.IsReceivingInspected | convertBooleanToString :orderLine.IsReceivingInspected}}</div>
+              <div><strong>Is To Be Recalculated:</strong>{{orderLine.IsToBeRecalculated | convertBooleanToString :orderLine.IsToBeRecalculated}}</div>
+              <div><strong>Is Updated:</strong>{{orderLine.IsUpdated | convertBooleanToString :orderLine.IsUpdated}}</div>                              
           </div>
       </div>
       <div><hr/></div>

@@ -14,8 +14,7 @@ import { OrderParameterService } from './order-parameter/order-parameter.service
         path:'orders/:Id',
         //canActivate:[OrderDetailGuard],
         component:OrderDetailComponent
-      }
-     // {path:'orderline',component:OrderListComponent }     
+      }     
     ]),
     SharedModule
    
@@ -25,8 +24,6 @@ import { OrderParameterService } from './order-parameter/order-parameter.service
     OrderDetailComponent
   
   ],
-  providers:[
-    OrderParameterService
-  ]
+  providers:[]
 })
 export class OrderModule { }

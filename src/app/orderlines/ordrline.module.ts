@@ -23,9 +23,7 @@ import { OrderParameterService } from '../orders/order-parameter/order-parameter
     OrderlineListComponent,
     OrderlineDetailComponent
   ],
-  providers:[
-    OrderParameterService
-  ]
+  providers:[]
 })
 
 export class OrdrlineModule { }

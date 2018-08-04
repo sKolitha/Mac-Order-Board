@@ -139,14 +139,14 @@
                     <div><strong>Commission Percent:</strong>{{order.CommissionPercent}}</div>   
                 </div>
                 <div class="col-xs-10 col-sm-5 col-md-4">
-                    <div><strong>Is Bill To Free Form:</strong>{{order.IsBillToFreeForm}}</div>
-                    <div><strong>Is Copy To Bill Of Material:</strong>{{order.IsCopyToBillOfMaterial}}</div>
-                    <div><strong>Is Exchange Rate:</strong>{{order.IsExchangeRate}}</div>
-                    <div><strong>Is Multiple Location:</strong>{{order.IsMultipleLocation}}</div>
-                    <div><strong>Is Order Taxable:</strong>{{order.IsOrderTaxable}}</div>
-                    <div><strong>Is Partially Posted:</strong>{{order.IsPartiallyPosted}}</div>
-                    <div><strong>Is Prepayment:</strong>{{order.IsPrepayment}}</div>
-                    <div><strong>Is Ship To Free Form:</strong>{{order.IsShipToFreeForm}}</div>                    
+                    <div><strong>Is Bill To Free Form:</strong>{{order.IsBillToFreeForm | convertBooleanToString :order.IsBillToFreeForm}}</div>
+                    <div><strong>Is Copy To Bill Of Material:</strong>{{order.IsCopyToBillOfMaterial| convertBooleanToString :order.IsCopyToBillOfMaterial}}</div>
+                    <div><strong>Is Exchange Rate:</strong>{{order.IsExchangeRate | convertBooleanToString :order.IsExchangeRate}}</div>
+                    <div><strong>Is Multiple Location:</strong>{{order.IsMultipleLocation | convertBooleanToString :order.IsMultipleLocation}}</div>
+                    <div><strong>Is Order Taxable:</strong>{{order.IsOrderTaxable| convertBooleanToString :order.IsOrderTaxable}}</div>
+                    <div><strong>Is Partially Posted:</strong>{{order.IsPartiallyPosted | convertBooleanToString :order.IsPartiallyPosted}}</div>
+                    <div><strong>Is Prepayment:</strong>{{order.IsPrepayment | convertBooleanToString :order.IsPrepayment}}</div>
+                    <div><strong>Is Ship To Free Form:</strong>{{order.IsShipToFreeForm | convertBooleanToString :order.IsShipToFreeForm}}</div>                    
                     
                 </div>
                 <div class="col-xs-10 col-sm-5 col-md-4">
