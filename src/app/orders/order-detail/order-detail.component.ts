@@ -19,7 +19,7 @@ export class OrderDetailComponent implements OnInit,OnDestroy {
   
   ngOnInit() {
 
-    this.sub=this.orderService.selectedorderchanges$.subscribe(ord=>this.order=ord);
+    this.sub=this.orderService.selectedOrderChanges$.subscribe(ord=>this.order=ord);
     if (!this.order){
       this.onBack();
     }

@@ -1,0 +1,189 @@
+<div class="card card-block card-outline-primary">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-xs-10 col-sm-5 col-md-8">
+                <strong>{{pageTitle}}</strong>
+            </div>
+            <div class="col-xs-10 col-sm-2 col-md">
+                  
+                </div>
+            <div class="col-xs-12 col-sm-5 col-md-2 ">
+                <button class='btn btn-outline-dark btn-sm float-right'
+                (click)='onBack()'
+                style='width:80px'>
+                <i class='fa fa-chevron-left'></i> Back
+                </button>
+            </div>
+            
+        </div>
+    </div>
+    <div class="card-body">
+      <div class="row">
+          <div class="col-xs-12 col-sm-5 col-md-4">
+              <div><strong>Order Number:</strong>{{orderLine.OrderNumber}}</div>
+              <div><strong>Order Type:</strong>{{orderLine.OrderType}}</div>                     
+          </div>
+          <div class="col-xs-12 col-sm-5 col-md-4">              
+              <div><strong>Line Number:</strong>{{orderLine.LineNumber}}</div>
+              <div><strong>Line Sequence Number:</strong>{{orderLine.LineSequenceNumber}}</div>
+              <div><strong>Line Type:</strong>{{orderLine.LineType}}</div>              
+          </div>
+          <div class="col-xs-12 col-sm-5 col-md-4">              
+              <div><strong>Customer:</strong>{{orderLine.CustomerNumber}}/{{orderLine.CustomerName}}</div>
+              <div><strong>Location:</strong>{{orderLine.Location}}</div>          
+          </div>
+      </div>
+      <div><hr/></div>
+      <div class="row">
+          <div class="col-xs-12 col-sm-5 col-md-4">
+              <div><strong>Request Date:</strong>{{orderLine.RequestDate| date: 'dd/MM/yyyy'}}</div>
+              <div><strong>Required ShipDate:</strong>{{orderLine.RequiredShipDate| date: 'dd/MM/yyyy'}}</div>
+          </div>
+          <div class="col-xs-12 col-sm-5 col-md-4">
+              <div><strong>Promise Date:</strong>{{orderLine.PromiseDate| date: 'dd/MM/yyyy'}}</div>   
+              <div><strong>Allocate Date:</strong>{{orderLine.AllocateDate| date: 'dd/MM/yyyy'}}</div>                            
+          </div>
+          <div class="col-xs-12 col-sm-5 col-md-4">
+              <div><strong>Last Post Date:</strong>{{orderLine.LastPostDate| date: 'dd/MM/yyyy'}}</div>
+              <div><strong>Billed Date:</strong>{{orderLine.BilledDate| date: 'dd/MM/yyyy'}}</div>          
+          </div>
+      </div>
+      <div><hr/></div>
+      <div class="row">
+          <div class="col-xs-12 col-sm-5 col-md-4">
+              <div><strong>Item Number:</strong>{{orderLine.ItemNumber}}</div>
+              <div><strong>Item Description1:</strong>{{orderLine.ItemDescription1}}</div>
+              <div><strong>Item Description2:</strong>{{orderLine.ItemDescription2}}</div>              
+              <div><strong>Item Release Number:</strong>{{orderLine.ItemReleaseNumber}}</div>
+              <div><strong>End Item Code:</strong>{{orderLine.EndItemCode}}</div>
+          </div>
+          <div class="col-xs-12 col-sm-5 col-md-4">
+              <div><strong>Product Category:</strong>{{orderLine.ProductCategory}}</div>
+              <div><strong>Unit Of Measure:</strong>{{orderLine.UnitOfMeasure}}</div>
+              <div><strong>Unit Of Measure Ratio:</strong>{{orderLine.UnitOfMeasureRatio}}</div>
+              <div><strong>Selection Code:</strong>{{orderLine.SelectionCode}}</div>                                  
+          </div>
+          <div class="col-xs-12 col-sm-5 col-md-4">
+              <div><strong>Serial Lot Code:</strong>{{orderLine.SerialLotCode}}</div>
+              <div><strong>Bin Serial Lot Component:</strong>{{orderLine.BinSerialLotComponent}}</div>
+              <div><strong>Warranty Date:</strong>{{orderLine.WarrantyDate| date: 'dd/MM/yyyy'}}</div>
+              <div><strong>Customer Item Number:</strong>{{orderLine.CustomerItemNumber}}</div>                    
+          </div>
+      </div>
+      <div><hr/></div>   
+      <div class="row">
+          <div class="col-xs-12 col-sm-5 col-md-4">
+              <div><strong>OriginalPrice:</strong>{{orderLine.OriginalPrice| currency : 'USD' : 'symbol':'1.2-2'}}</div>
+          </div>
+          <div class="col-xs-12 col-sm-5 col-md-4">
+              <div><strong>ExtendedPrice:</strong>{{orderLine.ExtendedPrice| currency : 'USD' : 'symbol':'1.2-2'}}</div>              
+          </div>
+          <div class="col-xs-12 col-sm-5 col-md-4">
+              <div><strong>PostedUnitCost:</strong>{{orderLine.PostedUnitCost| currency : 'USD' : 'symbol':'1.2-2'}}</div>        
+          </div>
+      </div>
+      <div><hr/></div>   
+      <div class="row">
+          <div class="col-xs-12 col-sm-5 col-md-4">
+              <div><strong>Manufacturing Method:</strong>{{orderLine.ManufacturingMethod}}</div>
+              <div><strong>Manufacturing Order Number:</strong>{{orderLine.ManufacturingOrderNumber}}</div>
+              <div><strong>Vendor Number:</strong>{{orderLine.VendorNumber}}</div>
+              <div><strong>Purchase Order Number:</strong>{{orderLine.PurchaseOrderOrderNumber}}</div>                                         
+          </div>
+          <div class="col-xs-12 col-sm-5 col-md-4">
+              <div><strong>Picking Sequence:</strong>{{orderLine.PickingSequence}}</div>
+              <div><strong>Picked Date:</strong>{{orderLine.PickedDate| date: 'dd/MM/yyyy'}}</div>
+              <div><strong>Confirm Pick Date:</strong>{{orderLine.ConfirmPickDate| date: 'dd/MM/yyyy'}}</div>    
+          </div>
+          <div class="col-xs-12 col-sm-5 col-md-4">
+              <div><strong>Commission Calculation Type:</strong>{{orderLine.CommissionCalculationType}}</div>
+              <div><strong>Commission Percent Or Amount:</strong>{{orderLine.CommissionPercentOrAmoun| number:'1.2-2'}}</div>
+              <div><strong>Cost Method:</strong>{{orderLine.CostMethod}}</div>
+              <div><strong>Price Code Original Price:</strong>{{orderLine.PriceCodeOriginalPrice| currency : 'USD' : 'symbol':'1.2-2'}}</div> 
+              <div><strong>Tax Schedule:</strong>{{orderLine.TaxSchedule}}</div>
+              <div><strong>Discount Percent:</strong>{{orderLine.DiscountPercent| number:'1.2-2'}}</div>                  
+          </div>
+      </div>
+      <div><hr/></div> 
+      <div class="row">
+          <div class="col-xs-12 col-sm-5 col-md-4">
+              <div><strong>Quantity Allocated:</strong>{{orderLine.QuantityAllocated| number:'1.2-2'}}</div>
+              <div><strong>Quantity Backordered:</strong>{{orderLine.QuantityBackordered| number:'1.2-2'}}</div>
+              <div><strong>Quantity From Stock:</strong>{{orderLine.QuantityFromStock| number:'1.2-2'}}</div>
+              <div><strong>Quantity Ordered:</strong>{{orderLine.QuantityOrdered| number:'1.2-2'}}</div>                             
+          </div>
+          <div class="col-xs-12 col-sm-5 col-md-4">
+              <div><strong>Quantity Returned To Stock:</strong>{{orderLine.QuantityReturnedToStock| number:'1.2-2'}}</div>
+              <div><strong>Quantity To Ship:</strong>{{orderLine.QuantityToShip| number:'1.2-2'}}</div>
+              <div><strong>Total Quantity Ordered:</strong>{{orderLine.TotalQuantityOrdered| number:'1.2-2'}}</div>                           
+          </div>
+          <div class="col-xs-12 col-sm-5 col-md-4">
+              <div><strong>Total Quantity Posted:</strong>{{orderLine.TotalQuantityPosted| number:'1.2-2'}}</div>
+              <div><strong>Total Quantity Shipped:</strong>{{orderLine.TotalQuantityShipped| number:'1.2-2'}}</div>
+              <div><strong>Post To Invoice Quantity:</strong>{{orderLine.PostToInvoiceQuantity| number:'1.2-2'}}</div>                         
+          </div>
+      </div>
+      <div><hr/></div>
+      <div class="row">
+          <div class="col-xs-12 col-sm-5 col-md-4">
+              <div><strong>Is Binned:</strong>{{orderLine.IsBinned}}</div>
+              <div><strong>Is Backorderable:</strong>{{orderLine.IsBackorderable}}</div>
+              <div><strong>Is CreditMemoPost:</strong>{{orderLine.IsCreditMemoPost}}</div>
+              <div><strong>Is Controlled:</strong>{{orderLine.IsControlled}}</div>
+              <div><strong>Is Copyto BillofMaterial:</strong>{{orderLine.IsCopytoBillofMaterial}}</div>                       
+          </div>
+          <div class="col-xs-12 col-sm-5 col-md-4">
+              <div><strong>Is Explode Kit:</strong>{{orderLine.IsExplodeKit}}</div>
+              <div><strong>Is Feature Return:</strong>{{orderLine.IsFeatureReturn}}</div>
+              <div><strong>Is Multiple Feature:</strong>{{orderLine.IsMultipleFeature}}</div>
+              <div><strong>Is Multi Release:</strong>{{orderLine.IsMultiRelease}}</div>
+              <div><strong>Is Offset Used:</strong>{{orderLine.IsOffsetUsed}}</div>                             
+          </div>
+          <div class="col-xs-12 col-sm-5 col-md-4">
+              <div><strong>Is Quantity Backordered:</strong>{{orderLine.IsQuantityBackordered}}</div>
+              <div><strong>Is Receiving Inspected:</strong>{{orderLine.IsReceivingInspected}}</div>
+              <div><strong>Is To Be Recalculated:</strong>{{orderLine.IsToBeRecalculated}}</div>
+              <div><strong>Is Updated:</strong>{{orderLine.IsUpdated}}</div>                              
+          </div>
+      </div>
+      <div><hr/></div>
+      <div class="row">
+          <div class="col-xs-12 col-sm-5 col-md-4">
+              <div><strong>Posted To Invoice:</strong>{{orderLine.PostedToInvoice}}</div>
+              <div><strong>Components Allocated:</strong>{{orderLine.ComponentsAllocated}}</div>
+              <div><strong>ECS Space:</strong>{{orderLine.ECSSpace}}</div>
+              <div><strong>ECM RevisionNumber:</strong>{{orderLine.ECMRevisionNumber}}</div>  
+              <div><strong>Reason Code:</strong>{{orderLine.ReasonCode}}</div>                            
+          </div>
+          <div class="col-xs-12 col-sm-5 col-md-4">
+              <div><strong>Return Material Authorization Sequence:</strong>{{orderLine.ReturnMaterialAuthorizationSequence}}</div>
+              <div><strong>Filler:</strong>{{orderLine.Filler}}</div>
+              <div><strong>Forced Demand:</strong>{{orderLine.ForcedDemand}}</div>                   
+          </div>
+          <div class="col-xs-12 col-sm-5 col-md-4">
+              <div><strong>User Defined Field1:</strong>{{orderLine.UserDefinedField1}}</div>
+              <div><strong>User Defined Field2:</strong>{{orderLine.UserDefinedField2}}</div>
+              <div><strong>User Defined Field3:</strong>{{orderLine.UserDefinedField3}}</div>
+              <div><strong>User Defined Field4:</strong>{{orderLine.UserDefinedField4}}</div>
+              <div><strong>User Defined Field5:</strong>{{orderLine.UserDefinedField5}}</div>                         
+          </div>
+      </div>
+      <div><hr/></div>
+      <div class="row" >                      
+          <div class="col-md-6" >
+              <div><strong>Order Comments:</strong><app-customer-comment [comments]='orderLine?.CustomerOrderLineComments'></app-customer-comment></div>
+          </div>
+          <div class="col-md-6" >
+                  <div><strong>Order Messages:</strong></div>
+                  <div>{{orderLine.MessagesStr}}</div>
+          </div>             
+      </div>
+    </div>
+    <div class='card-footer '>        
+        <button class='btn btn-outline-dark btn-sm  float-right'
+        (click)='onBack()'
+        style='width:80px'>
+        <i class='fa fa-chevron-left'></i> Back
+        </button>
+  </div>
+</div>

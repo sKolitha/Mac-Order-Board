@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card card-block card-blue clearfix">
         <div class="card-header">
             <div class="row">
                 <div class="col-xs-10 col-sm-5 col-md-8">
@@ -8,7 +8,7 @@
                       
                     </div>
                 <div class="col-xs-12 col-sm-5 col-md-2">
-                    <button class='btn btn-outline-dark btn-sm'
+                    <button class='btn btn-outline-dark btn-sm float-right'
                     (click)='onBack()'
                     style='width:80px'>
                     <i class='fa fa-chevron-left'></i> Back
@@ -191,18 +191,18 @@
             </div>
             <div><hr/></div>
             <div class="row" >                      
-                <div class="col-xs-10 col-sm-5 col-md-4" >
+                <div class="col-md-6" >
                     <div><strong>Order Comments:</strong><app-customer-comment [comments]='order?.CustomerOrderComments'></app-customer-comment></div>
                 </div>
-                <div class="col-xs-10 col-sm-5 col-md-4" >
+                <div class="col-md-6" >
                         <div><strong>Order Messages:</strong></div>
                         <div>{{order.MessagesStr}}</div>
                 </div>             
             </div>
         </div>  
     
-        <div class='card-footer'>        
-                <button class='btn btn-outline-dark btn-sm'
+        <div class='card-footer '>        
+                <button class='btn btn-outline-dark btn-sm  float-right'
                 (click)='onBack()'
                 style='width:80px'>
                 <i class='fa fa-chevron-left'></i> Back

@@ -5,6 +5,7 @@ import { BehaviorSubject, of} from "rxjs";
 import { HttpErrorResponse, HttpClient } from "@angular/common/http";
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
+import { ErrorService } from "../error/error.service";
 
 @Injectable({
     providedIn:"root"
@@ -13,44 +14,32 @@ import { catchError, tap, map } from 'rxjs/operators';
 export class OrderService{
 
     private orderJsonUrl='api/orders/orderdatastructure.json'; 
-    private currentorder:IOrder;     
-    private orderSource=new BehaviorSubject<IOrder|null>(this.currentorder);  
+    private currentOrder:IOrder;     
+    private orderSource=new BehaviorSubject<IOrder|null>(this.currentOrder);  
     private listOfOrders:IOrder[];
 
-    constructor(private http:HttpClient){}
+    constructor(private http:HttpClient, private errorService:ErrorService){}
 
-    selectedorderchanges$=this.orderSource.asObservable();   
+    selectedOrderChanges$=this.orderSource.asObservable();   
 
     changeSelectedOrder(curorder :IOrder|null){
         this.orderSource.next(curorder);
     }
 
     getOrdersAsync():Observable<IOrder[]>{
+        /*Data in this app is not critical, so no need to 
+            go to server every time to get data from server.
+        */
         if (this.listOfOrders){
-            return of(this.listOfOrders);
-           /*Data in this app is not critical, so no need to 
-            go to server every time to get data.
-           */
+            return of(this.listOfOrders);           
         }
        return this.http.get<IOrder[]>(this.orderJsonUrl).pipe(
             map(data=>data["data"]),
-            tap(data=>this.currentorder=data[0]),
+            tap(data=>this.currentOrder=data[0]),
             tap(data=>this.listOfOrders=data),                     
                 //console.log("All"+JSON.stringify(data)))
-            catchError(this.errorHandler)
+            catchError(this.errorService.errorHandler)
        );
     }    
-    private errorHandler(err:HttpErrorResponse){
-        let errMessage = '';
-
-        if (err.error instanceof ErrorEvent){
-            errMessage = `error occured :${err.error.message}`;
-        }
-        else{
-            errMessage = `error status code :${ err.status}, message is :${err.message}`;
-        }
-
-        //console.log(errMessage);
-        return throwError(errMessage);
-    }
+    
 }

@@ -4,6 +4,7 @@ import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { OrderDetailGuard } from './order-detail/order-detail.guard';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { OrderParameterService } from './order-parameter/order-parameter.service';
 
 @NgModule({
   imports: [
@@ -11,17 +12,21 @@ import { SharedModule } from '../shared/shared.module';
       {path:'orders',component:OrderListComponent },
       {
         path:'orders/:Id',
-        canActivate:[OrderDetailGuard],
-        component:OrderDetailComponent}      
+        //canActivate:[OrderDetailGuard],
+        component:OrderDetailComponent
+      }
+     // {path:'orderline',component:OrderListComponent }     
     ]),
     SharedModule
-   // {path:'orderline',component:OrderListComponent }
+   
   ],
   declarations: [
     OrderListComponent,
     OrderDetailComponent
   
   ],
-  providers:[]
+  providers:[
+    OrderParameterService
+  ]
 })
 export class OrderModule { }

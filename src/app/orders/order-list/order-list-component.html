@@ -4,7 +4,7 @@
         <div class="row">
             <app-filter-criteria class="col-md-12"
             (filterOrderbyValueChange)='onOrderValueChange($event)' 
-            (filterCustomerbyValueChange)='onCustomerValueChange($event)' >               
+            (filterCustomerbyValueChange)='onCustomerValueChange($event)' *ngIf ='!errors' >               
             </app-filter-criteria>
         </div>
  
@@ -24,7 +24,7 @@
                     <th>Customer Name</th>
                     <th>Tot Weight</th>
                     <th>Tot Sale</th>
-                    <th>To Taxable</th>
+                    <th>Tot Taxable</th>
                     <th>Tot Dollars</th>
                               
                 </tr>
@@ -32,7 +32,7 @@
             <tbody>
               <tr *ngFor ='let order of filteredOrders'>
                 <td>
-                    <a [routerLink]="['/orders',order.ID]" (click)='orderidclicked(order.ID)'>{{order.ID}}</a>
+                    <a [routerLink]="['/orders',order.ID]" (click)='onOrderIdclicked(order.ID)'>{{order.ID}}</a>
                 </td>
                 <td>{{order.OrderNumber | uppercase}}</td>
                 <td>{{order.OrderDate| date: 'dd/MM/yyyy'}}</td>

@@ -14,7 +14,6 @@ export class FilterCriteriaComponent implements OnInit, AfterViewInit {
     return this.parameterService.filterByOrder;
   }
   set filterByOrder(value:string){
-    this.parameterService.filterByCustomer="";
     this.parameterService.filterByOrder=value;
     this.filterOrderbyValueChange.emit(value);    
   }
@@ -22,8 +21,7 @@ export class FilterCriteriaComponent implements OnInit, AfterViewInit {
   get filterByCustomer() : string {    
     return this.parameterService.filterByCustomer;
   }
-  set filterByCustomer(value:string){  
-    this.parameterService.filterByOrder="";  
+  set filterByCustomer(value:string){
     this.parameterService.filterByCustomer=value;
     this.filterCustomerbyValueChange.emit(value);    
   }
