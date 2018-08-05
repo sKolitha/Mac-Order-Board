@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular
 import { IOrder } from '../order';
 import { OrderService } from '../order.service';
 import { CustomerService } from '../../shared/customer.service';
-import { OrderParameterService } from '../order-parameter/order-parameter.service';
 import { Router } from '@angular/router';
+import { OrderParameterService } from '../../shared/order-parameter/order-parameter.service';
 
 @Component({ 
   templateUrl: './order-list-component.html',
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 })
 
 export class OrderListComponent implements OnInit,OnDestroy {
-
+   
   orders : IOrder[] = [];
   filteredOrders : IOrder[] = []; 
   errors : string;
@@ -20,15 +20,14 @@ export class OrderListComponent implements OnInit,OnDestroy {
 constructor(private orderService:OrderService, private customerService:CustomerService,private orderParamterService:OrderParameterService,
 private router:Router){ }
 
-onOrderValueChange(value :string):void{    
-  this.filteredOrders=this.performListFilter(value,this.orderParamterService.filterByCustomer);   
+onOrderValueChange(value :string):void{  
+  this.filteredOrders=this.performListFilter(value,this.orderParamterService.Order_filterByCustomer);   
 }
-onCustomerValueChange(value :string):void{ 
-  this.filteredOrders=this.performListFilter(this.orderParamterService.filterByOrder,value);      
+onCustomerValueChange(value :string):void{   
+  this.filteredOrders=this.performListFilter(this.orderParamterService.Order_filterByOrder,value);      
 }
 onOrderIdclicked(id:number){
   this.orderService.changeSelectedOrder(this.filteredOrders.find(x=>x.ID==id))   
-  //this.router.navigate(['/orders',id]);
 }
 performListFilter(orderValue:string,customerValue:string):IOrder[]{      
   if ((orderValue && orderValue.length>0) && (customerValue && customerValue.length)>0){
@@ -59,7 +58,7 @@ ngOnInit() {
   this.orderService.getOrdersAsync().subscribe(
     orders=>{
     this.orders=this.formatData(orders); 
-    this.filteredOrders = this.performListFilter(this.orderParamterService.filterByOrder,this.orderParamterService.filterByCustomer);              
+    this.filteredOrders = this.performListFilter(this.orderParamterService.Order_filterByOrder,this.orderParamterService.Order_filterByCustomer);              
     },
   error=>this.errors=<any>error      
   );

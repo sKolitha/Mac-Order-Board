@@ -3,8 +3,10 @@
   <div class="card-body">
         <div class="row">
             <app-filter-criteria class="col-md-12"
+            [callingComponetName]="'orderComponent'"     
             (filterOrderbyValueChange)='onOrderValueChange($event)' 
-            (filterCustomerbyValueChange)='onCustomerValueChange($event)' *ngIf ='!errors' >               
+            (filterCustomerbyValueChange)='onCustomerValueChange($event)' *ngIf ='!errors'>
+                      
             </app-filter-criteria>
         </div>
  

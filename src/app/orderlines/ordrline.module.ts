@@ -4,7 +4,7 @@ import { OrderlineListComponent } from './orderline-list/orderline-list.componen
 import { RouterModule } from '../../../node_modules/@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { OrderlineDetailComponent } from './orderline-detail/orderline-detail.component';
-import { OrderParameterService } from '../orders/order-parameter/order-parameter.service';
+import { OrderParameterService } from '../shared/order-parameter/order-parameter.service';
 
 @NgModule({
   imports: [

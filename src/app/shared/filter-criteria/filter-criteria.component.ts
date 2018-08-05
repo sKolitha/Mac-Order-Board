@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild,  AfterViewInit, ElementRef, Output, EventEmitter } from '@angular/core';
-import { OrderParameterService } from '../../orders/order-parameter/order-parameter.service';
+import { Component, OnInit, ViewChild,  AfterViewInit, ElementRef, Output, EventEmitter, Input } from '@angular/core';
+import { OrderParameterService } from '../../shared/order-parameter/order-parameter.service';
 
 
 @Component({
@@ -9,26 +9,48 @@ import { OrderParameterService } from '../../orders/order-parameter/order-parame
 })
 
 export class FilterCriteriaComponent implements OnInit, AfterViewInit { 
- 
+
   get filterByOrder() : string {
-    return this.parameterService.filterByOrder;
+    if (this.callingComponetName==='orderComponent'){
+      return this.parameterService.Order_filterByOrder;
+    }
+    else if (this.callingComponetName==='orderLineComponent'){
+      return this.parameterService.Orderline_filterByOrder;
+    }
   }
   set filterByOrder(value:string){
-    this.parameterService.filterByOrder=value;
-    this.filterOrderbyValueChange.emit(value);    
+    if (this.callingComponetName==='orderComponent'){
+      this.parameterService.Order_filterByOrder=value;
+    }
+    else if (this.callingComponetName==='orderLineComponent'){
+      this.parameterService.Orderline_filterByOrder=value;
+    }
+    this.filterOrderbyValueChange.emit(value);      
   }
 
   get filterByCustomer() : string {    
-    return this.parameterService.filterByCustomer;
+    if (this.callingComponetName==='orderComponent'){
+      return this.parameterService.Order_filterByCustomer;
+    }
+    else if (this.callingComponetName==='orderLineComponent'){
+      return this.parameterService.Orderline_filterByCustomer;
+    }
+    
   }
   set filterByCustomer(value:string){
-    this.parameterService.filterByCustomer=value;
+    if (this.callingComponetName==='orderComponent'){
+      this.parameterService.Order_filterByCustomer=value;
+    }
+    else if (this.callingComponetName==='orderLineComponent'){
+      this.parameterService.Orderline_filterByCustomer=value;
+    }
     this.filterCustomerbyValueChange.emit(value);    
   }
 
   @ViewChild('focusElement') focusElementRef:ElementRef;
   @Output() filterOrderbyValueChange:EventEmitter<string>=new EventEmitter<string>();
   @Output() filterCustomerbyValueChange:EventEmitter<string>=new EventEmitter<string>();
+  @Input() callingComponetName:string;
 
   constructor(private parameterService :OrderParameterService) { }
 

@@ -7,13 +7,12 @@ import { WelcomeComponent } from './home/welcome.component';
 import { OrderModule } from './orders/order.module';
 import { ErrorComponent } from './error/error.component';
 import { OrdrlineModule } from './orderlines/ordrline.module';
-
-
+import { ItemModule } from './items/item.module';
 
 @NgModule({
   declarations: [   
     AppComponent,    
-    WelcomeComponent, 
+    WelcomeComponent,     
     ErrorComponent
   ],
   imports: [
@@ -25,7 +24,8 @@ import { OrdrlineModule } from './orderlines/ordrline.module';
       {path:'**',redirectTo:'welcome',pathMatch:'full'}
     ]),
     OrderModule,
-    OrdrlineModule
+    OrdrlineModule,
+    ItemModule
   ],
   providers: [],
   bootstrap: [AppComponent]

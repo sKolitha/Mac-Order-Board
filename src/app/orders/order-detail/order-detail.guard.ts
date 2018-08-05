@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot,  Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { OrderParameterService } from '../order-parameter/order-parameter.service';
+
 
 @Injectable({
   providedIn: 'root'

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IOrderLine } from '../orderline';
 import { OrderLineService } from '../orderline.service';
-import { OrderParameterService } from '../../orders/order-parameter/order-parameter.service';
 import { CustomerService } from '../../shared/customer.service';
+import { OrderParameterService } from '../../shared/order-parameter/order-parameter.service';
 
 @Component({
   selector: 'app-orderline-list',
@@ -16,8 +16,7 @@ export class OrderlineListComponent implements OnInit {
   filteredOrderLines : IOrderLine[] = []; 
 
   constructor(private orderLineService: OrderLineService,
-    private orderParamterService:OrderParameterService,
-  private customerService:CustomerService) { }
+    private orderParamterService:OrderParameterService,private customerService:CustomerService) { }
 
   performListFilter(orderValue:string,customerValue:string):IOrderLine[]{      
     if ((orderValue && orderValue.length>0) && (customerValue && customerValue.length)>0){
@@ -36,18 +35,17 @@ export class OrderlineListComponent implements OnInit {
   } 
 
   onOrderValueChange(value :string):void{    
-    this.filteredOrderLines=this.performListFilter(value,this.orderParamterService.filterByCustomer);   
+    this.filteredOrderLines=this.performListFilter(value,this.orderParamterService.Orderline_filterByCustomer);   
   }
   onCustomerValueChange(value :string):void{ 
-    this.filteredOrderLines=this.performListFilter(this.orderParamterService.filterByOrder,value);      
+    this.filteredOrderLines=this.performListFilter(this.orderParamterService.Orderline_filterByOrder,value);      
   }
 
   onOrderLineIdClicked(id:string):void{
     this.orderLineService.changeSelctedOrderLine(this.filteredOrderLines.find(x=>x.OrderKey===id));
   }
   formatData(orderLineList:IOrderLine[]):IOrderLine[]{
-    orderLineList.forEach(element => {      
-      console.log(element.CustomerNumber);
+    orderLineList.forEach(element => {    
       element.CustomerName=this.customerService.getCustomerName(element.CustomerNumber);
       element.OrderKey= element.OrderNumber.concat(element.LineNumber.toString().trim().concat(element.LineSequenceNumber.toString().trim()));
       element.MessagesStr=element.Messages.join(',');
@@ -59,7 +57,7 @@ export class OrderlineListComponent implements OnInit {
     this.orderLineService.getOrderLinesAsync().subscribe(
       orderlines=>{
       this.orderLines=this.formatData(orderlines); 
-      this.filteredOrderLines = this.performListFilter(this.orderParamterService.filterByOrder,this.orderParamterService.filterByCustomer);              
+      this.filteredOrderLines = this.performListFilter(this.orderParamterService.Orderline_filterByOrder,this.orderParamterService.Orderline_filterByCustomer);              
       },
     error=>this.errors=<any>error      
   );
