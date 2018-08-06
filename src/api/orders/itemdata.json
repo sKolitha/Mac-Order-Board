@@ -1,9 +1,9 @@
 [{
-    "ItemNumber":"001",
-    "ItemDescription1":"Desc 001",
-    "ItemDescription2":"Desc 002",
-    "ItemReleaseNumber":"",
-    "EndItemCode":"",
-    "ProductCategory":"01",
+    "ItemNumber":"LEVER",
+    "ItemDescription1": "Levers, Light Allow, Double",
+    "ItemDescription2": "Crankset",
+    "ItemReleaseNumber":"1",
+    "EndItemCode":"P",
+    "ProductCategory":"SP",
     "UnitOfMeasure":"EA"
 }]

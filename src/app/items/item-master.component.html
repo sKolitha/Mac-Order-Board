@@ -4,10 +4,10 @@
             <!-- form user info -->
             <div class="card">
                 <div class="card-header">
-                    <h4 class="mb-0">Maintain Items</h4>
+                    <h4>{{pageTitle}}</h4>
                 </div>
                 <div class="card-body">
-                    <form class="form" role="form"
+                    <form class="form inline"
                     novalidate
                     (ngSubmit)="saveData()" 
                     [formGroup]="itemForm" autocomplete="off">
@@ -19,8 +19,7 @@
                                         id="itemNumber" 
                                         type="text"                                     
                                         placeholder="Item Number (required)"                                       
-                                        formControlName="itemNumber" />
-                                    
+                                        formControlName="itemNumber" />                                     
                                     <span class="help-block" *ngIf="(itemForm.get('itemNumber').touched || itemForm.get('itemNumber').dirty) && !itemForm.get('itemNumber').valid">
                                         <span  *ngIf="itemForm.get('itemNumber').errors?.required">
                                             "Please enter the item number."
@@ -87,20 +86,35 @@
                             <div class="form-group row">
                                     <label class="col-md-3 col-form-label form-control-label"></label>
                                     <div class="col-md-9">
-                                        <input type="reset" class="btn btn-outline-dark btn-sm" value="Cancel">
-                                        <input type="submit" class="btn btn-outline-dark btn-sm" 
-                                        value="Save" > <!-- [disabled]="!itemForm.valid" -->
+                                        <span>
+                                            <button class='btn btn-outline-dark btn-md '
+                                            (click)='onBack()'style="width:80px;margin-right:10px"> Back
+                                            </button>
+                                           <!--  <input type="button" class="btn btn-outline-dark btn-md" 
+                                            value="Back" style="width:80px;margin-right:10px" (click)="onBack()" > -->
+                                        </span>
+                                        <span>
+                                            <input type="reset" class="btn btn-outline-dark btn-md" value="Cancel" style="width:80px;margin-right:10px">  
+                                        </span>                                        
+                                        <span>
+                                            <input type="submit" class="btn btn-outline-dark btn-md" value="Save" style="width:80px;margin-right:10px" [disabled]="!itemForm.valid">
+                                        </span>                                                                            
+                                        
                                     </div>
                             </div>
                         </fieldset>
                     </form>
                 </div>
-            </div>
-            <br> Dirty:{{itemForm.dirty}}
+            </div>            
+           <!--  <br> Dirty:{{itemForm.dirty}}
             <br> Toched:{{itemForm.touched}}
             <br> Valid:{{itemForm.valid}}
-            <br> Value:{{itemForm.value | json}}
+            <br> Value:{{itemForm.value | json}} -->
             <!-- /form user info -->
         </div>
+        <div class="alert alert-danger" role="alert" *ngIf='errors'>  
+            <strong>Error!</strong> {{errors}}
+        </div>
     </div>
+   
 </div>

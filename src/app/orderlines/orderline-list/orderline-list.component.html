@@ -39,7 +39,8 @@
               <td>{{line.OrderType| uppercase}}</td>
               <td>{{line.LineNumber}}</td>
               <td>{{line.LineSequenceNumber}}</td>
-              <td>{{line.ItemNumber}}</td>
+              <td>
+                    <a [routerLink]="['/item',line.ItemNumber]">{{line.ItemNumber}}</a></td>
               <td>{{line.CustomerNumber| uppercase}}</td>
               <td>{{line.CustomerName| uppercase}}</td>
               <td>{{line.PromiseDate| date: 'dd/MM/yyyy'}}</td>
