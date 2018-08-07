@@ -6,9 +6,9 @@ import { ICustomerordercomment } from '../../orders/order';
   templateUrl: './customer-comment.component.html',
   styleUrls: ['./customer-comment.component.css']
 })
-export class CustomerCommentComponent implements OnInit,OnChanges {
+export class CustomerCommentComponent implements OnChanges {
 
-  @Input() comments : ICustomerordercomment[]=[];
+  @Input() comments : ICustomerordercomment[]=[];  
   customerordercomments:ICustomerordercomment[];
   constructor() { }
 
@@ -16,7 +16,6 @@ export class CustomerCommentComponent implements OnInit,OnChanges {
     this.customerordercomments=this.comments;
   }
 
-  ngOnInit() {
-  }
+  
 
 }

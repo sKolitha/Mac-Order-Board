@@ -11,6 +11,5 @@ export class OrderParameterService {
   Order_filterByCustomer:string;
   Orderline_filterByOrder:string;
   Orderline_filterByCustomer:string;
-
-  constructor() { }
+  
 }

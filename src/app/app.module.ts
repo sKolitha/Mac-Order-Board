@@ -5,15 +5,13 @@ import {RouterModule} from '@angular/router';
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { OrderModule } from './orders/order.module';
-import { ErrorComponent } from './error/error.component';
 import { OrdrlineModule } from './orderlines/ordrline.module';
 import { ItemModule } from './items/item.module';
 
 @NgModule({
   declarations: [   
     AppComponent,    
-    WelcomeComponent,     
-    ErrorComponent
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,    

@@ -5,8 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class CustomerService {
 /*
-Becuase there is no json file for customers, just use this array to keep the list of
-customers.
+Because there is no json file for customers, just use this array to maintain
+customer master data.
 */
   customers:any[] = [
     {id: '904', name:'Nissan'},
@@ -15,9 +15,7 @@ customers.
     {id: '102', name:'TOYOTA'},
     {id: '245', name:'PQR Builders'}
   ];
-
-  constructor() { }
-
+  
   getCustomerName(id:string):string
   {
 

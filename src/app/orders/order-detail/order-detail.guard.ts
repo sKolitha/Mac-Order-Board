@@ -9,7 +9,6 @@ import { Observable } from 'rxjs';
 export class OrderDetailGuard implements CanActivate {
 
   constructor(private router:Router){
-    
   }
 
   canActivate(

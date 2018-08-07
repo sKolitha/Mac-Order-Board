@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="mx-auto col-sm-6">
+        <div class=".col-xs-12 .col-sm-6 .col-md-8">
             <!-- form user info -->
             <div class="card">
                 <div class="card-header">
@@ -12,11 +12,11 @@
                     (ngSubmit)="saveData()" 
                     [formGroup]="itemForm" autocomplete="off">
                         <fieldset>
-                        <div class="form-group row"
-                                [ngClass]="{'has-error':itemNumberMessage}" >                                 
+                        <div class="form-group row">                                 
                                 <label class="col-md-4 col-form-label form-control-label" for="itemNumber">Item Number</label>
                                 <div class="col-md-8" >
                                     <input class="form-control"
+                                        [ngClass]="{'is-invalid':itemNumberMessage}"
                                         id="itemNumber" 
                                         type="text"                                     
                                         placeholder="Item Number (required)"                                       
@@ -28,6 +28,7 @@
                                 <label class="col-md-4 col-form-label form-control-label" for="itemDescription1">Item Description 1</label>
                                 <div class="col-md-8" >
                                     <input class="form-control" 
+                                        [ngClass]="{'is-invalid':itemDesc1Message}"
                                         id="itemDescription1" 
                                         type="text"                                     
                                         placeholder="Item Description 1 (required)"                                       
@@ -86,15 +87,13 @@
                                         <span>
                                             <button class='btn btn-outline-dark btn-md '
                                             (click)='onBack()'style="width:80px;margin-right:10px"
-                                            *ngIf='showBackButton'> Back
+                                            *ngIf='editingItem'> Back
                                             </button>
-                                           <!--  <input type="button" class="btn btn-outline-dark btn-md" 
-                                            value="Back" style="width:80px;margin-right:10px" (click)="onBack()" > -->
                                         </span>
                                         <span>
                                             <input type="reset" class="btn btn-outline-dark btn-md" 
                                                 value="Cancel" style="width:80px;margin-right:10px"
-                                                *ngIf='!showBackButton'>  
+                                                *ngIf='!editingItem'>  
                                         </span>                                        
                                         <span>
                                             <input type="submit" class="btn btn-outline-dark btn-md" value="Save" style="width:80px;margin-right:10px" [disabled]="!itemForm.valid">
@@ -105,12 +104,9 @@
                         </fieldset>
                     </form>
                 </div>
-            </div>            
-           <!--  <br> Dirty:{{itemForm.dirty}}
-            <br> Toched:{{itemForm.touched}}
-            <br> Valid:{{itemForm.valid}}
-            <br> Value:{{itemForm.value | json}} -->
-            <!-- /form user info -->
+            </div>  
+            <div class='card-footer '>  
+            </div>  
         </div>
         <div class="alert alert-danger" role="alert" *ngIf='errors'>  
             <strong>Error!</strong> {{errors}}

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { IItem, Item } from './item';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { ItemService } from './item.service';
-import { debounceTime, min } from '../../../node_modules/rxjs/operators';
+import { debounceTime } from '../../../node_modules/rxjs/operators';
 import { ActivatedRoute, Router } from '../../../node_modules/@angular/router';
 
 @Component({  
@@ -15,7 +15,7 @@ export class ItemMasterComponent implements OnInit {
   itemForm:FormGroup; 
   errors:string;
   pageTitle:string="Add Item";
-  showBackButton:boolean=false;
+  editingItem:boolean=false;
   itemNumberMessage:string;
   itemDesc1Message:string;
 
@@ -70,21 +70,32 @@ export class ItemMasterComponent implements OnInit {
   }
 
   saveData():void{   
-
     if (this.itemForm.dirty && this.itemForm.valid) {      
-      let i=Object.assign({},this.item,this.itemForm.value);
-      //call the post/put method here
-      //Didn't write the API call because it takes more time to create a fake API. 
-      console.log(i);
+      let i=Object.assign({},this.item,this.itemForm.value);     
 
-      this.itemForm.reset();
-      if (this.showBackButton){
-        this.onBack();
+      if (this.editingItem){
+        this.itemService.updateItemAsync(i).subscribe(
+          (data)=>this.onSaveCompleted(data),         
+          (error:any)=>this.errors=<any>error
+        );
+      }
+      else{
+        this.itemService.addItemAsync(i).subscribe(
+          (data)=>this.onSaveCompleted(data),
+          (error:any)=>this.errors=<any>error
+        );
       }
     }    
     
   }
   
+  onSaveCompleted(data):void{
+    console.log(data);//to show the data object after the fake db operation
+    this.itemForm.reset();
+      if (this.editingItem){
+        this.onBack();
+      }
+  }
   onItemDisplay(item:IItem):void{   
     this.item=item;
     if (this.item){      
@@ -119,7 +130,6 @@ export class ItemMasterComponent implements OnInit {
       this.itemNumberMessage=Object.keys(control.errors)
       .map(key=>this.itemNumberValidationMessages[key]).join(' ');
     }
-
     if (this.itemNumberMessage.length>0){
       return true;
     }
@@ -144,22 +154,21 @@ export class ItemMasterComponent implements OnInit {
 
   ngOnInit() {
 
-    let id=this.route.snapshot.paramMap.get('Id'); 
-      
+    let id=this.route.snapshot.paramMap.get('Id');       
     this.buildForm(id);
       
     if (this.itemForm.get('itemNumber').value!=="0"){
       this.itemForm.get('itemNumber').disable();
       this.descriptionElementRef.nativeElement.focus();
       this.pageTitle="Edit Item";
-      this.showBackButton=true;
+      this.editingItem=true;
       this.onItemNumberChange(id);
     }
     else{
       this.itemForm.get('itemNumber').enable();    
       this.itemForm.get('itemNumber').reset();
       this.pageTitle="Add Item";
-      this.showBackButton=false;
+      this.editingItem=false;
       this.idElementRef.nativeElement.focus();   
       
     }     

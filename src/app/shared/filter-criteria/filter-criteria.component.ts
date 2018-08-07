@@ -8,7 +8,7 @@ import { OrderParameterService } from '../../shared/order-parameter/order-parame
   styleUrls: ['./filter-criteria.component.css']
 })
 
-export class FilterCriteriaComponent implements OnInit, AfterViewInit { 
+export class FilterCriteriaComponent implements AfterViewInit { 
 
   get filterByOrder() : string {
     if (this.callingComponetName==='orderComponent'){
@@ -53,9 +53,6 @@ export class FilterCriteriaComponent implements OnInit, AfterViewInit {
   @Input() callingComponetName:string;
 
   constructor(private parameterService :OrderParameterService) { }
-
-  ngOnInit() {    
-  }
 
   ngAfterViewInit() :void{
     if (this.focusElementRef){   

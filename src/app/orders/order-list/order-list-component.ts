@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IOrder } from '../order';
 import { OrderService } from '../order.service';
 import { CustomerService } from '../../shared/customer.service';
@@ -10,7 +10,7 @@ import { OrderParameterService } from '../../shared/order-parameter/order-parame
   styleUrls: ['./order-list-component.css']
 })
 
-export class OrderListComponent implements OnInit,OnDestroy {
+export class OrderListComponent implements OnInit {
    
   orders : IOrder[] = [];
   filteredOrders : IOrder[] = []; 
@@ -63,12 +63,5 @@ ngOnInit() {
   error=>this.errors=<any>error      
   );
 } 
-
-ngOnDestroy():void{
-  /* if (!this.filteredOrders){
-  this.orderParamterService.filterByCustomer="";
-  this.orderParamterService.filterByOrder="";
-  } */
-}
 
 }

@@ -7,8 +7,6 @@ import { throwError } from 'rxjs';
 })
 export class ErrorService {
 
-  constructor() { }
-
    errorHandler(err:HttpErrorResponse){
     let errMessage = '';
 
@@ -17,9 +15,7 @@ export class ErrorService {
     }
     else{
         errMessage = `error status code :${ err.status}, message is :${err.message}`;
-    }
-
-    //console.log(errMessage);
+    }  
     return throwError(errMessage);
 }
 }
