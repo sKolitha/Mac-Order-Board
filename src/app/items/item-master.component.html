@@ -7,24 +7,23 @@
                     <h4>{{pageTitle}}</h4>
                 </div>
                 <div class="card-body">
-                    <form class="form inline"
+                    <form class="form"
                     novalidate
                     (ngSubmit)="saveData()" 
                     [formGroup]="itemForm" autocomplete="off">
                         <fieldset>
-                        <div class="form-group row" > 
+                        <div class="form-group row"
+                                [ngClass]="{'has-error':itemNumberMessage}" >                                 
                                 <label class="col-md-4 col-form-label form-control-label" for="itemNumber">Item Number</label>
                                 <div class="col-md-8" >
                                     <input class="form-control"
                                         id="itemNumber" 
                                         type="text"                                     
                                         placeholder="Item Number (required)"                                       
-                                        formControlName="itemNumber" />                                     
-                                    <span class="help-block" *ngIf="(itemForm.get('itemNumber').touched || itemForm.get('itemNumber').dirty) && !itemForm.get('itemNumber').valid">
-                                        <span  *ngIf="itemForm.get('itemNumber').errors?.required">
-                                            "Please enter the item number."
-                                        </span>                                        
-                                    </span>
+                                        formControlName="itemNumber" #itemnumber/>                                     
+                                        <span class="error text-danger" *ngIf="itemNumberMessage">
+                                            {{itemNumberMessage}}
+                                        </span> 
                                 </div>
                                 <label class="col-md-4 col-form-label form-control-label" for="itemDescription1">Item Description 1</label>
                                 <div class="col-md-8" >
@@ -32,12 +31,10 @@
                                         id="itemDescription1" 
                                         type="text"                                     
                                         placeholder="Item Description 1 (required)"                                       
-                                        formControlName="itemDescription1" />
-                                    <span class="help-block" *ngIf="(itemForm.get('itemDescription1').touched || itemForm.get('itemDescription1').dirty) && !itemForm.get('itemDescription1').valid">
-                                        <span *ngIf="itemForm.get('itemDescription1').errors?.required">
-                                            "Please enter the item description."
-                                        </span>                                        
-                                    </span>
+                                        formControlName="itemDescription1" #itemdescription1 />
+                                        <span class="error text-danger" *ngIf="itemDesc1Message">
+                                            {{itemDesc1Message}}
+                                        </span> 
                                 </div>
                                 <label class="col-md-4 col-form-label form-control-label" for="itemDescription2">Item Description 2</label>
                                 <div class="col-md-8" >
@@ -88,13 +85,16 @@
                                     <div class="col-md-9">
                                         <span>
                                             <button class='btn btn-outline-dark btn-md '
-                                            (click)='onBack()'style="width:80px;margin-right:10px"> Back
+                                            (click)='onBack()'style="width:80px;margin-right:10px"
+                                            *ngIf='showBackButton'> Back
                                             </button>
                                            <!--  <input type="button" class="btn btn-outline-dark btn-md" 
                                             value="Back" style="width:80px;margin-right:10px" (click)="onBack()" > -->
                                         </span>
                                         <span>
-                                            <input type="reset" class="btn btn-outline-dark btn-md" value="Cancel" style="width:80px;margin-right:10px">  
+                                            <input type="reset" class="btn btn-outline-dark btn-md" 
+                                                value="Cancel" style="width:80px;margin-right:10px"
+                                                *ngIf='!showBackButton'>  
                                         </span>                                        
                                         <span>
                                             <input type="submit" class="btn btn-outline-dark btn-md" value="Save" style="width:80px;margin-right:10px" [disabled]="!itemForm.valid">

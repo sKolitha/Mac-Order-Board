@@ -11,6 +11,7 @@ import { ItemMasterGuard } from './item-master.guard';
     RouterModule.forChild([
       {path:'item/:Id',
       canDeactivate:[ItemMasterGuard],
+      canActivate:[ItemMasterGuard],
       component:ItemMasterComponent }      
     ]),    
     CommonModule,
@@ -20,7 +21,7 @@ import { ItemMasterGuard } from './item-master.guard';
   declarations: [
     ItemMasterComponent
   ],
-  exports:[ItemMasterComponent,ReactiveFormsModule],
+  exports:[],
   providers:[ItemMasterGuard]
 })
 export class ItemModule { }

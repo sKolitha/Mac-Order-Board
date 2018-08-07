@@ -5,8 +5,7 @@ export interface IItem{
     ItemReleaseNumber:string;
     EndItemCode:string;
     ProductCategory:string;
-    UnitOfMeasure:string;
-    IsActive:boolean;
+    UnitOfMeasure:string
 }
 
 export class Item implements IItem{
@@ -16,6 +15,5 @@ export class Item implements IItem{
     ItemReleaseNumber:string;
     EndItemCode:string;
     ProductCategory:string;
-    UnitOfMeasure:string;
-    IsActive:boolean;
+    UnitOfMeasure:string
 }
