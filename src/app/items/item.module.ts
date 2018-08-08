@@ -14,14 +14,11 @@ import { ItemMasterGuard } from './item-master.guard';
       canActivate:[ItemMasterGuard],
       component:ItemMasterComponent }      
     ]),    
-    CommonModule,
-    SharedModule,
+    CommonModule,   
     ReactiveFormsModule
   ],
   declarations: [
     ItemMasterComponent
-  ],
-  exports:[],
-  providers:[ItemMasterGuard]
+  ]
 })
 export class ItemModule { }

@@ -20,8 +20,7 @@ import { SharedModule } from '../shared/shared.module';
   ],
   declarations: [
     OrderListComponent,
-    OrderDetailComponent
-  
+    OrderDetailComponent  
   ],
   providers:[]
 })

@@ -19,7 +19,7 @@ export class ItemMasterGuard implements CanDeactivate<ItemMasterComponent>,CanAc
 
   canActivate(next: ActivatedRouteSnapshot,
      state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-       //can include any user access checks kind of code here.     
+       //can include any user access checks code here.     
       return true;
   }
 

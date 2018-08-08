@@ -1,15 +1,16 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { IItem, Item } from './item';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { ItemService } from './item.service';
 import { debounceTime } from '../../../node_modules/rxjs/operators';
 import { ActivatedRoute, Router } from '../../../node_modules/@angular/router';
+import { Subscription } from '../../../node_modules/rxjs';
 
 @Component({  
   templateUrl: './item-master.component.html',
   styleUrls: ['./item-master.component.css']
 })
-export class ItemMasterComponent implements OnInit {
+export class ItemMasterComponent implements OnInit,OnDestroy {
 
   item:IItem =new Item();
   itemForm:FormGroup; 
@@ -18,6 +19,7 @@ export class ItemMasterComponent implements OnInit {
   editingItem:boolean=false;
   itemNumberMessage:string;
   itemDesc1Message:string;
+  private sub:Subscription;
 
   @ViewChild('itemnumber') idElementRef:ElementRef;
   @ViewChild('itemdescription1') descriptionElementRef:ElementRef;
@@ -63,7 +65,7 @@ export class ItemMasterComponent implements OnInit {
 
 
   getItemData(itemnumber:string):void {    
-    this.itemService.getItemAsync(itemnumber).subscribe(
+   this.sub= this.itemService.getItemAsync(itemnumber).subscribe(
      (data)=>this.onItemDisplay(data),
      (error:any)=>this.errors=<any>error
    );
@@ -74,13 +76,13 @@ export class ItemMasterComponent implements OnInit {
       let i=Object.assign({},this.item,this.itemForm.value);     
 
       if (this.editingItem){
-        this.itemService.updateItemAsync(i).subscribe(
+        this.sub=this.itemService.updateItemAsync(i).subscribe(
           (data)=>this.onSaveCompleted(data),         
           (error:any)=>this.errors=<any>error
         );
       }
       else{
-        this.itemService.addItemAsync(i).subscribe(
+        this.sub=this.itemService.addItemAsync(i).subscribe(
           (data)=>this.onSaveCompleted(data),
           (error:any)=>this.errors=<any>error
         );
@@ -173,13 +175,13 @@ export class ItemMasterComponent implements OnInit {
       
     }     
     const itemNumberControl=this.itemForm.get('itemNumber');
-    itemNumberControl.valueChanges.pipe(debounceTime(500)).subscribe(value=>{      
+    this.sub=itemNumberControl.valueChanges.pipe(debounceTime(500)).subscribe(value=>{      
       if (!this.setItemNumberMessage(itemNumberControl)){
         this.onItemNumberChange(value);
       }
     });
     const itemDesc1Control=this.itemForm.get('itemDescription1');
-    itemDesc1Control.valueChanges.pipe(debounceTime(500)).subscribe(value=>{      
+    this.sub=itemDesc1Control.valueChanges.pipe(debounceTime(500)).subscribe(value=>{      
       this.setItemDesc1Message(itemDesc1Control);
     });
   }
@@ -188,4 +190,7 @@ export class ItemMasterComponent implements OnInit {
     this.router.navigate(['/orderlines']);
   }
 
+  ngOnDestroy(){
+    this.sub.unsubscribe();
+  }
 }

@@ -2,8 +2,8 @@
 import { IOrder } from "./order";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, of} from "rxjs";
-import { HttpErrorResponse, HttpClient } from "@angular/common/http";
-import { Observable, throwError } from 'rxjs';
+import { HttpClient } from "@angular/common/http";
+import { Observable} from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { ErrorService } from "../error/error.service";
 
@@ -36,8 +36,7 @@ export class OrderService{
        return this.http.get<IOrder[]>(this.orderJsonUrl).pipe(
             map(data=>data["data"]),
             tap(data=>this.currentOrder=data[0]),
-            tap(data=>this.listOfOrders=data),                     
-                //console.log("All"+JSON.stringify(data)))
+            tap(data=>this.listOfOrders=data),
             catchError(this.errorService.errorHandler)
        );
     }    
