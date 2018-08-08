@@ -32,7 +32,7 @@
                     </div>
                     <div class="col-xs-12 col-sm-5 col-md-4">  
                         <div><strong>Status:</strong>{{order.Status}}</div>
-                        <div><strong>Closed?:</strong>{{order.IsClosed}}</div>
+                        <div><strong>Closed?:</strong>{{order.IsClosed| convertBooleanToString :order.IsClosed}}</div>
                     </div>
             </div>
             <div><hr/></div>        

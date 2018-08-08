@@ -1,7 +1,16 @@
 <div class="jumbotron">
   <h1>Welcome to Mac Order Board</h1>
-  <p>Displays list of sales order and order line information…</p>
-  <p><a [routerLink] = "['/orders']" class="btn btn-outline-dark">Go to Orders</a></p>
-  <p><a [routerLink] = "['/orderlines']" class="btn btn-outline-dark">Go to Order Lines</a></p>
-  <p><a [routerLink] = "['/item','0']" class="btn btn-outline-dark">Go to Add Items</a></p>
+
+  <p>Displays order and order line information…</p>
+
+  <span>
+    <p><a [routerLink] = "['/orders']" class="btn btn-outline-dark">Go to Orders</a></p>
+  </span>
+  <span>
+    <p><a [routerLink] = "['/orderlines']" class="btn btn-outline-dark">Go to Order Lines</a></p>
+  </span>
+  <span>
+    <p><a [routerLink] = "['/item','0']" class="btn btn-outline-dark">Go to Add Items</a></p>
+  </span>
+ 
 </div>

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ItemMasterComponent } from './item-master.component';
 import { RouterModule } from '../../../node_modules/@angular/router';
-import { SharedModule } from '../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ItemMasterGuard } from './item-master.guard';
 
@@ -14,7 +13,7 @@ import { ItemMasterGuard } from './item-master.guard';
       canActivate:[ItemMasterGuard],
       component:ItemMasterComponent }      
     ]),    
-    CommonModule,   
+    CommonModule,     
     ReactiveFormsModule
   ],
   declarations: [

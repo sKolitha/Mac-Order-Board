@@ -2,7 +2,7 @@
   <div class="card-header">Order List</div>
   <div class="card-body">
         <div class="row">
-            <app-filter-criteria class="col-md-12"
+            <app-filter-criteria class="col-xs-12 col-sm-6 col-md-8"
             [callingComponetName]="'orderComponent'"     
             (filterOrderbyValueChange)='onOrderValueChange($event)' 
             (filterCustomerbyValueChange)='onCustomerValueChange($event)' *ngIf ='!errors'>

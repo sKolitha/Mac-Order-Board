@@ -20,7 +20,7 @@ import { ConvertBooleanToStringPipe } from './custom-pipes/convert-boolean-to-st
     FilterCriteriaComponent,
     ConvertBooleanToStringPipe,
     CommonModule,
-    FormsModule    
+    FormsModule   
   ]
 })
 export class SharedModule { }

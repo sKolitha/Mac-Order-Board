@@ -11,7 +11,7 @@ import { SharedModule } from '../shared/shared.module';
       {path:'orders',component:OrderListComponent },
       {
         path:'orders/:Id',
-        //canActivate:[OrderDetailGuard],
+        canActivate:[OrderDetailGuard],
         component:OrderDetailComponent
       }     
     ]),
