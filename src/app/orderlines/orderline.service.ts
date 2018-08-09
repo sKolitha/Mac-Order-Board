@@ -32,7 +32,7 @@ export class OrderLineService {
     }
     
     return this.http.get<IOrderLine[]>(this.orderLineJsonUrl).pipe(
-      tap(data=>this.listOfOrderLines==data),
+      tap(data=>this.listOfOrderLines===data),
       catchError(this.errorService.errorHandler)
     );
   }

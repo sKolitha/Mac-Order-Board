@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IItem } from './item';
 import { Observable, of } from '../../../node_modules/rxjs';
-import { HttpClient, HttpHeaders } from '../../../node_modules/@angular/common/http';
+import { HttpClient } from '../../../node_modules/@angular/common/http';
 import { catchError, map } from '../../../node_modules/rxjs/operators';
 import { ErrorService } from '../error/error.service';
 

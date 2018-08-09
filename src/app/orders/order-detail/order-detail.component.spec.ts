@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OrderDetailComponent } from './order-detail.component';
 import { SharedModule } from '../../shared/shared.module';
+import { ActivatedRoute } from '../../../../node_modules/@angular/router';
 
 describe('OrderDetailComponent', () => {
   let component: OrderDetailComponent;
@@ -9,7 +10,7 @@ describe('OrderDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports:[SharedModule],
+      imports: [SharedModule],
       declarations: [ OrderDetailComponent ]
     })
     .compileComponents();

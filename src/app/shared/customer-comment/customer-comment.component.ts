@@ -8,7 +8,7 @@ import { ICustomerordercomment } from '../../orders/order';
 })
 export class CustomerCommentComponent implements OnChanges {
 
-  @Input() comments : ICustomerordercomment[]=[];  
+  @Input() comments: ICustomerordercomment[]=[];  
   customerordercomments:ICustomerordercomment[]=[];
   constructor() { }
 

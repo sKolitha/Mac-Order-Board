@@ -13,36 +13,33 @@ import { Subscription } from '../../../../node_modules/rxjs';
 
 export class OrderListComponent implements OnInit,OnDestroy {
    
-  orders : IOrder[] = null;
-  filteredOrders : IOrder[] = null; 
-  errors : string[]=null;
+  orders: IOrder[] = null;
+  filteredOrders: IOrder[] = null; 
+  errors: string[]=null;
   private sub:Subscription=null;
 
 
-constructor(private orderService:OrderService, private customerService:CustomerService,private orderParamterService:OrderParameterService,
-private router:Router){ }
+constructor(private orderService: OrderService, private customerService: CustomerService,
+  private orderParamterService: OrderParameterService){ }
 
-onOrderValueChange(value :string):void{  
+onOrderValueChange(value: string):void{  
   this.filteredOrders=this.performListFilter(value,this.orderParamterService.Order_filterByCustomer);   
 }
-onCustomerValueChange(value :string):void{   
+onCustomerValueChange(value: string):void{   
   this.filteredOrders=this.performListFilter(this.orderParamterService.Order_filterByOrder,value);      
 }
 onOrderIdclicked(id:number){
-  this.orderService.changeSelectedOrder(this.filteredOrders.find(x=>x.ID==id))   
+  this.orderService.changeSelectedOrder(this.filteredOrders.find(x=>x.ID===id))   
 }
 performListFilter(orderValue:string,customerValue:string):IOrder[]{      
   if ((orderValue && orderValue.length>0) && (customerValue && customerValue.length)>0){
     return this.orders.filter((order : IOrder) => ((order.OrderNumber.toLocaleLowerCase().indexOf(orderValue) !== -1) &&
     order.CustomerName.toLocaleLowerCase().indexOf(customerValue) !== -1));
-  }
-  else if (orderValue && orderValue.length>0){
-    return this.orders.filter((order : IOrder) => (order.OrderNumber.toLocaleLowerCase().indexOf(orderValue) !== -1));
-  } 
-  else if (customerValue && customerValue.length>0){
-    return this.orders.filter((order : IOrder) => (order.CustomerName.toLocaleLowerCase().indexOf(customerValue) !== -1));
-  }
-  else{
+  }else if (orderValue && orderValue.length>0){
+    return this.orders.filter((order: IOrder) => (order.OrderNumber.toLocaleLowerCase().indexOf(orderValue) !== -1));
+  }else if (customerValue && customerValue.length>0){
+    return this.orders.filter((order: IOrder) => (order.CustomerName.toLocaleLowerCase().indexOf(customerValue) !== -1));
+  }else{
     return this.orders;
   }
 } 
@@ -50,7 +47,8 @@ performListFilter(orderValue:string,customerValue:string):IOrder[]{
 formatData(orderList:IOrder[]):IOrder[]{
   orderList.forEach(element => {      
     element.CustomerName=this.customerService.getCustomerName(element.CustomerNumber);  
-    element.FreightPaymentName=(element.FreightPayCodeLiteral.find(x=>x.Key.toLocaleLowerCase()==element.FreightPaymentCode.toLocaleLowerCase()).Value);
+    element.FreightPaymentName=(element.FreightPayCodeLiteral.find(x=>x.Key.
+      toLocaleLowerCase()===element.FreightPaymentCode.toLocaleLowerCase()).Value);
     element.MessagesStr=element.Messages.join(',');
   });
   return orderList;
@@ -60,7 +58,8 @@ ngOnInit() {
  this.sub= this.orderService.getOrdersAsync().subscribe(
     orders=>{
     this.orders=this.formatData(orders); 
-    this.filteredOrders = this.performListFilter(this.orderParamterService.Order_filterByOrder,this.orderParamterService.Order_filterByCustomer);              
+    this.filteredOrders = this.performListFilter(this.orderParamterService.
+      Order_filterByOrder,this.orderParamterService.Order_filterByCustomer);              
     },
   error=>this.errors=<any>error      
   );

@@ -7,11 +7,11 @@ import { OrderlineDetailComponent } from './orderline-detail/orderline-detail.co
 @NgModule({
   imports: [
     RouterModule.forChild([
-      {path:'orderlines',component:OrderlineListComponent },
+      {path: 'orderlines' ,component: OrderlineListComponent },
       {
-        path:'orderlines/:Id',        
-        component:OrderlineDetailComponent
-       }       
+        path: 'orderlines/:Id',         
+        component: OrderlineDetailComponent
+       }              
     ]),
     SharedModule
   ],

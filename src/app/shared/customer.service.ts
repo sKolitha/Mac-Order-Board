@@ -19,11 +19,10 @@ customer master data.
   getCustomerName(id:string):string
   {
 
-    let customer=this.customers.find(x=>x.id===id.trim());
+    const customer=this.customers.find(x=>x.id===id.trim());
         if (customer){
-            return customer.name ||id;
-        }
-        else{
+            return customer.name || id;
+        }else{
             return id;
         }
   }

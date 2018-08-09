@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {  CanDeactivate, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import {  CanDeactivate, CanActivate, ActivatedRouteSnapshot,  Router } from '@angular/router';
 import { ItemMasterComponent } from './item-master.component';
 import { Observable } from '../../../node_modules/rxjs';
 
@@ -20,8 +20,7 @@ export class ItemMasterGuard implements CanDeactivate<ItemMasterComponent>,CanAc
     return true; 
   }
 
-  canActivate(next: ActivatedRouteSnapshot,
-     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+  canActivate(next: ActivatedRouteSnapshot): Observable<boolean> | Promise<boolean> | boolean {
       let id=+next.url[1].path;
       if (id.toString().length===0){       
         this.router.navigate(['/welcome']);

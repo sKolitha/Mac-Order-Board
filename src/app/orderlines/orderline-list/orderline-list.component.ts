@@ -12,42 +12,39 @@ import { Subscription } from '../../../../node_modules/rxjs';
 })
 export class OrderlineListComponent implements OnInit,OnDestroy {
 
-  errors:string[]=null;
-  orderLines : IOrderLine[] =null;
-  filteredOrderLines : IOrderLine[];
+  errors:string[]= null;
+  orderLines: IOrderLine[] = null;
+  filteredOrderLines: IOrderLine[];
 
-  private sub:Subscription=null;
+  private sub: Subscription=null;
 
   constructor(private orderLineService: OrderLineService,
-    private orderParamterService:OrderParameterService,private customerService:CustomerService) { }
+    private orderParamterService:OrderParameterService,private customerService: CustomerService) { }
 
-  performListFilter(orderValue:string,customerValue:string):IOrderLine[]{      
+  performListFilter(orderValue: string,customerValue: string): IOrderLine[]{      
     if ((orderValue && orderValue.length>0) && (customerValue && customerValue.length)>0){
-      return this.orderLines.filter((orderLine : IOrderLine) => ((orderLine.OrderNumber.toLocaleLowerCase().indexOf(orderValue) !== -1) &&
+      return this.orderLines.filter((orderLine: IOrderLine) => ((orderLine.OrderNumber.toLocaleLowerCase().indexOf(orderValue) !== -1) &&
       orderLine.CustomerName.toLocaleLowerCase().indexOf(customerValue) !== -1));
-    }
-    else if (orderValue && orderValue.length>0){
-      return this.orderLines.filter((orderLine : IOrderLine) => (orderLine.OrderNumber.toLocaleLowerCase().indexOf(orderValue) !== -1));
-    } 
-    else if (customerValue && customerValue.length>0){
-      return this.orderLines.filter((orderLine : IOrderLine) => (orderLine.CustomerName.toLocaleLowerCase().indexOf(customerValue) !== -1));
-    }
-    else{
+    }else if (orderValue && orderValue.length>0){
+      return this.orderLines.filter((orderLine: IOrderLine) => (orderLine.OrderNumber.toLocaleLowerCase().indexOf(orderValue) !== -1));
+    }else if (customerValue && customerValue.length>0){
+      return this.orderLines.filter((orderLine: IOrderLine) => (orderLine.CustomerName.toLocaleLowerCase().indexOf(customerValue) !== -1));
+    }else{
       return this.orderLines;
     }
   } 
 
-  onOrderValueChange(value :string):void{    
+  onOrderValueChange(value: string): void{    
     this.filteredOrderLines=this.performListFilter(value,this.orderParamterService.Orderline_filterByCustomer);   
   }
-  onCustomerValueChange(value :string):void{ 
+  onCustomerValueChange(value:string): void{ 
     this.filteredOrderLines=this.performListFilter(this.orderParamterService.Orderline_filterByOrder,value);      
   }
 
-  onOrderLineIdClicked(id:string):void{
+  onOrderLineIdClicked(id:string): void{
     this.orderLineService.changeSelctedOrderLine(this.filteredOrderLines.find(x=>x.OrderKey===id));
   }
-  formatData(orderLineList:IOrderLine[]):IOrderLine[]{
+  formatData(orderLineList:IOrderLine[]): IOrderLine[]{
     orderLineList.forEach(element => {    
       element.CustomerName=this.customerService.getCustomerName(element.CustomerNumber);
       element.OrderKey= element.OrderNumber.concat(element.LineNumber.toString().trim().concat(element.LineSequenceNumber.toString().trim()));

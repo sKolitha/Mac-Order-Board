@@ -1,7 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { CustomerCommentComponent } from '../../shared/customer-comment/customer-comment.component';
 import { OrderlineDetailComponent } from './orderline-detail.component';
 import { SharedModule } from '../../shared/shared.module';
+import { HttpClientModule } from '../../../../node_modules/@angular/common/http';
+import { ActivatedRoute, Router } from '../../../../node_modules/@angular/router';
 
 describe('OrderlineDetailComponent', () => {
   let component: OrderlineDetailComponent;
@@ -9,8 +10,8 @@ describe('OrderlineDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports:[SharedModule],
-      declarations: [ OrderlineDetailComponent,CustomerCommentComponent ]
+      imports:[SharedModule,HttpClientModule,ActivatedRoute,Router],
+      declarations: [ OrderlineDetailComponent ]
     })
     .compileComponents();
   }));

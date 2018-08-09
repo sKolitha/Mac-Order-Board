@@ -18,6 +18,7 @@ import { ItemMasterGuard } from './item-master.guard';
   ],
   declarations: [
     ItemMasterComponent
-  ]
+  ],
+  exports:[ItemMasterComponent]
 })
 export class ItemModule { }

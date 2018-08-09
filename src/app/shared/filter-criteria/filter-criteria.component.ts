@@ -10,29 +10,27 @@ import { OrderParameterService } from '../../shared/order-parameter/order-parame
 
 export class FilterCriteriaComponent implements AfterViewInit { 
 
-  get filterByOrder() : string {
-    if (this.callingComponetName==='orderComponent'){
+  get filterByOrder(): string {
+    if (this.callingComponetName ==='orderComponent'){
       return this.parameterService.Order_filterByOrder;
-    }
-    else if (this.callingComponetName==='orderLineComponent'){
+    }else if (this.callingComponetName ==='orderLineComponent'){
       return this.parameterService.Orderline_filterByOrder;
     }
   }
   set filterByOrder(value:string){
-    if (this.callingComponetName==='orderComponent'){
+    if (this.callingComponetName ==='orderComponent'){
       this.parameterService.Order_filterByOrder=value;
-    }
-    else if (this.callingComponetName==='orderLineComponent'){
+    }else if (this.callingComponetName ==='orderLineComponent'){
       this.parameterService.Orderline_filterByOrder=value;
-    }
-    this.filterOrderbyValueChange.emit(value);      
-  }
+    } 
 
-  get filterByCustomer() : string {    
+    this.filterOrderbyValueChange.emit(value);      
+  } 
+
+  get filterByCustomer(): string {   
     if (this.callingComponetName==='orderComponent'){
       return this.parameterService.Order_filterByCustomer;
-    }
-    else if (this.callingComponetName==='orderLineComponent'){
+    }else if (this.callingComponetName==='orderLineComponent'){
       return this.parameterService.Orderline_filterByCustomer;
     }
     
@@ -40,21 +38,20 @@ export class FilterCriteriaComponent implements AfterViewInit {
   set filterByCustomer(value:string){
     if (this.callingComponetName==='orderComponent'){
       this.parameterService.Order_filterByCustomer=value;
-    }
-    else if (this.callingComponetName==='orderLineComponent'){
+    }else if (this.callingComponetName==='orderLineComponent'){
       this.parameterService.Orderline_filterByCustomer=value;
     }
     this.filterCustomerbyValueChange.emit(value);    
   }
 
   @ViewChild('focusElement') focusElementRef:ElementRef;
-  @Output() filterOrderbyValueChange:EventEmitter<string>=new EventEmitter<string>();
-  @Output() filterCustomerbyValueChange:EventEmitter<string>=new EventEmitter<string>();
-  @Input() callingComponetName:string="";
+  @Output() filterOrderbyValueChange:EventEmitter<string>= new EventEmitter<string>();
+  @Output() filterCustomerbyValueChange:EventEmitter<string>= new EventEmitter<string>();
+  @Input() callingComponetName: string;
 
-  constructor(private parameterService :OrderParameterService) { }
+  constructor(private parameterService: OrderParameterService) { }
 
-  ngAfterViewInit() :void{
+  ngAfterViewInit():void{
     if (this.focusElementRef){   
       this.focusElementRef.nativeElement.focus();
     }

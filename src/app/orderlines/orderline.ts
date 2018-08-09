@@ -1,4 +1,4 @@
-import { ICustomerordercomment } from "../orders/order";
+import { ICustomerordercomment } from '../orders/order';
 
 export interface IOrderLine{
     OrderKey : string;
@@ -85,5 +85,4 @@ export interface IOrderLine{
     UserDefinedField3 : string;
     UserDefinedField4 : string;
     UserDefinedField5 : string;
-
 }
