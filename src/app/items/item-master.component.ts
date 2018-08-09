@@ -13,67 +13,34 @@ import { Subscription } from '../../../node_modules/rxjs';
 export class ItemMasterComponent implements OnInit,OnDestroy {
 
   item:IItem =new Item();
-  itemForm:FormGroup; 
-  errors:string;
+  itemForm:FormGroup=null; 
+  errors:string="";
   pageTitle:string="Add Item";
   editingItem:boolean=false;
-  itemNumberMessage:string;
-  itemDesc1Message:string;
-  private sub:Subscription;
+  itemNumberMessage:string="";
+  itemDesc1Message:string="";
+  private sub:Subscription=null;
 
   @ViewChild('itemnumber') idElementRef:ElementRef;
   @ViewChild('itemdescription1') descriptionElementRef:ElementRef;
 
-  private itemNumberValidationMessages={
+  itemNumberValidationMessages={
     required: "Please enter the item number.",
     minLength:"Please enter at least 4 charactors."
   }
-  private itemDesc1ValidationMessages={
+  itemDesc1ValidationMessages={
     required: "Please enter the item Description 1."
   }
   
   constructor(private formBuilder:FormBuilder,
-    private itemService:ItemService,private route: ActivatedRoute,private router:Router) { }
-
-  private initItem():IItem{
-      return { 
-        ItemNumber: null,       
-        ItemDescription1:null,
-        ItemDescription2:null,
-        ItemReleaseNumber:null,
-        EndItemCode:null,
-        ProductCategory:null,
-        UnitOfMeasure:null 
-      }
-  }  
-
-  private initializeForm(){
-    this.itemForm.patchValue({   
-      itemDescription1:"",
-      itemDescription2:"",
-      itemReleaseNumber:"",
-      endItemCode:"",
-      productCategory:"",
-      unitOfMeasure:""
-    });
-  }
-
-  private onItemNumberChange(strnumber:string):void{
-    this.initializeForm();  
-    this.getItemData(strnumber||"");
-  }
-
-
-  getItemData(itemnumber:string):void {    
-   this.sub= this.itemService.getItemAsync(itemnumber).subscribe(
-     (data)=>this.onItemDisplay(data),
-     (error:any)=>this.errors=<any>error
-   );
-  }
+    private itemService:ItemService,
+    private route: ActivatedRoute,
+    private router:Router) { }
 
   saveData():void{   
-    if (this.itemForm.dirty && this.itemForm.valid) {      
-      let i=Object.assign({},this.item,this.itemForm.value);     
+    if (this.itemForm.dirty && this.itemForm.valid) {  
+
+      const i = { ...this.item, ...this.itemForm.value };
 
       if (this.editingItem){
         this.sub=this.itemService.updateItemAsync(i).subscribe(
@@ -89,32 +56,56 @@ export class ItemMasterComponent implements OnInit,OnDestroy {
       }
     }    
     
-  }
-  
+  }  
   onSaveCompleted(data):void{
-    console.log(data);//to show the data object after the fake db operation
+    console.log(data);//temporary line to show the data object after the fake db operation.
     this.itemForm.reset();
       if (this.editingItem){
         this.onBack();
       }
   }
+  
+
   onItemDisplay(item:IItem):void{   
     this.item=item;
     if (this.item){      
       this.itemForm.patchValue({
-        itemnumber:this.item.ItemNumber,
-        itemDescription1:this.item.ItemDescription1,
-        itemDescription2:this.item.ItemDescription2,
-        itemReleaseNumber:this.item.ItemReleaseNumber,
-        endItemCode:this.item.EndItemCode,
-        productCategory:this.item.ProductCategory,
-        unitOfMeasure:this.item.UnitOfMeasure
+        itemnumber:this.item.itemNumber,
+        itemDescription1:this.item.itemDescription1,
+        itemDescription2:this.item.itemDescription2,
+        itemReleaseNumber:this.item.itemReleaseNumber,
+        endItemCode:this.item.endItemCode,
+        productCategory:this.item.productCategory,
+        unitOfMeasure:this.item.unitOfMeasure
       });
     }  
 
+  } 
+
+  onItemNumberChange(strnumber:string):void{
+    this.initializeForm();  
+    this.getItemData(strnumber||"");
   }
 
-  private buildForm(newNumber:string){
+  initializeForm(){
+    this.itemForm.patchValue({   
+      itemDescription1:"",
+      itemDescription2:"",
+      itemReleaseNumber:"",
+      endItemCode:"",
+      productCategory:"",
+      unitOfMeasure:""
+    });
+  }
+
+  getItemData(itemnumber:string):void {    
+    this.sub= this.itemService.getItemAsync(itemnumber).subscribe(
+      (data)=>this.onItemDisplay(data),
+      (error:any)=>this.errors=<any>error
+    );
+  }
+
+  buildForm(newNumber:string){
     this.itemForm= this.formBuilder.group({
       itemNumber:[newNumber,[Validators.required,Validators.minLength(4)]],
       itemDescription1:["",Validators.required],
@@ -124,39 +115,11 @@ export class ItemMasterComponent implements OnInit,OnDestroy {
       productCategory:"",
       unitOfMeasure:""
     })
-  }
-
-  private setItemNumberMessage(control:AbstractControl):boolean{
-    this.itemNumberMessage="";
-    if((control.touched || control.dirty) && control.errors){
-      this.itemNumberMessage=Object.keys(control.errors)
-      .map(key=>this.itemNumberValidationMessages[key]).join(' ');
-    }
-    if (this.itemNumberMessage.length>0){
-      return true;
-    }
-    else{
-      return false;
-    }
-  }
-  private setItemDesc1Message(control:AbstractControl):boolean{
-    this.itemDesc1Message="";
-    if((control.touched || control.dirty) && control.errors){
-      this.itemDesc1Message=Object.keys(control.errors)
-      .map(key=>this.itemDesc1ValidationMessages[key]).join(' ');
-    }
-
-    if (this.itemDesc1Message.length>0){
-      return true;
-    }
-    else{
-      return false;
-    }
-  }
+  } 
 
   ngOnInit() {
 
-    let id=this.route.snapshot.paramMap.get('Id');       
+    let id=this.route.snapshot.paramMap.get('Id')||"0";       
     this.buildForm(id);
       
     if (this.itemForm.get('itemNumber').value!=="0"){
@@ -184,7 +147,7 @@ export class ItemMasterComponent implements OnInit,OnDestroy {
     this.sub=itemDesc1Control.valueChanges.pipe(debounceTime(500)).subscribe(value=>{      
       this.setItemDesc1Message(itemDesc1Control);
     });
-  }
+  } 
 
   onBack(){
     this.router.navigate(['/orderlines']);
@@ -192,5 +155,33 @@ export class ItemMasterComponent implements OnInit,OnDestroy {
 
   ngOnDestroy(){
     this.sub.unsubscribe();
+  }
+
+  setItemNumberMessage(control:AbstractControl):boolean{
+    this.itemNumberMessage="";
+    if((control.touched || control.dirty) && control.errors){
+      this.itemNumberMessage=Object.keys(control.errors)
+      .map(key=>this.itemNumberValidationMessages[key]).join(' ');
+    }
+    if (this.itemNumberMessage.length>0){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+  setItemDesc1Message(control:AbstractControl):boolean{
+    this.itemDesc1Message="";
+    if((control.touched || control.dirty) && control.errors){
+      this.itemDesc1Message=Object.keys(control.errors)
+      .map(key=>this.itemDesc1ValidationMessages[key]).join(' ');
+    }
+
+    if (this.itemDesc1Message.length>0){
+      return true;
+    }
+    else{
+      return false;
+    }
   }
 }

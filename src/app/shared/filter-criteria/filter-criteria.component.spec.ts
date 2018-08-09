@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { FormsModule } from '@angular/forms';
 import { FilterCriteriaComponent } from './filter-criteria.component';
 
 describe('FilterCriteriaComponent', () => {
@@ -8,6 +8,7 @@ describe('FilterCriteriaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports:[FormsModule],
       declarations: [ FilterCriteriaComponent ]
     })
     .compileComponents();

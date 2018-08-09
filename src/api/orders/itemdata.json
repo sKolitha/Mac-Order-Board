@@ -1,9 +1,9 @@
 [{
-    "ItemNumber":"LEVER",
-    "ItemDescription1": "Levers, Light Allow, Double",
-    "ItemDescription2": "Crankset",
-    "ItemReleaseNumber":"1",
-    "EndItemCode":"P",
-    "ProductCategory":"SP",
-    "UnitOfMeasure":"EA"
+    "itemNumber":"LEVER",
+    "itemDescription1": "Levers, Light Allow, Double",
+    "itemDescription2": "Crankset",
+    "itemReleaseNumber":"1",
+    "endItemCode":"P",
+    "productCategory":"SP",
+    "unitOfMeasure":"EA"
 }]

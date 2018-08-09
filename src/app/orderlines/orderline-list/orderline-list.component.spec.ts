@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterTestingModule } from '@angular/router/testing';
 import { OrderlineListComponent } from './orderline-list.component';
+import { SharedModule } from '../../shared/shared.module';
+
 
 describe('OrderlineListComponent', () => {
   let component: OrderlineListComponent;
@@ -8,6 +10,7 @@ describe('OrderlineListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports:[RouterTestingModule,SharedModule],
       declarations: [ OrderlineListComponent ]
     })
     .compileComponents();

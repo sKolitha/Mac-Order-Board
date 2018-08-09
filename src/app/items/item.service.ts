@@ -25,7 +25,7 @@ export class ItemService {
 
   getItemAsync(number:string):Observable<IItem>{    
       return this.http.get<IItem[]>(this.itemJsonUrl).pipe( 
-      map(data=>data.find(x=>x.ItemNumber.toLocaleLowerCase()===number.toLocaleLowerCase())),
+      map(data=>data.find(x=>x.itemNumber.toLocaleLowerCase()===number.toLocaleLowerCase())),
       catchError(this.errorService.errorHandler)
       );
   } 
@@ -33,7 +33,7 @@ export class ItemService {
   updateItemAsync(item:IItem):Observable<IItem>{      
     
     //valid code would be something like this    
-    /* const url=`${this.baseAPIUrl}/${item.ItemNumber}`;
+    /* const url=`${this.baseAPIUrl}/${item.itemNumber}`;
     return this.http.put(url,item,this.httpOptions).pipe(
       map(()=>item),
       catchError(this.errorService.errorHandler)

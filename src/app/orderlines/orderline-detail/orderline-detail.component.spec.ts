@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { CustomerCommentComponent } from '../../shared/customer-comment/customer-comment.component';
 import { OrderlineDetailComponent } from './orderline-detail.component';
+import { SharedModule } from '../../shared/shared.module';
 
 describe('OrderlineDetailComponent', () => {
   let component: OrderlineDetailComponent;
@@ -8,7 +9,8 @@ describe('OrderlineDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OrderlineDetailComponent ]
+      imports:[SharedModule],
+      declarations: [ OrderlineDetailComponent,CustomerCommentComponent ]
     })
     .compileComponents();
   }));

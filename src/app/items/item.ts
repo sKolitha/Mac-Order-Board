@@ -1,19 +1,19 @@
 export interface IItem{
-    ItemNumber:string;
-    ItemDescription1:string;
-    ItemDescription2:string;
-    ItemReleaseNumber:string;
-    EndItemCode:string;
-    ProductCategory:string;
-    UnitOfMeasure:string
+    itemNumber:string;
+    itemDescription1:string;
+    itemDescription2:string;
+    itemReleaseNumber:string;
+    endItemCode:string;
+    productCategory:string;
+    unitOfMeasure:string
 }
 
 export class Item implements IItem{
-    ItemNumber:string;
-    ItemDescription1:string;
-    ItemDescription2:string;
-    ItemReleaseNumber:string;
-    EndItemCode:string;
-    ProductCategory:string;
-    UnitOfMeasure:string
+    itemNumber:string;
+    itemDescription1:string;
+    itemDescription2:string;
+    itemReleaseNumber:string;
+    endItemCode:string;
+    productCategory:string;
+    unitOfMeasure:string
 }
