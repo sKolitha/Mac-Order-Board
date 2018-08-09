@@ -18,8 +18,7 @@ import { OrderlineDetailComponent } from './orderline-detail/orderline-detail.co
   declarations: [
     OrderlineListComponent,
     OrderlineDetailComponent
-  ],
-  providers:[]
+  ]
 })
 
 export class OrdrlineModule { }

@@ -50,7 +50,7 @@ export class FilterCriteriaComponent implements AfterViewInit {
   @ViewChild('focusElement') focusElementRef:ElementRef;
   @Output() filterOrderbyValueChange:EventEmitter<string>=new EventEmitter<string>();
   @Output() filterCustomerbyValueChange:EventEmitter<string>=new EventEmitter<string>();
-  @Input() callingComponetName:string;
+  @Input() callingComponetName:string="";
 
   constructor(private parameterService :OrderParameterService) { }
 

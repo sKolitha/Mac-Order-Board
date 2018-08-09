@@ -11,15 +11,21 @@ import { Subscription } from 'rxjs';
 
 export class OrderDetailComponent implements OnInit,OnDestroy {
   pageTitle:string='Order ID';
-  order:IOrder;
-  sub:Subscription;
+  order:IOrder=null;
+  errors : string[]=null;
+  sub:Subscription=null;
 
   constructor(private route:ActivatedRoute,private router:Router,
     private orderService:OrderService) { }
   
   ngOnInit() {
 
-    this.sub=this.orderService.selectedOrderChanges$.subscribe(ord=>this.order=ord);
+    this.sub=this.orderService.selectedOrderChanges$.
+    subscribe(
+      ord=>this.order=ord,
+      err=>this.errors=<any>err
+    );
+    
     if (!this.order){
       this.onBack();
     }

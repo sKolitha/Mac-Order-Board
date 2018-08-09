@@ -9,7 +9,7 @@ import { ICustomerordercomment } from '../../orders/order';
 export class CustomerCommentComponent implements OnChanges {
 
   @Input() comments : ICustomerordercomment[]=[];  
-  customerordercomments:ICustomerordercomment[];
+  customerordercomments:ICustomerordercomment[]=[];
   constructor() { }
 
   ngOnChanges():void {

@@ -178,6 +178,9 @@
                   <div>{{orderLine.MessagesStr}}</div>
           </div>             
       </div>
+      <div class="alert alert-danger" role="alert" *ngIf='errors'>  
+        <strong>Error!</strong> {{errors}}
+    </div>
     </div>
     <div class='card-footer '>        
         <button class='btn btn-outline-dark btn-sm  float-right'

@@ -11,15 +11,20 @@ import { ActivatedRoute, Router } from '../../../../node_modules/@angular/router
 })
 export class OrderlineDetailComponent implements OnInit,OnDestroy {
   pageTitle:string='Order Line ID';
-  orderLine:IOrderLine;
-  sub:Subscription;
+  orderLine:IOrderLine=null;
+  sub:Subscription=null;
+  errors:string[]=null;
 
 constructor(private orderLineService: OrderLineService,
     private route:ActivatedRoute,private router:Router) { }  
 
   ngOnInit() {
 
-    this.sub=this.orderLineService.selectedOrderLineChanges$.subscribe(orderline=>this.orderLine=orderline);
+    this.sub=this.orderLineService.selectedOrderLineChanges$.
+    subscribe(
+      orderline=>this.orderLine=orderline,
+      err=>this.errors=<any>err
+    );
     
     if (!this.orderLine){
       this.onBack();

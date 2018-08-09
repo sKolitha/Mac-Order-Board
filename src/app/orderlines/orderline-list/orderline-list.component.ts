@@ -1,19 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IOrderLine } from '../orderline';
 import { OrderLineService } from '../orderline.service';
 import { CustomerService } from '../../shared/customer.service';
 import { OrderParameterService } from '../../shared/order-parameter/order-parameter.service';
+import { Subscription } from '../../../../node_modules/rxjs';
 
 @Component({
   selector: 'app-orderline-list',
   templateUrl: './orderline-list.component.html',
   styleUrls: ['./orderline-list.component.css']
 })
-export class OrderlineListComponent implements OnInit {
+export class OrderlineListComponent implements OnInit,OnDestroy {
 
-  errors:string[];
-  orderLines : IOrderLine[] = [];
-  filteredOrderLines : IOrderLine[] = []; 
+  errors:string[]=null;
+  orderLines : IOrderLine[] =null;
+  filteredOrderLines : IOrderLine[];
+
+  private sub:Subscription=null;
 
   constructor(private orderLineService: OrderLineService,
     private orderParamterService:OrderParameterService,private customerService:CustomerService) { }
@@ -54,13 +57,17 @@ export class OrderlineListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.orderLineService.getOrderLinesAsync().subscribe(
+    this.sub=this.orderLineService.getOrderLinesAsync().subscribe(
       orderlines=>{
       this.orderLines=this.formatData(orderlines); 
       this.filteredOrderLines = this.performListFilter(this.orderParamterService.Orderline_filterByOrder,this.orderParamterService.Orderline_filterByCustomer);              
       },
     error=>this.errors=<any>error      
   );
+  }
+
+  ngOnDestroy(){
+    this.sub.unsubscribe();
   }
 
 }

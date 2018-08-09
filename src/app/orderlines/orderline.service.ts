@@ -11,8 +11,8 @@ import { ErrorService } from '../error/error.service';
 export class OrderLineService {
 
   private orderLineJsonUrl='api/orders/orderlineitem.json'; 
-  private listOfOrderLines : IOrderLine[];
-  private currentOrderLine:IOrderLine;
+  private listOfOrderLines : IOrderLine[]=null;
+  private currentOrderLine:IOrderLine=null;
   private orderLineSource=new BehaviorSubject<IOrderLine|null>(this.currentOrderLine);
 
 

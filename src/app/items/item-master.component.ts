@@ -15,7 +15,7 @@ export class ItemMasterComponent implements OnInit,OnDestroy {
   item:IItem =new Item();
   itemForm:FormGroup=null; 
   errors:string="";
-  pageTitle:string="Add Item";
+  pageTitle:string="Add/Edit Item";
   editingItem:boolean=false;
   itemNumberMessage:string="";
   itemDesc1Message:string="";
@@ -37,34 +37,7 @@ export class ItemMasterComponent implements OnInit,OnDestroy {
     private route: ActivatedRoute,
     private router:Router) { }
 
-  saveData():void{   
-    if (this.itemForm.dirty && this.itemForm.valid) {  
 
-      const i = { ...this.item, ...this.itemForm.value };
-
-      if (this.editingItem){
-        this.sub=this.itemService.updateItemAsync(i).subscribe(
-          (data)=>this.onSaveCompleted(data),         
-          (error:any)=>this.errors=<any>error
-        );
-      }
-      else{
-        this.sub=this.itemService.addItemAsync(i).subscribe(
-          (data)=>this.onSaveCompleted(data),
-          (error:any)=>this.errors=<any>error
-        );
-      }
-    }    
-    
-  }  
-  onSaveCompleted(data):void{
-    console.log(data);//temporary line to show the data object after the fake db operation.
-    this.itemForm.reset();
-      if (this.editingItem){
-        this.onBack();
-      }
-  }
-  
 
   onItemDisplay(item:IItem):void{   
     this.item=item;
@@ -120,35 +93,67 @@ export class ItemMasterComponent implements OnInit,OnDestroy {
   ngOnInit() {
 
     let id=this.route.snapshot.paramMap.get('Id')||"0";       
-    this.buildForm(id);
+    this.buildForm(id);    
       
-    if (this.itemForm.get('itemNumber').value!=="0"){
-      this.itemForm.get('itemNumber').disable();
-      this.descriptionElementRef.nativeElement.focus();
-      this.pageTitle="Edit Item";
-      this.editingItem=true;
-      this.onItemNumberChange(id);
-    }
-    else{
+    if (this.itemForm.get('itemNumber').value==="0"){
+      //add new item
       this.itemForm.get('itemNumber').enable();    
       this.itemForm.get('itemNumber').reset();
-      this.pageTitle="Add Item";
       this.editingItem=false;
-      this.idElementRef.nativeElement.focus();   
-      
-    }     
+      this.idElementRef.nativeElement.focus();
+    }
+    else{  
+      //edit item         
+      this.itemForm.get('itemNumber').disable();
+      this.descriptionElementRef.nativeElement.focus();
+      this.editingItem=true;  
+      this.onItemNumberChange(id);
+    }    
+   
+    //subscribe value change to fire valisdation and other events
     const itemNumberControl=this.itemForm.get('itemNumber');
     this.sub=itemNumberControl.valueChanges.pipe(debounceTime(500)).subscribe(value=>{      
       if (!this.setItemNumberMessage(itemNumberControl)){
         this.onItemNumberChange(value);
       }
     });
+
+    //subscribe value change to fire valisdation and other events
     const itemDesc1Control=this.itemForm.get('itemDescription1');
     this.sub=itemDesc1Control.valueChanges.pipe(debounceTime(500)).subscribe(value=>{      
       this.setItemDesc1Message(itemDesc1Control);
     });
   } 
 
+  
+  saveData():void{   
+    if (this.itemForm.dirty && this.itemForm.valid) {  
+
+      const i = { ...this.item, ...this.itemForm.value };
+
+      if (this.editingItem){
+        this.sub=this.itemService.updateItemAsync(i).subscribe(
+          (data)=>this.onSaveCompleted(data),         
+          (error:any)=>this.errors=<any>error
+        );
+      }
+      else{
+        this.sub=this.itemService.addItemAsync(i).subscribe(
+          (data)=>this.onSaveCompleted(data),
+          (error:any)=>this.errors=<any>error
+        );
+      }
+    }    
+    
+  }  
+  onSaveCompleted(data):void{
+    console.log(data);//temporary line to show the data object after the fake db operation.
+    this.itemForm.reset();
+      if (this.editingItem){
+        this.onBack();
+      }
+  }
+  
   onBack(){
     this.router.navigate(['/orderlines']);
   }

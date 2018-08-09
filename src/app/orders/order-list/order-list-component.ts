@@ -1,20 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { IOrder } from '../order';
 import { OrderService } from '../order.service';
 import { CustomerService } from '../../shared/customer.service';
 import { Router } from '@angular/router';
 import { OrderParameterService } from '../../shared/order-parameter/order-parameter.service';
+import { Subscription } from '../../../../node_modules/rxjs';
 
 @Component({ 
   templateUrl: './order-list-component.html',
   styleUrls: ['./order-list-component.css']
 })
 
-export class OrderListComponent implements OnInit {
+export class OrderListComponent implements OnInit,OnDestroy {
    
-  orders : IOrder[] = [];
-  filteredOrders : IOrder[] = []; 
-  errors : string;
+  orders : IOrder[] = null;
+  filteredOrders : IOrder[] = null; 
+  errors : string[]=null;
+  private sub:Subscription=null;
 
 
 constructor(private orderService:OrderService, private customerService:CustomerService,private orderParamterService:OrderParameterService,
@@ -55,7 +57,7 @@ formatData(orderList:IOrder[]):IOrder[]{
 }
 
 ngOnInit() {
-  this.orderService.getOrdersAsync().subscribe(
+ this.sub= this.orderService.getOrdersAsync().subscribe(
     orders=>{
     this.orders=this.formatData(orders); 
     this.filteredOrders = this.performListFilter(this.orderParamterService.Order_filterByOrder,this.orderParamterService.Order_filterByCustomer);              
@@ -63,5 +65,9 @@ ngOnInit() {
   error=>this.errors=<any>error      
   );
 } 
+
+ngOnDestroy(){
+  this.sub.unsubscribe();
+}
 
 }

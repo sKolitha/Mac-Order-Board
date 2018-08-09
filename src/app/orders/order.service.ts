@@ -14,9 +14,9 @@ import { ErrorService } from "../error/error.service";
 export class OrderService{
 
     private orderJsonUrl='api/orders/orderdatastructure.json'; 
-    private currentOrder:IOrder;     
+    private currentOrder:IOrder=null;     
     private orderSource=new BehaviorSubject<IOrder|null>(this.currentOrder);  
-    private listOfOrders:IOrder[];
+    private listOfOrders:IOrder[]=null;
 
     constructor(private http:HttpClient, private errorService:ErrorService){}
 
