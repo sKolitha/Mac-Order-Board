@@ -7,7 +7,7 @@ import { ErrorService } from '../error/error.service';
 
 
 @Injectable({
-  providedIn: 'root'
+  providedIn:  'root'
 })
 
 export class ItemService {
@@ -16,21 +16,21 @@ export class ItemService {
 
   /* private baseAPIUrl='WWW.M1.com/API/orders';
   private const httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json'
+    headers:  new HttpHeaders({
+      'Content-Type':   'application/json'
     })
   }; */
 
-  constructor(private http:HttpClient, private errorService:ErrorService){ }
+  constructor(private http: HttpClient, private errorService: ErrorService){ }
 
-  getItemAsync(number:string):Observable<IItem>{    
+  getItemAsync(number: string): Observable<IItem>{    
       return this.http.get<IItem[]>(this.itemJsonUrl).pipe( 
       map(data=>data.find(x=>x.itemNumber.toLocaleLowerCase()===number.toLocaleLowerCase())),
       catchError(this.errorService.errorHandler)
       );
   } 
   
-  updateItemAsync(item:IItem):Observable<IItem>{      
+  updateItemAsync(item: IItem): Observable<IItem>{      
     
     //valid code would be something like this    
     /* const url=`${this.baseAPIUrl}/${item.itemNumber}`;
@@ -41,7 +41,7 @@ export class ItemService {
     return of(item);
   }   
 
-  addItemAsync(item:IItem):Observable<IItem>{
+  addItemAsync(item: IItem): Observable<IItem>{
     //valid code would be something like this    
     
    /*  return this.http.post<IItem>(this.baseAPIUrl,item,this.httpOptions).pipe(     

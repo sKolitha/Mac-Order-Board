@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { ICustomerordercomment } from '../../orders/order';
 
 @Component({
@@ -8,14 +8,12 @@ import { ICustomerordercomment } from '../../orders/order';
 })
 export class CustomerCommentComponent implements OnChanges {
 
-  @Input() comments: ICustomerordercomment[]=[];  
-  customerordercomments:ICustomerordercomment[]=[];
+  @Input() comments: ICustomerordercomment[] = [];  
+  customerordercomments:ICustomerordercomment[] = [];
   constructor() { }
 
-  ngOnChanges():void {
-    this.customerordercomments=this.comments;
+  ngOnChanges(): void {
+    this.customerordercomments = this.comments;
   }
-
-  
 
 }

@@ -28,30 +28,30 @@ export class FilterCriteriaComponent implements AfterViewInit {
   } 
 
   get filterByCustomer(): string {   
-    if (this.callingComponetName==='orderComponent'){
+    if (this.callingComponetName === 'orderComponent'){
       return this.parameterService.Order_filterByCustomer;
-    }else if (this.callingComponetName==='orderLineComponent'){
+    }else if (this.callingComponetName === 'orderLineComponent'){
       return this.parameterService.Orderline_filterByCustomer;
     }
     
   }
-  set filterByCustomer(value:string){
-    if (this.callingComponetName==='orderComponent'){
+  set filterByCustomer(value: string){
+    if (this.callingComponetName === 'orderComponent'){
       this.parameterService.Order_filterByCustomer=value;
-    }else if (this.callingComponetName==='orderLineComponent'){
+    }else if (this.callingComponetName === 'orderLineComponent'){
       this.parameterService.Orderline_filterByCustomer=value;
     }
     this.filterCustomerbyValueChange.emit(value);    
   }
 
-  @ViewChild('focusElement') focusElementRef:ElementRef;
-  @Output() filterOrderbyValueChange:EventEmitter<string>= new EventEmitter<string>();
-  @Output() filterCustomerbyValueChange:EventEmitter<string>= new EventEmitter<string>();
+  @ViewChild('focusElement') focusElementRef: ElementRef;
+  @Output() filterOrderbyValueChange: EventEmitter<string> = new EventEmitter<string>();
+  @Output() filterCustomerbyValueChange: EventEmitter<string> = new EventEmitter<string>();
   @Input() callingComponetName: string;
 
   constructor(private parameterService: OrderParameterService) { }
 
-  ngAfterViewInit():void{
+  ngAfterViewInit(): void{
     if (this.focusElementRef){   
       this.focusElementRef.nativeElement.focus();
     }

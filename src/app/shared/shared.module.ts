@@ -15,7 +15,7 @@ import { ConvertBooleanToStringPipe } from './custom-pipes/convert-boolean-to-st
     FilterCriteriaComponent,
     ConvertBooleanToStringPipe
   ],
-  exports:[
+  exports: [
     CustomerCommentComponent,
     FilterCriteriaComponent,
     ConvertBooleanToStringPipe,

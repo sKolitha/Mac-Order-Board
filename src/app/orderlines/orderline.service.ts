@@ -10,20 +10,20 @@ import { ErrorService } from '../error/error.service';
 })
 export class OrderLineService {
 
-  private orderLineJsonUrl='api/orders/orderlineitem.json'; 
-  private listOfOrderLines : IOrderLine[]=null;
-  private currentOrderLine:IOrderLine=null;
-  private orderLineSource=new BehaviorSubject<IOrderLine|null>(this.currentOrderLine);
+  private orderLineJsonUrl = 'api/orders/orderlineitem.json'; 
+  private listOfOrderLines: IOrderLine[] = null;
+  private currentOrderLine: IOrderLine = null;
+  private orderLineSource = new BehaviorSubject<IOrderLine|null>(this.currentOrderLine);
 
 
   constructor(private http:HttpClient,private errorService:ErrorService) { }
 
-  selectedOrderLineChanges$=this.orderLineSource.asObservable();
-  changeSelctedOrderLine(curOrderLine :IOrderLine|null){
+  selectedOrderLineChanges$ = this.orderLineSource.asObservable();
+  changeSelctedOrderLine(curOrderLine: IOrderLine|null){
     this.orderLineSource.next(curOrderLine);
   }
 
-  getOrderLinesAsync():Observable<IOrderLine[]>{
+  getOrderLinesAsync(): Observable<IOrderLine[]>{
     /*Data in this app is not critical, so no need to 
       go to server every time to get data from server.
     */
@@ -32,7 +32,7 @@ export class OrderLineService {
     }
     
     return this.http.get<IOrderLine[]>(this.orderLineJsonUrl).pipe(
-      tap(data=>this.listOfOrderLines===data),
+      tap(data => this.listOfOrderLines === data),
       catchError(this.errorService.errorHandler)
     );
   }

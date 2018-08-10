@@ -10,7 +10,7 @@ import { Observable } from '../../../node_modules/rxjs';
 
 export class ItemMasterGuard implements CanDeactivate<ItemMasterComponent>,CanActivate { 
   
-  constructor(private router:Router){    
+  constructor(private router: Router){    
   }
 
   canDeactivate(component: ItemMasterComponent):boolean {
@@ -21,8 +21,8 @@ export class ItemMasterGuard implements CanDeactivate<ItemMasterComponent>,CanAc
   }
 
   canActivate(next: ActivatedRouteSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-      let id=+next.url[1].path;
-      if (id.toString().length===0){       
+      const id =+ next.url[1].path;
+      if (id.toString().length === 0){       
         this.router.navigate(['/welcome']);
       } 
        //can include any user access checks code here.     

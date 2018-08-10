@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { OrderDetailComponent } from './order-detail.component';
 import { SharedModule } from '../../shared/shared.module';
-import { ActivatedRoute } from '../../../../node_modules/@angular/router';
+import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '../../../../node_modules/@angular/router';
+
 
 describe('OrderDetailComponent', () => {
   let component: OrderDetailComponent;

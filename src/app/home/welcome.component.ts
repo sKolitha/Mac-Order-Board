@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./welcome.component.css']
 })
 export class WelcomeComponent  {
-pageTitle:string="Welcome to Mac Order Board";
-pageDescription:string="Displays order and order line information…";
+pageTitle:string='Welcome to Mac Order Board';
+pageDescription:string='Displays order and order line information…';
  
 }

@@ -11,7 +11,7 @@ describe('OrderlineListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports:[RouterTestingModule,SharedModule,HttpClientModule],
+      imports: [RouterTestingModule,SharedModule,HttpClientModule],
       declarations: [ OrderlineListComponent ]
     })
     .compileComponents();

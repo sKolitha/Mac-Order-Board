@@ -12,11 +12,11 @@ import { Subscription } from '../../../../node_modules/rxjs';
 })
 export class OrderlineListComponent implements OnInit,OnDestroy {
 
-  errors:string[]= null;
+  errors: string[] = null;
   orderLines: IOrderLine[] = null;
   filteredOrderLines: IOrderLine[];
 
-  private sub: Subscription=null;
+  private sub: Subscription = null;
 
   constructor(private orderLineService: OrderLineService,
     private orderParamterService:OrderParameterService,private customerService: CustomerService) { }
@@ -35,29 +35,31 @@ export class OrderlineListComponent implements OnInit,OnDestroy {
   } 
 
   onOrderValueChange(value: string): void{    
-    this.filteredOrderLines=this.performListFilter(value,this.orderParamterService.Orderline_filterByCustomer);   
+    this.filteredOrderLines = this.performListFilter(value,this.orderParamterService.Orderline_filterByCustomer);   
   }
-  onCustomerValueChange(value:string): void{ 
-    this.filteredOrderLines=this.performListFilter(this.orderParamterService.Orderline_filterByOrder,value);      
+  onCustomerValueChange(value: string): void{ 
+    this.filteredOrderLines = this.performListFilter(this.orderParamterService.Orderline_filterByOrder,value);      
   }
 
-  onOrderLineIdClicked(id:string): void{
-    this.orderLineService.changeSelctedOrderLine(this.filteredOrderLines.find(x=>x.OrderKey===id));
+  onOrderLineIdClicked(id: string): void{
+    this.orderLineService.changeSelctedOrderLine(this.filteredOrderLines.find(x => x.OrderKey === id));
   }
-  formatData(orderLineList:IOrderLine[]): IOrderLine[]{
+  formatData(orderLineList: IOrderLine[]): IOrderLine[]{
     orderLineList.forEach(element => {    
-      element.CustomerName=this.customerService.getCustomerName(element.CustomerNumber);
-      element.OrderKey= element.OrderNumber.concat(element.LineNumber.toString().trim().concat(element.LineSequenceNumber.toString().trim()));
-      element.MessagesStr=element.Messages.join(',');
+      element.CustomerName = this.customerService.getCustomerName(element.CustomerNumber);
+      element.OrderKey = element.OrderNumber.concat(element.LineNumber.toString().trim()
+        .concat(element.LineSequenceNumber.toString().trim()));
+      element.MessagesStr = element.Messages.join(',');
     });
     return orderLineList;
   }
 
   ngOnInit() {
-    this.sub=this.orderLineService.getOrderLinesAsync().subscribe(
-      orderlines=>{
-      this.orderLines=this.formatData(orderlines); 
-      this.filteredOrderLines = this.performListFilter(this.orderParamterService.Orderline_filterByOrder,this.orderParamterService.Orderline_filterByCustomer);              
+    this.sub = this.orderLineService.getOrderLinesAsync().subscribe(
+      orderlines => {
+      this.orderLines = this.formatData(orderlines); 
+      this.filteredOrderLines = this.performListFilter(this.orderParamterService
+        .Orderline_filterByOrder,this.orderParamterService.Orderline_filterByCustomer);              
       },
     error=>this.errors=<any>error      
   );

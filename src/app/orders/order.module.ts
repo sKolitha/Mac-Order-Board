@@ -8,11 +8,11 @@ import { SharedModule } from '../shared/shared.module';
 @NgModule({
   imports: [
     RouterModule.forChild([
-      {path:'orders',component:OrderListComponent },
+      {path: 'orders',component: OrderListComponent },
       {
-        path:'orders/:Id',
-        canActivate:[OrderDetailGuard],
-        component:OrderDetailComponent
+        path: 'orders/:Id',
+        canActivate: [OrderDetailGuard],
+        component: OrderDetailComponent
       }     
     ]),
     SharedModule
@@ -22,6 +22,6 @@ import { SharedModule } from '../shared/shared.module';
     OrderListComponent,
     OrderDetailComponent  
   ],
-  providers:[]
+  providers: []
 })
 export class OrderModule { }

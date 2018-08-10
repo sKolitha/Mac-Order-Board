@@ -8,25 +8,25 @@ import { catchError, tap, map } from 'rxjs/operators';
 import { ErrorService } from '../error/error.service';
 
 @Injectable({
-    providedIn:'root'
+    providedIn: 'root'
 })
 
 export class OrderService{
 
-    private orderJsonUrl='api/orders/orderdatastructure.json'; 
-    private currentOrder:IOrder=null;     
-    private orderSource=new BehaviorSubject<IOrder|null>(this.currentOrder);  
-    private listOfOrders:IOrder[]=null;
+    private orderJsonUrl = 'api/orders/orderdatastructure.json'; 
+    private currentOrder: IOrder = null;     
+    private orderSource = new BehaviorSubject<IOrder|null>(this.currentOrder);  
+    private listOfOrders: IOrder[] = null;
 
-    constructor(private http:HttpClient, private errorService:ErrorService){}
+    constructor(private http: HttpClient, private errorService: ErrorService){}
 
-    selectedOrderChanges$=this.orderSource.asObservable();   
+    selectedOrderChanges$ = this.orderSource.asObservable();   
 
-    changeSelectedOrder(curorder:IOrder|null){
+    changeSelectedOrder(curorder: IOrder|null){
         this.orderSource.next(curorder);
     }
 
-    getOrdersAsync():Observable<IOrder[]>{
+    getOrdersAsync(): Observable<IOrder[]>{
         /*Data in this app is not critical, so no need to 
             go to server every time to get data from server.
         */
@@ -34,9 +34,9 @@ export class OrderService{
             return of(this.listOfOrders);          
         }
        return this.http.get<IOrder[]>(this.orderJsonUrl).pipe(
-            map(data =>data['data']),
-            tap(data =>this.currentOrder=data[0]),
-            tap(data =>this.listOfOrders=data),
+            map(data  => data['data']),
+            tap(data  => this.currentOrder = data[0]),
+            tap(data  => this.listOfOrders = data),
             catchError(this.errorService.errorHandler)
        );
     }    

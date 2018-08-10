@@ -8,8 +8,7 @@ export class ConvertBooleanToStringPipe implements PipeTransform {
   transform(value: boolean): string {
     if (value === true){
       return 'Yes';
-    }
-    else{
+    } else{
       return 'No';
     }
     

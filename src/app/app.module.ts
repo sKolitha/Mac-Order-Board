@@ -8,21 +8,21 @@ import { OrderModule } from './orders/order.module';
 import { OrdrlineModule } from './orderlines/ordrline.module';
 import { ItemModule } from './items/item.module';
 
-@NgModule({  
-  imports: [    
-    RouterModule.forRoot([     
-      {path:'welcome',component:WelcomeComponent},
-      {path:'',redirectTo:'welcome',pathMatch:'full'},
-      {path:'**',redirectTo:'welcome',pathMatch:'full'}
+@NgModule({
+  imports: [
+    RouterModule.forRoot([
+      {path: 'welcome', component: WelcomeComponent},
+      {path: '', redirectTo: 'welcome', pathMatch: 'full'},
+      {path: '**', redirectTo: 'welcome', pathMatch: 'full'}
     ]),
-    BrowserModule,    
+    BrowserModule,
     HttpClientModule,
     OrderModule,
     OrdrlineModule,
     ItemModule
   ],
-  declarations: [   
-    AppComponent,    
+  declarations: [
+    AppComponent,
     WelcomeComponent
   ],
   bootstrap: [AppComponent]

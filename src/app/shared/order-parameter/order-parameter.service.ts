@@ -7,9 +7,8 @@ import { Injectable } from '@angular/core';
 )
 export class OrderParameterService {
 
-  Order_filterByOrder:string;
-  Order_filterByCustomer:string;
-  Orderline_filterByOrder:string;
-  Orderline_filterByCustomer:string;
-  
+  Order_filterByOrder: string;
+  Order_filterByCustomer: string;
+  Orderline_filterByOrder: string;
+  Orderline_filterByCustomer: string;  
 }

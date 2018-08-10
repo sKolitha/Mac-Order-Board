@@ -11,33 +11,33 @@ import { Subscription } from 'rxjs';
 
 export class OrderDetailComponent implements OnInit, OnDestroy {
   pageTitle: string = 'Order ID';
-  order: IOrder=null;
-  errors: string[]=null;
-  sub: Subscription=null;
+  order: IOrder = null;
+  errors: string[] = null;
+  sub: Subscription = null;
 
-  constructor(private route:ActivatedRoute,private router:Router,
+  constructor(private route: ActivatedRoute,private router: Router,
     private orderService: OrderService) { }
   
   ngOnInit() {
 
-    this.sub= this.orderService.selectedOrderChanges$.
+    this.sub = this.orderService.selectedOrderChanges$.
     subscribe(
-      ord=>this.order=ord,
-      err=>this.errors=<any>err
+      ord => this.order = ord,
+      err => this.errors = <any>err
     );
     
     if (!this.order){
       this.onBack();
     }
-    const id=+this.route.snapshot.paramMap.get('Id');
-    this.pageTitle+=`: ${id==null ? '' : id}`;
+    const id =+ this.route.snapshot.paramMap.get('Id');
+    this.pageTitle += `: ${id === null ? '' : id}`;
   }
 
   onBack(): void {
     this.router.navigate(['/orders']);
   }
 
-  ngOnDestroy():void{
+  ngOnDestroy(): void{
     this.sub.unsubscribe();
   }
 }

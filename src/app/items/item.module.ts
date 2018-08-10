@@ -8,10 +8,10 @@ import { ItemMasterGuard } from './item-master.guard';
 @NgModule({
   imports: [    
     RouterModule.forChild([
-      {path:'item/:Id',
-      canDeactivate:[ItemMasterGuard],
-      canActivate:[ItemMasterGuard],
-      component:ItemMasterComponent }      
+      {path: 'item/:Id',
+      canDeactivate: [ItemMasterGuard],
+      canActivate: [ItemMasterGuard],
+      component: ItemMasterComponent }      
     ]),    
     CommonModule,     
     ReactiveFormsModule
@@ -19,6 +19,6 @@ import { ItemMasterGuard } from './item-master.guard';
   declarations: [
     ItemMasterComponent
   ],
-  exports:[ItemMasterComponent]
+  exports: [ItemMasterComponent]
 })
 export class ItemModule { }
