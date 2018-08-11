@@ -1,5 +1,5 @@
 <div class="card">
-  <div class="card-header">Order List</div>
+  <div class="card-header">Orders List</div>
   <div class="card-body">
         <div class="row">
             <app-filter-criteria class="col-xs-12 col-sm-6 col-md-8"
@@ -15,12 +15,12 @@
             <h6></h6> 
         </div> 
     </div>
-    <div class="table-responsive  w-auto"> 
-        <table class="table table-sm" *ngIf='orders && orders.length'>
-            <thead>
+    <div class="table-responsive-md"> 
+        <table class="table table-bordered table-sm" *ngIf='orders && orders.length'>
+            <thead class="bg-light">
                 <tr>
                     <th>ID</th>
-                    <th>Ord NO</th>
+                    <th>Ord No</th>
                     <th>Ord Date</th>
                     <th>Customer ID</th>
                     <th>Customer Name</th>
@@ -28,6 +28,7 @@
                     <th>Tot Sale</th>
                     <th>Tot Taxable</th>
                     <th>Tot Dollars</th>
+                    <th>Closed?</th>
                               
                 </tr>
             </thead>
@@ -44,7 +45,7 @@
                 <td>{{order.TotalSaleAmt | currency : 'USD' : 'symbol':'1.2-2'}}</td>
                 <td>{{order.TotalTaxableAmount | currency : 'USD' : 'symbol':'1.2-2'}}</td>
                 <td>{{order.TotalDollars | currency : 'USD' : 'symbol':'1.2-2' }}</td>
-               
+                <td>{{order.IsClosed| convertBooleanToString :order.IsClosed}}</td>
               </tr>
             </tbody>
         </table>

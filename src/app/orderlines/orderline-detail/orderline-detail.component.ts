@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '../../../../node_modules/@angular/router
   styleUrls: ['./orderline-detail.component.css']
 })
 export class OrderlineDetailComponent implements OnInit, OnDestroy {
-  pageTitle: string = 'Order Line ID';
+  pageTitle: string = 'LINE DETAILS FOR ORDER';
   orderLine: IOrderLine = null;
   sub: Subscription = null;
   errors: string[] = null;

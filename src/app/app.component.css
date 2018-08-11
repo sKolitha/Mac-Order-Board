@@ -1,0 +1,10 @@
+div,nav,input,span,td,button,form,textarea,text {  
+    font-size:14px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+th,label,thead{  
+    font-size:15px;
+}
+
+

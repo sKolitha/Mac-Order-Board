@@ -2,9 +2,9 @@
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-8">
             <!-- form user info -->
-            <div class="card">
+            <div class="card bg-light">
                 <div class="card-header">
-                    <h4>{{pageTitle}}</h4>
+                    <div>{{pageTitle}}</div>
                 </div>
                 <div class="card-body">
                     <form class="form"
@@ -14,8 +14,8 @@
                         <fieldset>
                         <div class="form-group row">                                 
                                 <label class="col-md-4 col-form-label form-control-label" for="itemNumber">Item Number</label>
-                                <div class="col-md-8" >
-                                    <input class="form-control"
+                                <div class="col-md-6" >
+                                    <input class="form-control form-control-sm"
                                         [ngClass]="{'is-invalid':itemNumberMessage}"
                                         id="itemNumber" 
                                         type="text"                                     
@@ -27,7 +27,7 @@
                                 </div>
                                 <label class="col-md-4 col-form-label form-control-label" for="itemDescription1">Item Description 1</label>
                                 <div class="col-md-8" >
-                                    <input class="form-control" 
+                                    <input class="form-control form-control-sm" 
                                         [ngClass]="{'is-invalid':itemDesc1Message}"
                                         id="itemDescription1" 
                                         type="text"                                     
@@ -39,45 +39,55 @@
                                 </div>
                                 <label class="col-md-4 col-form-label form-control-label" for="itemDescription2">Item Description 2</label>
                                 <div class="col-md-8" >
-                                    <input class="form-control" 
+                                    <input class="form-control form-control-sm" 
                                         id="itemDescription2" 
                                         type="text"                                     
                                         placeholder="Item Description 2"                                       
                                         formControlName="itemDescription2" />                                    
                                 </div>
                                 <label class="col-md-4 col-form-label form-control-label" for="itemReleaseNumber">Item Release Number</label>
-                                <div class="col-md-8" >
-                                    <input class="form-control" 
+                                <div class="col-md-6" >
+                                    <input class="form-control form-control-sm" 
                                         id="itemReleaseNumber" 
                                         type="text"                                     
                                         placeholder="Item ReleaseNumber"                                       
                                         formControlName="itemReleaseNumber" />                                    
                                 </div>
                                 <label class="col-md-4 col-form-label form-control-label" for="endItemCode">End Item Code</label>
-                                <div class="col-md-8" >
-                                    <input class="form-control" 
+                                <div class="col-md-6" >
+                                    <input class="form-control form-control-sm" 
                                         id="endItemCode" 
                                         type="text"                                     
                                         placeholder="End Item Code"                                       
                                         formControlName="endItemCode" />                                    
                                 </div>
                                 <label class="col-md-4 col-form-label form-control-label" for="productCategory">Product Category</label>
-                                <div class="col-md-8" >
-                                    <input class="form-control" 
+                                <div class="col-md-6" >
+                                    <input class="form-control form-control-sm" 
                                         id="productCategory" 
                                         type="text"                                     
                                         placeholder="Product Category"                                       
                                         formControlName="productCategory" />                                    
                                 </div>
                                 <label class="col-md-4 col-form-label form-control-label" for="unitOfMeasure">Unit Of Measure</label>
-                                <div class="col-md-8" >
-                                    <input class="form-control" 
+                                <div class="col-md-3" >
+                                    <input class="form-control form-control-sm"
                                         id="unitOfMeasure" 
                                         type="text"                                     
                                         placeholder="Unit Of Measure"                                       
                                         formControlName="unitOfMeasure" />                                    
-                                </div>                 
+                                </div>  
                                 
+                                <div class="col-md-3" >
+                                    <div class="form-check" >
+                                        <input class="form-check-input"
+                                            id="inactive" 
+                                            type="checkbox"                                  
+                                            formControlName="inactive" />      
+                                        <label class="form-check-label" for="inactive">Inactive</label>                              
+                                    </div>   
+                                </div>               
+
                             </div>
 
 
@@ -85,18 +95,18 @@
                                     <label class="col-md-4 col-form-label form-control-label"></label>
                                     <div class="col-md-8">
                                         <span>
-                                            <button type="button" class='btn btn-outline-dark btn-md '
+                                            <button type="button" class='btn btn-outline-dark btn-sm '
                                             (click)='onBack()'style="width:80px;margin-right:10px"
                                             *ngIf='editingItem'> Back
                                             </button>
                                         </span>
                                         <span>
-                                            <input type="reset" class="btn btn-outline-dark btn-md" 
+                                            <input type="reset" class="btn btn-outline-dark btn-sm" 
                                                 value="Cancel" style="width:80px;margin-right:10px"
                                                 *ngIf='!editingItem'>  
                                         </span>                                        
                                         <span>
-                                            <input type="submit" class="btn btn-outline-dark btn-md" value="Save" style="width:80px;margin-right:10px" [disabled]="!itemForm.valid">
+                                            <input type="submit" class="btn btn-outline-dark btn-sm" value="Save" style="width:80px;margin-right:10px" [disabled]="!itemForm.valid">
                                         </span>                                                                            
                                         
                                     </div>

@@ -10,7 +10,8 @@ import { Subscription } from 'rxjs';
 })
 
 export class OrderDetailComponent implements OnInit, OnDestroy {
-  pageTitle: string = 'Order ID';
+  pageTitle: string = 'DETAILS FOR ORDER ';
+ 
   order: IOrder = null;
   errors: string[] = null;
   sub: Subscription = null;

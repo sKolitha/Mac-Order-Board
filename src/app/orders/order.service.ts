@@ -39,6 +39,19 @@ export class OrderService{
             tap(data  => this.listOfOrders = data),
             catchError(this.errorService.errorHandler)
        );
-    }    
+    }   
+
+    isItemInOpenOrders(itemNumber: string):Observable<boolean>{
+       /* 
+       needs to send a request to the API and get the staus.
+       for this example, i just hardcord the logic
+       */
+      if (itemNumber.toUpperCase() === 'LEVER'){
+        return of(true);
+      } else {
+        return of(false);
+      }
+        
+    }
     
 }

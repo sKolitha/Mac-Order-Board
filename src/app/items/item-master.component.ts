@@ -4,7 +4,8 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 import { ItemService } from './item.service';
 import { debounceTime } from '../../../node_modules/rxjs/operators';
 import { ActivatedRoute, Router } from '../../../node_modules/@angular/router';
-import { Subscription } from '../../../node_modules/rxjs';
+import { Subscription, of } from '../../../node_modules/rxjs';
+import { OrderService } from '../orders/order.service';
 
 @Component({
 templateUrl: './item-master.component.html',
@@ -35,7 +36,8 @@ itemDesc1ValidationMessages = {
 constructor(private formBuilder:  FormBuilder,
 private itemService:  ItemService,
 private route: ActivatedRoute,
-private router:  Router) { }
+private router:  Router,
+private orderService: OrderService) { }
 
 
 
@@ -49,7 +51,8 @@ onItemDisplay(item:  IItem):  void{
         itemReleaseNumber:  this.item.itemReleaseNumber,
         endItemCode:  this.item.endItemCode,
         productCategory:  this.item.productCategory,
-        unitOfMeasure:  this.item.unitOfMeasure
+        unitOfMeasure:  this.item.unitOfMeasure,
+        inactive:  this.item.inactive
     });
 }
 
@@ -67,7 +70,8 @@ initializeForm(){
         itemReleaseNumber:  '',
         endItemCode:  '',
         productCategory:  '',
-        unitOfMeasure:  ''
+        unitOfMeasure:  '',
+        inactive: false
     });
 }
 
@@ -86,7 +90,8 @@ buildForm(newNumber:  string){
         itemReleaseNumber:  '',
         endItemCode:  '',
         productCategory:  '',
-        unitOfMeasure:  ''
+        unitOfMeasure:  '',
+        inactive: false
     })
 } 
 
@@ -119,20 +124,34 @@ ngOnInit() {
         //subscribe value change to fire valisdation and other events
         const itemDesc1Control = this.itemForm.get('itemDescription1');
         this.sub = itemDesc1Control.valueChanges.pipe(debounceTime(500)).subscribe(value=>{
-        this.setItemDesc1Message(value);
+        this.setItemDesc1Message(itemDesc1Control);
     });
 } 
 
-
+validateSave(item:IItem): boolean { 
+       
+   this.sub= this.orderService.isItemInOpenOrders(item.itemNumber).subscribe(
+        data => {
+            return confirm(`Cannot make inactive. There are open sales orders for this item`);
+        }
+    ) 
+    return true;
+}
 saveData():  void{ 
     if (this.itemForm.dirty && this.itemForm.valid) {
      const i = { ...this.item, ...this.itemForm.value };
 
+        if (!this.validateSave(i)){
+            return;
+        }
+
         if (this.editingItem){
-            this.sub = this.itemService.updateItemAsync(i).subscribe(
-            (data) => this.onSaveCompleted(data), 
-            (error:  any) => this.errors = <any>error
-            );
+           
+                this.sub = this.itemService.updateItemAsync(i).subscribe(
+                (data) => this.onSaveCompleted(data), 
+                (error:  any) => this.errors = <any>error
+                );
+           
         } else {
             this.sub = this.itemService.addItemAsync(i).subscribe(
             (data) => this.onSaveCompleted(data),
