@@ -27,6 +27,6 @@ export class ItemMasterGuard implements CanDeactivate<ItemMasterComponent>,CanAc
       } 
        //can include any user access checks code here.     
       return true;
-  }
+  } 
 
 }
