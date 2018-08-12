@@ -101,14 +101,18 @@
                                             </button>
                                         </span>
                                         <span>
-                                            <input type="reset" class="btn btn-outline-dark btn-sm" 
-                                                value="Cancel" style="width:80px;margin-right:10px"
+                                            <input type="button" class="btn btn-outline-dark btn-sm" 
+                                            (click)= 'OnReset()' value="Cancel" style="width:80px;margin-right:10px"
                                                 *ngIf='!editingItem'>  
                                         </span>                                        
                                         <span>
                                             <input type="submit" class="btn btn-outline-dark btn-sm" value="Save" style="width:80px;margin-right:10px" [disabled]="!itemForm.valid">
                                         </span>                                                                            
-                                        
+                                        <span>
+                                            <input type="button" class="btn btn-outline-dark btn-sm" 
+                                             (click)= 'OnDelete()' value="Delete" style="width:80px;margin-right:10px" 
+                                             *ngIf='editingItem'>
+                                        </span> 
                                     </div>
                             </div>
                         </fieldset>

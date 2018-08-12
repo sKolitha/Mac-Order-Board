@@ -3,7 +3,7 @@ import { IOrder } from '../order';
 import { OrderService } from '../order.service';
 import { CustomerService } from '../../shared/customer.service';
 import { OrderParameterService } from '../../shared/order-parameter/order-parameter.service';
-import { Subscription } from '../../../../node_modules/rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({ 
   templateUrl: './order-list-component.html',

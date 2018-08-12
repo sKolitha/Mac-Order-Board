@@ -1,5 +1,5 @@
 import { Component,  ViewChild,  AfterViewInit, ElementRef, Output, EventEmitter, Input } from '@angular/core';
-import { OrderParameterService } from '../../shared/order-parameter/order-parameter.service';
+import { OrderParameterService } from '../order-parameter/order-parameter.service';
 
 
 @Component({

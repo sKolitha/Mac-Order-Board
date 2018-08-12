@@ -7,6 +7,8 @@ import { WelcomeComponent } from './home/welcome.component';
 import { OrderModule } from './orders/order.module';
 import { OrdrlineModule } from './orderlines/ordrline.module';
 import { ItemModule } from './items/item.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   imports: [
@@ -19,12 +21,14 @@ import { ItemModule } from './items/item.module';
     HttpClientModule,
     OrderModule,
     OrdrlineModule,
-    ItemModule
+    ItemModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   declarations: [
     AppComponent,
     WelcomeComponent
-  ],
+  ],  
   bootstrap: [AppComponent]
 })
 export class AppModule { }

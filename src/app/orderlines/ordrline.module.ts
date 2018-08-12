@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { OrderlineListComponent } from './orderline-list/orderline-list.component';
-import { RouterModule } from '../../../node_modules/@angular/router';
+import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { OrderlineDetailComponent } from './orderline-detail/orderline-detail.component';
 

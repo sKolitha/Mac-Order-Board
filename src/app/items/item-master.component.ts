@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { IItem, Item } from './item';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn } from '@angular/forms';
 import { ItemService } from './item.service';
-import { debounceTime } from '../../../node_modules/rxjs/operators';
-import { ActivatedRoute, Router } from '../../../node_modules/@angular/router';
-import { Subscription, of } from '../../../node_modules/rxjs';
+import { debounceTime } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription, of } from 'rxjs';
 import { OrderService } from '../orders/order.service';
+import { ToastrService } from '../../../node_modules/ngx-toastr';
 
 @Component({
 templateUrl: './item-master.component.html',
@@ -20,6 +21,7 @@ pageTitle:  string = 'Add/Edit Item';
 editingItem:  boolean = false;
 itemNumberMessage:  string = '';
 itemDesc1Message:  string = '';
+canMakeInactive: boolean = true;
 private sub:  Subscription = null;
 
 @ViewChild('itemnumber') idElementRef:  ElementRef;
@@ -37,24 +39,28 @@ constructor(private formBuilder:  FormBuilder,
 private itemService:  ItemService,
 private route: ActivatedRoute,
 private router:  Router,
-private orderService: OrderService) { }
+private orderService: OrderService,
+private toastr: ToastrService ) { }
 
 
 
 onItemDisplay(item:  IItem):  void{ 
     this.item=item;
     if (this.item){
+        this.editingItem = true;
         this.itemForm.patchValue({
-        itemnumber:  this.item.itemNumber,
-        itemDescription1:  this.item.itemDescription1,
-        itemDescription2:  this.item.itemDescription2,
-        itemReleaseNumber:  this.item.itemReleaseNumber,
-        endItemCode:  this.item.endItemCode,
-        productCategory:  this.item.productCategory,
-        unitOfMeasure:  this.item.unitOfMeasure,
-        inactive:  this.item.inactive
-    });
-}
+            itemnumber:  this.item.itemNumber,
+            itemDescription1:  this.item.itemDescription1,
+            itemDescription2:  this.item.itemDescription2,
+            itemReleaseNumber:  this.item.itemReleaseNumber,
+            endItemCode:  this.item.endItemCode,
+            productCategory:  this.item.productCategory,
+            unitOfMeasure:  this.item.unitOfMeasure,
+            inactive:  this.item.inactive
+        });
+    } else {
+        this.editingItem = false;
+    }
 
 } 
 
@@ -92,8 +98,34 @@ buildForm(newNumber:  string){
         productCategory:  '',
         unitOfMeasure:  '',
         inactive: false
-    })
+    },{ validator: this.canItemMakeInactiveValidator})
 } 
+
+
+
+canItemMakeInactiveValidator: ValidatorFn = (fg: FormGroup) => {
+
+    this.canMakeInactive = true;
+
+    const inactiveValue = fg.get('inactive').value;
+    const itemNumberValue = fg.get('itemNumber').value;
+
+    if (itemNumberValue){
+        if (inactiveValue){
+          this.sub =  this.orderService.isItemInOpenOrders(itemNumberValue).subscribe(
+            (data: boolean) => this.canMakeInactive = !data);
+               
+       }        
+    }
+    if (!this.canMakeInactive){
+        fg.get("inactive").setErrors({'canItemMakeInactive': !this.canMakeInactive});
+        this.toastr.warning('Cannot make the item inactive. There are open sales orders for this item','Warning');
+        return {'canItemMakeInactive': !this.canMakeInactive};
+    } else {
+        fg.get("inactive").setErrors(null);        
+        return null;
+    }
+};
 
 ngOnInit() {
 
@@ -104,11 +136,16 @@ ngOnInit() {
             this.itemForm.get('itemNumber').enable();
             this.itemForm.get('itemNumber').reset();
             this.editingItem = false;
-            this.idElementRef.nativeElement.focus();
+            if (this.idElementRef){
+                this.idElementRef.nativeElement.focus();
+            }
+            
         }else {
             //edit item 
             this.itemForm.get('itemNumber').disable();
-            this.descriptionElementRef.nativeElement.focus();
+            if (this.descriptionElementRef) {
+                 this.descriptionElementRef.nativeElement.focus();
+            }           
             this.editingItem = true;
             this.onItemNumberChange(id);
         }
@@ -128,42 +165,35 @@ ngOnInit() {
     });
 } 
 
-validateSave(item:IItem): boolean { 
-       
-   this.sub= this.orderService.isItemInOpenOrders(item.itemNumber).subscribe(
-        data => {
-            return confirm(`Cannot make inactive. There are open sales orders for this item`);
-        }
-    ) 
-    return true;
-}
+
+
+
 saveData():  void{ 
     if (this.itemForm.dirty && this.itemForm.valid) {
-     const i = { ...this.item, ...this.itemForm.value };
-
-        if (!this.validateSave(i)){
-            return;
-        }
-
-        if (this.editingItem){
-           
-                this.sub = this.itemService.updateItemAsync(i).subscribe(
+     const i = { ...this.item, ...this.itemForm.value };        
+        if (this.editingItem){            
+            this.sub = this.itemService.updateItemAsync(i).subscribe(
                 (data) => this.onSaveCompleted(data), 
                 (error:  any) => this.errors = <any>error
-                );
-           
+            );
+        
         } else {
             this.sub = this.itemService.addItemAsync(i).subscribe(
-            (data) => this.onSaveCompleted(data),
-            (error:  any) => this.errors = <any>error
+                (data) => this.onSaveCompleted(data),
+                (error:  any) => this.errors = <any>error
             );
-        }
+        }        
     }
 
 }
 onSaveCompleted(data):  void{
     console.log(data);//temporary line to show the data object after the fake db operation.
     this.itemForm.reset();
+    this.itemForm.get('itemNumber').enable();
+    if (this.idElementRef){
+        this.idElementRef.nativeElement.focus();
+    }
+    this.toastr.success('Record successfully updated to the console.','Success');
     if (this.editingItem){
         this.onBack();
     }
@@ -171,6 +201,17 @@ onSaveCompleted(data):  void{
 
 onBack(){
     this.router.navigate(['/orderlines']);
+}
+
+OnDelete() {
+    this.toastr.info('This method is not implemented.','Information');
+}
+
+OnReset() {
+    this.itemForm.reset();
+    if (this.idElementRef){
+        this.idElementRef.nativeElement.focus();
+    }
 }
 
 ngOnDestroy(){

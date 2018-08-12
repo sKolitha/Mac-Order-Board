@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { OrderlineDetailComponent } from './orderline-detail.component';
 import { SharedModule } from '../../shared/shared.module';
-import { HttpClientModule } from '../../../../node_modules/@angular/common/http';
-import { ActivatedRoute, Router } from '../../../../node_modules/@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 
 describe('OrderlineDetailComponent', () => {
   let component: OrderlineDetailComponent;

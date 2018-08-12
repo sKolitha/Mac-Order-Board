@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ItemMasterComponent } from './item-master.component';
-import { RouterModule } from '../../../node_modules/@angular/router';
+import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ItemMasterGuard } from './item-master.guard';
 
@@ -18,7 +18,7 @@ import { ItemMasterGuard } from './item-master.guard';
   ],
   declarations: [
     ItemMasterComponent
-  ],
+  ],  
   exports: [ItemMasterComponent]
 })
 export class ItemModule { }

@@ -1,7 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { OrderDetailGuard } from './order-detail.guard';
-import { Router, ActivatedRoute } from '../../../../node_modules/@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 describe('OrderDetailGuard', () => {
   beforeEach(() => {

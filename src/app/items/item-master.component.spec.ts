@@ -1,9 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ItemMasterComponent } from './item-master.component';
-import { ReactiveFormsModule } from '../../../node_modules/@angular/forms';
-import { CommonModule } from '../../../node_modules/@angular/common';
-import { HttpClientModule } from '../../../node_modules/@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
