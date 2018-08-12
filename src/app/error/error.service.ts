@@ -12,8 +12,7 @@ export class ErrorService {
 
     if (err.error instanceof ErrorEvent){
         errMessage = `error occured :${err.error.message}`;
-    }
-    else{
+    }else{
         errMessage = `error status code :${ err.status}, message is :${err.message}`;
     }  
     return throwError(errMessage);

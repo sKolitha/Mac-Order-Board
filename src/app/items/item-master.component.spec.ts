@@ -4,6 +4,7 @@ import { ItemMasterComponent } from './item-master.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule, ToastrService } from '../../../node_modules/ngx-toastr';
 
 
 
@@ -15,7 +16,7 @@ describe('ItemMasterComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports:[RouterTestingModule,HttpClientModule, CommonModule,     
-        ReactiveFormsModule],
+        ReactiveFormsModule,ToastrModule],
       declarations: [ ItemMasterComponent ]
     })
     .compileComponents();
