@@ -169,20 +169,24 @@ ngOnInit() {
 
 
 saveData():  void{ 
-    if (this.itemForm.dirty && this.itemForm.valid) {
-     const i = { ...this.item, ...this.itemForm.value };        
-        if (this.editingItem){            
-            this.sub = this.itemService.updateItemAsync(i).subscribe(
-                (data) => this.onSaveCompleted(data), 
-                (error:  any) => this.errors = <any>error
-            );
-        
-        } else {
-            this.sub = this.itemService.addItemAsync(i).subscribe(
-                (data) => this.onSaveCompleted(data),
-                (error:  any) => this.errors = <any>error
-            );
-        }        
+    if (this.itemForm.dirty) {
+        if (this.itemForm.valid) {
+            const i = { ...this.item, ...this.itemForm.value };        
+            if (this.editingItem){            
+                this.sub = this.itemService.updateItemAsync(i).subscribe(
+                    (data) => this.onSaveCompleted(data), 
+                    (error:  any) => this.errors = <any>error
+                );
+            
+            } else {
+                this.sub = this.itemService.addItemAsync(i).subscribe(
+                    (data) => this.onSaveCompleted(data),
+                    (error:  any) => this.errors = <any>error
+                );
+            }     
+        }   
+    } else {
+        this.toastr.info('No changes to update.','Information');
     }
 
 }
